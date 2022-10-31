@@ -1,0 +1,14 @@
+.project-card {
+  text-align: left;
+  border: 1px dotted green;
+  
+  border-radius: 25px;
+  background: rgb(243, 144, 79);
+  background: linear-gradient(
+    270deg,
+    rgba(243, 144, 79, 1) 0%,
+    rgba(59, 67, 113, 1) 50%
+  );
+  padding: 5%;
+  margin: 5% auto;
+}

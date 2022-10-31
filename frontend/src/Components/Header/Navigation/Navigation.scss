@@ -1,0 +1,16 @@
+.nav {
+  border: 1px dotted red;
+  width: 50%;
+  ul {
+    display: flex;
+    justify-content: space-around;
+    li {
+      list-style: none;
+      .nav-link {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}
