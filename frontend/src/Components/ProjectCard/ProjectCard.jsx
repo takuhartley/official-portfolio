@@ -2,11 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './ProjectCard.scss'
 const ProjectCard = ({ project }) => {
-  console.log(project)
   return (
     <>
       <div className='project-card'>
-        <Link to={`/project/${project._id}`}>
+        <Link to={`/projects/${project._id}`}>
           <p>{project._id}</p>
           <h1>{project.title}</h1>
         </Link>
