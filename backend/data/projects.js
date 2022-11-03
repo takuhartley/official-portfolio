@@ -1,6 +1,6 @@
 const projects = [
   {
-    _id: 1,
+    _id: '1',
     title: 'Portfolio',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -30,7 +30,7 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: 2,
+    _id: '2',
     title: 'Anime Website',
     subTitle: 'Multi-purpose personal Anime website',
     description:
@@ -60,7 +60,7 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: 3,
+    _id: '3',
     title: 'Weather Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -90,7 +90,7 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: 4,
+    _id: '4',
     title: 'XXX Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -120,7 +120,7 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: 5,
+    _id: '5',
     title: 'ZZZ Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -150,7 +150,7 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: 6,
+    _id: '6',
     title: 'Portfolio Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -180,5 +180,4 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   }
 ]
-
-export default projects
+module.exports = projects
