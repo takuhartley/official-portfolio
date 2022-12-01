@@ -5,8 +5,9 @@ import express from 'express'
 // import morgan from 'morgan'
 // import cors from 'cors'
 import projects from './data/projects.js'
+import colors from 'colors'
 // ----------------------------------------------------------------------------------------------------
-// import connectDB from './config/database.js'
+import connectDB from './config/db.js'
 // import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 // ----------------------------------------------------------------------------------------------------
 // Routes (Import):
@@ -20,7 +21,7 @@ dotenv.config()
 // connectDB(); was imported from another file and
 // Sends a connection request using .env file and returns
 // The connection
-// connectDB()
+connectDB()
 // ----------------------------------------------------------------------------------------------------
 const app = express()
 // Asking express to use json as a default-------------------------------------------------------------
@@ -77,5 +78,8 @@ const PORT = process.env.PORT || 5000
 // ----------------------------------------------------------------------------------------------------
 app.listen(
   PORT,
-  console.log(`Server runny in ${process.env.NODE_ENV} modey on porty ${PORT} boss`)
+  console.log(
+    `Server runny in ${process.env.NODE_ENV} modey on porty ${PORT} boss`.green
+      .underline.bold
+  )
 )
