@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 import express from 'express'
 // import morgan from 'morgan'
 // import cors from 'cors'
-import projects from './data/projects.js'
 import colors from 'colors'
 // ----------------------------------------------------------------------------------------------------
 import connectDB from './config/db.js'
@@ -26,23 +25,12 @@ connectDB()
 const app = express()
 // Asking express to use json as a default-------------------------------------------------------------
 app.use(express.json())
-// app.use(
-//   express.urlencoded({
-//     extended: true
-//   })
-// )
-// ----------------------------------------------------------------------------------------------------
-// Initial Test Route
-app.get('/', (req, res) => {
-  res.send('API running nicely boss')
-})
-app.get('/api/projects', (req, res) => {
-  res.json(projects)
-})
-app.get('/api/projects/:id', (req, res) => {
-  const project = projects.find(p => p._id === req.params.id)
-  res.json(project)
-})
+app.use(
+  express.urlencoded({
+    extended: true
+  })
+)
+
 // Routes----------------------------------------------------------------------------------------------
 app.use('/api/users', userRoutes)
 app.use('/api/projects', projectRoutes)

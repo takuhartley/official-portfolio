@@ -5,6 +5,8 @@ const projects = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum placerat arcu turpis. Fusce arcu diam, sollicitudin ut nulla non, pellentesque volutpat velit. Pellentesque vitae enim non risus convallis varius ut vitae ante. Curabitur rutrum laoreet sem a ullamcorper. Fusce velit felis, tempor eget porta non, ultricies eget ligula.',
     published: true,
+    private: false,
+    technologies: ['JavaScript', 'CSS', 'HTML'],
     images: {
       thumbnail: {
         name: 'Portfolio Thumbnail',
@@ -25,8 +27,7 @@ const projects = [
         website: 'Github',
         websiteUrl: 'https://github.com'
       }
-    ],
-    technologies: ['JavaScript', 'CSS', 'HTML']
+    ]
   },
   {
     title: 'Anime Website',
@@ -34,6 +35,7 @@ const projects = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum placerat arcu turpis. Fusce arcu diam, sollicitudin ut nulla non, pellentesque volutpat velit. Pellentesque vitae enim non risus convallis varius ut vitae ante. Curabitur rutrum laoreet sem a ullamcorper. Fusce velit felis, tempor eget porta non, ultricies eget ligula.',
     published: true,
+    private: false,
     images: {
       thumbnail: {
         name: 'Anime Thumbnail',
@@ -63,6 +65,7 @@ const projects = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum placerat arcu turpis. Fusce arcu diam, sollicitudin ut nulla non, pellentesque volutpat velit. Pellentesque vitae enim non risus convallis varius ut vitae ante. Curabitur rutrum laoreet sem a ullamcorper. Fusce velit felis, tempor eget porta non, ultricies eget ligula.',
     published: true,
+    private: false,
     images: {
       thumbnail: {
         name: 'Portfolio Thumbnail',
@@ -92,6 +95,7 @@ const projects = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum placerat arcu turpis. Fusce arcu diam, sollicitudin ut nulla non, pellentesque volutpat velit. Pellentesque vitae enim non risus convallis varius ut vitae ante. Curabitur rutrum laoreet sem a ullamcorper. Fusce velit felis, tempor eget porta non, ultricies eget ligula.',
     published: true,
+    private: true,
     images: {
       thumbnail: {
         name: 'Portfolio Thumbnail',
@@ -121,6 +125,7 @@ const projects = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum placerat arcu turpis. Fusce arcu diam, sollicitudin ut nulla non, pellentesque volutpat velit. Pellentesque vitae enim non risus convallis varius ut vitae ante. Curabitur rutrum laoreet sem a ullamcorper. Fusce velit felis, tempor eget porta non, ultricies eget ligula.',
     published: true,
+    private: true,
     images: {
       thumbnail: {
         name: 'Portfolio Thumbnail',
@@ -150,6 +155,7 @@ const projects = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum placerat arcu turpis. Fusce arcu diam, sollicitudin ut nulla non, pellentesque volutpat velit. Pellentesque vitae enim non risus convallis varius ut vitae ante. Curabitur rutrum laoreet sem a ullamcorper. Fusce velit felis, tempor eget porta non, ultricies eget ligula.',
     published: true,
+    private: true,
     images: {
       thumbnail: {
         name: 'Portfolio Thumbnail',
