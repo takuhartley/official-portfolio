@@ -1,6 +1,5 @@
 const projects = [
   {
-    _id: '1',
     title: 'Portfolio',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -27,10 +26,9 @@ const projects = [
         websiteUrl: 'https://github.com'
       }
     ],
-    tags: ['JavaScript', 'CSS', 'HTML']
+    technologies: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: '2',
     title: 'Anime Website',
     subTitle: 'Multi-purpose personal Anime website',
     description:
@@ -57,10 +55,9 @@ const projects = [
         websiteUrl: 'https://github.com'
       }
     ],
-    tags: ['JavaScript', 'CSS', 'HTML']
+    technologies: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: '3',
     title: 'Weather Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -87,10 +84,9 @@ const projects = [
         websiteUrl: 'https://github.com'
       }
     ],
-    tags: ['JavaScript', 'CSS', 'HTML']
+    technologies: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: '4',
     title: 'XXX Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -117,10 +113,9 @@ const projects = [
         websiteUrl: 'https://github.com'
       }
     ],
-    tags: ['JavaScript', 'CSS', 'HTML']
+    technologies: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: '5',
     title: 'ZZZ Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -147,10 +142,9 @@ const projects = [
         websiteUrl: 'https://github.com'
       }
     ],
-    tags: ['JavaScript', 'CSS', 'HTML']
+    technologies: ['JavaScript', 'CSS', 'HTML']
   },
   {
-    _id: '6',
     title: 'Portfolio Website',
     subTitle: 'Multi-purpose personal portfolio website',
     description:
@@ -177,7 +171,7 @@ const projects = [
         websiteUrl: 'https://github.com'
       }
     ],
-    tags: ['JavaScript', 'CSS', 'HTML']
+    technologies: ['JavaScript', 'CSS', 'HTML']
   }
 ]
 export default projects

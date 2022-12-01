@@ -8,12 +8,12 @@ import projects from './data/projects.js'
 import colors from 'colors'
 // ----------------------------------------------------------------------------------------------------
 import connectDB from './config/db.js'
-// import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 // ----------------------------------------------------------------------------------------------------
 // Routes (Import):
-// import userRoutes from './routes/userRoutes.js'
-// import projectRoutes from './routes/projectRoutes.js'
-// import uploadRoutes from './routes/uploadRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+import projectRoutes from './routes/projectRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 // ----------------------------------------------------------------------------------------------------
 dotenv.config()
 // ----------------------------------------------------------------------------------------------------
@@ -44,14 +44,12 @@ app.get('/api/projects/:id', (req, res) => {
   res.json(project)
 })
 // Routes----------------------------------------------------------------------------------------------
-// app.use("/api/users", require("./routes/api/users"));
-//app.use('/api/users', userRoutes)
-// app.use('/api/projects', projectRoutes)
-//app.use('/api/upload', uploadRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/projects', projectRoutes)
+app.use('/api/upload', uploadRoutes)
 // ----------------------------------------------------------------------------------------------------
 // Middleware
 //app.use(morgan('dev'))
-//app.use(express.json())
 // app.use(
 //   express.urlencoded({
 //     extended: true
@@ -71,8 +69,8 @@ app.get('/api/projects/:id', (req, res) => {
 //     res.send('API is running....')
 //   })
 // }
-// app.use(notFound)
-// app.use(errorHandler)
+app.use(notFound)
+app.use(errorHandler)
 // ----------------------------------------------------------------------------------------------------
 const PORT = process.env.PORT || 5000
 // ----------------------------------------------------------------------------------------------------
