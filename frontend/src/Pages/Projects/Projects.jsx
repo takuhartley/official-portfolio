@@ -1,10 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+// import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Unstable_Grid2'
 import Container from '@mui/material/Container'
-import projects from '../../Data/projects.js'
 import ProjectCard from '../../Components/ProjectCard/ProjectCard'
+import axios from 'axios'
 const Projects = () => {
+  const [projects, setProjects] = useState([])
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data } = await axios.get('/api/projects')
+      setProjects(data)
+    }
+    fetchProjects()
+  }, [])
   return (
     <>
       <Container maxWidth='sm'>

@@ -180,4 +180,4 @@ const projects = [
     tags: ['JavaScript', 'CSS', 'HTML']
   }
 ]
-module.exports = projects
+export default projects
