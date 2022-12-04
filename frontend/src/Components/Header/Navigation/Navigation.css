@@ -1,0 +1,23 @@
+.nav {
+  border: 1px dotted red;
+  width: 50%;
+}
+
+.nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.nav ul li {
+  list-style: none;
+}
+
+.nav ul li .nav-link {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+}
+/*# sourceMappingURL=Navigation.css.map */

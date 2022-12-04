@@ -1,0 +1,35 @@
+.project-card {
+  height: 300px;
+  width: 200px;
+  text-align: left;
+  border: 1px dotted green;
+  border-radius: 25px;
+  background: #f3904f;
+  background: black;
+  padding: 10%;
+  margin: 10% auto;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.project-card a {
+  text-decoration: none;
+  color: white;
+  font-size: 0.75em;
+}
+
+.project-card .project-card-title h1 {
+  font-size: 0.75em;
+  word-spacing: 4px;
+  color: white;
+}
+
+.project-card .project-card-sub_title {
+  position: relative;
+  padding-top: 20px;
+  font-size: 0.75em;
+  color: white;
+  line-height: 140%;
+  font-weight: 400;
+}
+/*# sourceMappingURL=ProjectCard.css.map */

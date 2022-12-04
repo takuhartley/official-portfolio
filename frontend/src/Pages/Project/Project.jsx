@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { listProjectDetails } from '../../Redux/Actions/projectActions'
+import Message from '../../Components/Message/Message'
 const Project = () => {
+  const dispatch = useDispatch()
   const { id } = useParams()
-  const [project, setProject] = useState([])
+  const projectDetails = useSelector(state => projectDetails)
+  const { loading, error, project } = projectDetails
+  
   useEffect(() => {
-    const fetchProject = async () => {
-      const { data } = await axios.get(`/api/projects/${id}`)
-      setProject(data)
-    }
-    fetchProject()
-  }, [id])
+    dispatch(listProjectDetails(id))
+  }, [dispatch, id])
   return (
     <>
+      <Message>{error}</Message>
       <h1>{project.title}</h1>
       <h3>{project.subTitle}</h3>
       <p>{project.description}</p>

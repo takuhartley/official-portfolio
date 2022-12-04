@@ -2,17 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './ProjectCard.scss'
 const ProjectCard = ({ project }) => {
+  const image = project.images.thumbnail.image
+  console.log(image)
   return (
     <>
       <div className='project-card'>
         <Link to={`/projects/${project._id}`}>
-          <p>{project._id}</p>
-          <h1>{project.title}</h1>
+          <h1 className='project-card-title'>{project.title}</h1>
         </Link>
-        <h3>{project.subTitle}</h3>
-        <p>{project.description}</p>
-        <img src={project.images.thumbnail} alt={project.title} />
-        <p>Tags {project.tags}</p>
+        <h3 className='project-card-sub_title'>{project.subTitle}</h3>
+        <img src={project.images.thumbnail.image} alt={project.title} />
       </div>
     </>
   )
