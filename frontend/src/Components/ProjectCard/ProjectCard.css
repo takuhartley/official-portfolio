@@ -1,35 +1,87 @@
 .project-card {
-  height: 300px;
-  width: 200px;
+  width: 300px;
+  height: 400px;
   text-align: left;
-  border: 1px dotted green;
   border-radius: 25px;
-  background: #f3904f;
-  background: black;
-  padding: 10%;
-  margin: 10% auto;
-  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .project-card a {
   text-decoration: none;
-  color: white;
+  color: red;
   font-size: 0.75em;
 }
 
-.project-card .project-card-title h1 {
+.project-card .project-card-thumbnail-container {
+  border-radius: 25px;
+}
+
+.project-card .project-card-thumbnail-container .project-card-thumbnail {
+  z-index: -10;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 400px;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+}
+
+.project-card .project-card-thumbnail-container .overlay {
+  z-index: -5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 400px;
+  opacity: 0.5;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
+  background-color: #000000;
+  border-radius: 25px;
+}
+
+.project-card .project-card-thumbnail-container .overlay:hover {
+  opacity: 0;
+}
+
+.project-card .project-card-header {
+  width: 300px;
+  height: 400px;
+  padding: 50px;
+}
+
+.project-card .project-card-header .project-card-title-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.project-card .project-card-header .project-card-title-group justify-content:flex-end .project-card-title h1 {
   font-size: 0.75em;
   word-spacing: 4px;
   color: white;
 }
 
-.project-card .project-card-sub_title {
+.project-card .project-card-header .project-card-sub_title {
   position: relative;
   padding-top: 20px;
   font-size: 0.75em;
   color: white;
   line-height: 140%;
   font-weight: 400;
+}
+
+.project-card .project-card-header .project-card-like {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
 }
 /*# sourceMappingURL=ProjectCard.css.map */

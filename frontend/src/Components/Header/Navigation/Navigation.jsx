@@ -1,7 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import './Navigation.scss'
+import { logout } from '../../../Redux/Actions/userActions.js'
 const Navigation = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+  const logoutHandler = () => {
+    dispatch(logout())
+    navigate('/')
+  }
   return (
     <>
       <div className='nav'>
@@ -21,18 +31,21 @@ const Navigation = () => {
               About
             </Link>
           </li>
+          {userInfo ? (
+            <li>
+              <Link className='nav-link' to='dashboard'>
+                Dashboard
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link className='nav-link' to='login'>
+                Login
+              </Link>
+            </li>
+          )}
           <li>
-            <Link className='nav-link' to='dashboard'>
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link className='nav-link' to='login'>
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link className='nav-link' to='logout'>
+            <Link onClick={logoutHandler} className='nav-link'>
               Logout
             </Link>
           </li>

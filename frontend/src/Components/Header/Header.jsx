@@ -1,12 +1,14 @@
 import React from 'react'
 import Navigation from './Navigation/Navigation'
 import Logo from './Logo/Logo'
-
+import './Header.scss'
 const Header = () => {
   return (
     <>
-      <Logo />
-      <Navigation />
+      <div className='header'>
+        <Logo />
+        <Navigation />
+      </div>
     </>
   )
 }

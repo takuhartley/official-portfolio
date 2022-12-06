@@ -10,6 +10,7 @@ import Contact from './Pages/Contact/Contact.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import Home from './Pages/Home/Home.jsx'
 import NotFound from './Components/NotFound/NotFound.jsx'
+import Header from './Components/Header/Header.jsx'
 const App = () => {
   return (
     <>

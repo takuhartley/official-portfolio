@@ -32,6 +32,9 @@ app.use(
 )
 
 // Routes----------------------------------------------------------------------------------------------
+app.get('/', (req, res) => {
+  res.send('API running nicely boss')
+})
 app.use('/api/users', userRoutes)
 app.use('/api/projects', projectRoutes)
 app.use('/api/upload', uploadRoutes)

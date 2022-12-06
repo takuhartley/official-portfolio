@@ -1,0 +1,14 @@
+.header {
+  z-index: 10;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 75px;
+  width: 100%;
+  background-color: black;
+}
+/*# sourceMappingURL=Header.css.map */

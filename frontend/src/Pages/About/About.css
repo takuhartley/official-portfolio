@@ -1,0 +1,120 @@
+.about-page-container {
+  background-color: #4648c0;
+  margin: 0;
+  padding: 80px;
+  color: white;
+}
+
+.about-page-container .about-page-header p {
+  margin: 0 auto;
+}
+
+.about-page-container .about-page-body {
+  position: relative;
+  line-height: 2em;
+}
+
+.about-page-container .about-page-body .about-page-main-body h3 {
+  color: #82a8e2;
+}
+
+.about-page-container .about-page-body .about-page-main-body p {
+  font-size: 1em;
+  color: white;
+}
+
+.about-page-container .about-page-body .about-page-second-body h3 {
+  color: #82a8e2;
+}
+
+@media screen and (max-width: 960px) {
+  .about-page-container {
+    height: auto;
+    margin: 0;
+    padding: 40px;
+  }
+  .about-page-container .about-page-header {
+    margin: 0;
+    padding: 0;
+    z-index: -100;
+  }
+  .about-page-container .about-page-header video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    -o-object-fit: cover;
+       object-fit: cover;
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-header .overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #364d42;
+    mix-blend-mode: overlay;
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-header p {
+    position: relative;
+    z-index: 50;
+    margin: 0 auto;
+    border: 1em solid white;
+    padding: 100px;
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-body .about-page-main-body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-body .about-page-main-body h3 {
+    text-align: center;
+  }
+  .about-page-container .about-page-body .about-page-main-body p {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    color: black;
+    line-height: 2em;
+  }
+  .about-page-container .about-page-body .about-page-second-body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-body .about-page-second-body h3 {
+    text-align: center;
+    word-spacing: 4px;
+  }
+  .about-page-container .about-page-body .about-page-second-body p {
+    margin: 0;
+    padding: 0;
+    line-height: 2em;
+    word-spacing: 4px;
+  }
+  .about-page-container .about-page-body .about-page-second-body ul {
+    margin: 0;
+    padding: 0;
+  }
+  .about-page-container .about-page-body .about-page-second-body ul li {
+    list-style: square;
+    padding: 10px;
+    line-height: 2em;
+    word-spacing: 4px;
+    color: #4b4b4b;
+  }
+}
+/*# sourceMappingURL=About.css.map */

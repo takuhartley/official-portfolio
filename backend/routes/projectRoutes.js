@@ -11,5 +11,5 @@ import {
 
 router.post('/new', createProject)
 router.route('/').get(getAllProjects)
-
+router.route('/:id').get(getProjectById)
 export default router

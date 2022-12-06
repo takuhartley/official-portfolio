@@ -6,6 +6,7 @@ import Container from '@mui/material/Container'
 import ProjectCard from '../../Components/ProjectCard/ProjectCard'
 import { listProjects } from '../../Redux/Actions/projectActions'
 //import Message from '../../Components/Message/Message'
+import './Projects.scss'
 
 const Projects = () => {
   const dispatch = useDispatch()
@@ -18,10 +19,17 @@ const Projects = () => {
 
   return (
     <>
-      <Container maxWidth='md'>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Container className='projects'>
+        <Grid
+          justifyContent='center'
+          direction='row'
+          alignItems='center'
+          container
+          spacing={1}
+          className='projects-grid'
+        >
           {projects.map(project => (
-            <Grid xs={2} sm={4} md={4} key={project._id}>
+            <Grid item xs={2} className='projects-grid-item' key={project._id}>
               <ProjectCard project={project} />
             </Grid>
           ))}

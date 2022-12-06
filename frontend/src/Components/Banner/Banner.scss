@@ -1,0 +1,24 @@
+.banner {
+  height: 100vh;
+  .banner-title {
+    text-align: center;
+    position: relative;
+    font-size: 4em;
+    font-weight: bold;
+    text-transform: lowercase;
+    letter-spacing: 0.0625em;
+    padding: 1em;
+    padding-top: 4em;
+    color: white;
+  }
+  .banner-subtitle {
+    text-align: center;
+    color: white;
+    padding: 1em;
+  }
+  .banner-location {
+    text-align: center;
+    color: white;
+    padding: 1em;
+  }
+}
