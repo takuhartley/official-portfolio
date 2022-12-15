@@ -23,7 +23,7 @@ import { listUsers, deleteUser } from '../../Redux/Actions/userActions.js'
 
 // SCSS
 
-const UserTable = ({ history }) => {
+const UserTable = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const userList = useSelector(state => state.userList)
@@ -39,64 +39,32 @@ const UserTable = ({ history }) => {
     } else {
       navigate('/login')
     }
-  }, [userInfo, dispatch, history, successDelete, navigate])
+  }, [userInfo, dispatch, successDelete, navigate])
 
   const deleteHandler = id => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteUser(id))
     }
   }
-
+  console.log(users)
   return (
-    <div className='user-table-container'>
-      <h1>Users</h1>
-      <TableContainer component={Paper} size='small' className='user-list'>
-        <Table aria-label='simple table'>
+    <div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
-              <TableCell>ID:</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Admin</TableCell>
-              <TableCell>Edit</TableCell>
+              <TableCell align='left'>ID</TableCell>
+              <TableCell align='left'>First Name</TableCell>
+              <TableCell align='left'>Last Name</TableCell>
+              <TableCell align='left'>User Name</TableCell>
+              <TableCell align='left'>Email</TableCell>
+              <TableCell align='left'>Admin</TableCell>
+              <TableCell align='left'>Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {users.map(user => (
-              <TableRow key={user._id}>
-                <TableCell>{user._id}</TableCell>
-                <TableCell>{user.firstName}</TableCell>
-                <TableCell>{user.lastName}</TableCell>
-                <TableCell>
-                  <a href={`mailto:${user.email}`}>{user.email}</a>
-                </TableCell>
-                <TableCell>
-                  {user.isAdmin ? (
-                    <CheckIcon color='primary' />
-                  ) : (
-                    <ErrorIcon color='secondary' />
-                  )}
-                </TableCell>
-                <TableCell>
-                  <Link to={`/admin/user/${user._id}/edit`}>
-                    <Button variant='light'>
-                      <EditIcon />
-                    </Button>
-                  </Link>
-                  <Button
-                    variant='danger'
-                    onClick={() => deleteHandler(user._id)}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <TableBody></TableBody>
         </Table>
       </TableContainer>
-      )}
     </div>
   )
 }

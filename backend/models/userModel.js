@@ -16,7 +16,7 @@ const userSchema = new Schema(
     },
     userName: {
       type: String,
-      requred: true,
+      required: true,
       // Mongoose Validator being used here
       unique: true
     },

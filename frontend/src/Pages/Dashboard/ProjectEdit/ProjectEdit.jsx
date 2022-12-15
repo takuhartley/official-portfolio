@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  getProjectDetails,
+  listProjectDetails,
   updateProject
 } from '../../../Redux/Actions/projectActions.js'
 import { PROJECT_UPDATE_RESET } from '../../../Redux/Constants/projectConstants.js'
@@ -57,7 +57,7 @@ const ProjectEditPage = () => {
       navigate('/dashboard')
     } else {
       if (!project.title || project._id !== projectId) {
-        dispatch(getProjectDetails(projectId))
+        dispatch(listProjectDetails(projectId))
       } else {
         setTitle(project.title)
         setSubTitle(project.subTitle)
@@ -127,13 +127,6 @@ const ProjectEditPage = () => {
         </RouterLink>
 
         <h1>Edit "{project.title}"</h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
           <Form onSubmit={submitHandler}>
             <FormGroup controlId='title'>
               <InputLabel>Title</InputLabel>

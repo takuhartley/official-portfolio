@@ -19,7 +19,7 @@ const BlogSchema = new Schema({
   },
   body: {
     type: String,
-    requred: true
+    required: true
   },
   images: {
     thumbnail: {
@@ -31,20 +31,17 @@ const BlogSchema = new Schema({
     subImage: {
       type: String
     },
-    imageCollection: []
+    imageCollection: [ImageSchema]
   },
   edited: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   },
   published: {
     type: Date,
-    default: Date.now()
-  },
-  private: {
-    type: Boolean,
-    default: true
+    default: Date.now
   }
 })
 // ----------------------------------------------------------------------------------------------------
-module.exports = Post = mongoose.model('post', PostSchema)
+const BlogPost = mongoose.model('post', BlogPostSchema)
+module.exports = BlogPost
