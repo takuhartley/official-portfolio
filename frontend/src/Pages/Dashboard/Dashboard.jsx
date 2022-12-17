@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import UserTable from '../../Components/UserTable/UserTable'
 import ProjectTable from '../../Components/ProjectTable/ProjectTable'
 import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded'
+import PingButton from '../../Components/PingButton/pingButton'
 const drawerWidth = 240
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open'
@@ -42,6 +43,7 @@ function DashboardContent () {
 
   return (
     <>
+      <PingButton></PingButton>
       <div>
         <UserTable />
       </div>

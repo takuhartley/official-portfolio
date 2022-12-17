@@ -1,11 +1,29 @@
-import mongoose from 'mongoose'
-const Schema = mongoose.Schema
-const ImageSchema = new Schema({
-  url: {
-    type: String,
-    required: true
+const mongoose = require('mongoose')
+
+const imageSchema = new mongoose.Schema(
+  {
+    filename: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    mimetype: {
+      type: String,
+      required: true
+    },
+    path: {
+      type: String,
+      required: true
+    },
+    originalname: String,
+    size: {
+      type: Number,
+      required: true
+    }
   },
-  description: {
-    type: String
+  {
+    timestamps: true
   }
-})
+)
+
+module.exports = mongoose.model('Image', imageSchema)

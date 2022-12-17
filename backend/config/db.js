@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
 import colors from 'colors'
+mongoose.set('strictQuery', false)
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     })
     console.log(
       `MongoDB Connected: ${conn.connection.host}`.green.underline.bold

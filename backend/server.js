@@ -1,74 +1,54 @@
-// Dependencies
-// import path from 'path'
+// Import dependencies
 import dotenv from 'dotenv'
 import express from 'express'
-// import morgan from 'morgan'
-// import cors from 'cors'
 import colors from 'colors'
-// ----------------------------------------------------------------------------------------------------
+
+// Import database connection function and error middleware
 import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
-// ----------------------------------------------------------------------------------------------------
-// Routes (Import):
+
+// Import routes
 import userRoutes from './routes/userRoutes.js'
 import projectRoutes from './routes/projectRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-// ----------------------------------------------------------------------------------------------------
-dotenv.config()
-// ----------------------------------------------------------------------------------------------------
-// Function running to connect express with database
-// connectDB(); was imported from another file and
-// Sends a connection request using .env file and returns
-// The connection
-connectDB()
-// ----------------------------------------------------------------------------------------------------
-const app = express()
-// Asking express to use json as a default-------------------------------------------------------------
-app.use(express.json())
-app.use(
-  express.urlencoded({
-    extended: true
-  })
-)
+import categoryRoutes from './routes/categoryRoutes.js'
+import blogPostRoutes from './routes/blogPostRoutes.js'
 
-// Routes----------------------------------------------------------------------------------------------
+// Load environment variables
+dotenv.config()
+
+// Connect to database
+connectDB()
+
+// Initialize Express app
+const app = express()
+
+// Parse request body as JSON
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// Define routes
 app.get('/', (req, res) => {
   res.send('API running nicely boss')
 })
 app.use('/api/users', userRoutes)
 app.use('/api/projects', projectRoutes)
 app.use('/api/upload', uploadRoutes)
-// ----------------------------------------------------------------------------------------------------
-// Middleware
-//app.use(morgan('dev'))
-// app.use(
-//   express.urlencoded({
-//     extended: true
-//   })
-// )
-// app.use(cors())
-// const __dirname = path.resolve()
-// app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, '/frontend/build')))
+app.use('/api/categories', categoryRoutes)
+app.use('/api/blogs', blogPostRoutes)
 
-//   app.get('*', (req, res) =>
-//     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-//   )
-// } else {
-//   app.get('/', (req, res) => {
-//     res.send('API is running....')
-//   })
-// }
+// Use error middleware
 app.use(notFound)
 app.use(errorHandler)
-// ----------------------------------------------------------------------------------------------------
+
+// Set port for the server
 const PORT = process.env.PORT || 5000
-// ----------------------------------------------------------------------------------------------------
+
+// Start the server
 app.listen(
   PORT,
   console.log(
-    `Server runny in ${process.env.NODE_ENV} modey on porty ${PORT} boss`.green
+    `Server runny in ${process.env.NODE_ENV} mode on port ${PORT} boss`.green
       .underline.bold
   )
 )
