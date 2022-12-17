@@ -9,8 +9,8 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 // Import routes
 import userRoutes from './routes/userRoutes.js'
-import projectRoutes from './routes/projectRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
+import projectPostRoutes from './routes/projectPostRoutes.js'
+import imageRoutes from './routes/imageRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
 import blogPostRoutes from './routes/blogPostRoutes.js'
 
@@ -32,8 +32,8 @@ app.get('/', (req, res) => {
   res.send('API running nicely boss')
 })
 app.use('/api/users', userRoutes)
-app.use('/api/projects', projectRoutes)
-app.use('/api/upload', uploadRoutes)
+app.use('/api/projects', projectPostRoutes)
+app.use('/api/images', imageRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/blogs', blogPostRoutes)
 

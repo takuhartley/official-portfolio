@@ -14,6 +14,12 @@ const CategorySchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'BlogPost'
       }
+    ],
+    projectPost: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ProjectPost'
+        }
     ]
   },
   {

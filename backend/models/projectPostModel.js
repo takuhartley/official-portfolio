@@ -3,15 +3,11 @@ const Schema = mongoose.Schema
 // ----------------------------------------------------------------------------------------------------
 const ProjectSchema = new Schema(
   {
-    user: {
+    author: {
       type: Schema.Types.ObjectId,
-      ref: 'users'
+      ref: 'Users'
     },
     title: {
-      type: String,
-      required: true
-    },
-    subTitle: {
       type: String,
       required: true
     },
@@ -29,22 +25,16 @@ const ProjectSchema = new Schema(
       default: 0,
       required: true
     },
-    technologies: [],
-    images: {
-      thumbnail: {
-        name: { type: String },
-        image: { type: String }
-      },
-      icon: {
-        name: { type: String },
-        image: { type: String }
-      },
-      articleImages: []
-    },
-    links: [
+    images: [
       {
-        website: { type: String },
-        websiteUrl: { type: String }
+        type: Schema.Types.ObjectId,
+        ref: 'Image'
+      }
+    ],
+    categories: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
       }
     ]
   },
