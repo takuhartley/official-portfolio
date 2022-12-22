@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const ImageSchema = new mongoose.Schema(
   {
-    filename: {
+    name: {
       type: String,
       required: true,
       unique: true
@@ -18,6 +18,11 @@ const ImageSchema = new mongoose.Schema(
     originalname: String,
     size: {
       type: Number,
+      required: true
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true
     }
   },

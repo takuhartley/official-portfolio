@@ -12,11 +12,9 @@ const Projects = () => {
   const dispatch = useDispatch()
   const projectList = useSelector(state => state.projectList)
   const { projects } = projectList
-
   useEffect(() => {
     dispatch(listProjects())
   }, [dispatch])
-
   return (
     <>
       <Container className='projects'>
@@ -38,5 +36,4 @@ const Projects = () => {
     </>
   )
 }
-
 export default Projects

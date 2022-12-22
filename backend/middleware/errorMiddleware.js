@@ -1,8 +1,8 @@
-const notFound = (req, res, next) => {
-  const error = new Error(`Not Found: ${req.originalUrl}`)
-  res.status(400)
-  next(error)
-}
+// const notFound = (req, res, next) => {
+//   const error = new Error(`Not Found: ${req.originalUrl}`)
+//   res.status(400)
+//   next(error)
+// }
 
 const errorHandler = (error, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode
@@ -13,4 +13,4 @@ const errorHandler = (error, req, res, next) => {
   })
 }
 
-export { notFound, errorHandler }
+export { errorHandler }

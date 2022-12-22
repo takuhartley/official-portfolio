@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProjectDetails } from '../../Redux/Actions/projectActions'
-import Message from '../../Components/Message/Message'
+import Grid from '@mui/material/Unstable_Grid2'
+import Container from '@mui/material/Container'
+
 const Project = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
@@ -15,25 +17,8 @@ const Project = () => {
       dispatch(listProjectDetails(id))
     }
   }, [dispatch, id, project._id])
-  return (
-    <>
-      <div className='project-details-page-link'>
-        <RouterLink to='/'>Back</RouterLink>
-      </div>
-      <div className='project-details-page-title'>
-        <p></p>
-      </div>
-      <div className='project-details-page-title'>
-        <p>{title}</p>
-      </div>
-      <div className='project-details-page-subTitle'>
-        <p>{subTitle}</p>
-      </div>
-      <div className='project-details-page-description'>
-        <p>{description}</p>
-      </div>
-    </>
-  )
+  return <>
+    
+  </>
 }
-
 export default Project

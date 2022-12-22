@@ -27,11 +27,8 @@ const getProjectPostById = asyncHandler(async (req, res) => {
 
 const getAllProjectPosts = asyncHandler(async (req, res) => {
   try {
-    const projectPosts = await ProjectPost.find()
-    res.json({
-      success: true,
-      data: projectPosts
-    })
+    const projects = await ProjectPost.find({})
+    res.json({ projects })
   } catch (err) {
     res.status(500).json({
       success: false,

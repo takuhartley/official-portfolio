@@ -5,7 +5,7 @@ import colors from 'colors'
 
 // Import database connection function and error middleware
 import connectDB from './config/db.js'
-import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import { errorHandler } from './middleware/errorMiddleware.js'
 
 // Import routes
 import userRoutes from './routes/userRoutes.js'
@@ -38,7 +38,7 @@ app.use('/api/categories', categoryRoutes)
 app.use('/api/blogs', blogPostRoutes)
 
 // Use error middleware
-app.use(notFound)
+// app.use(notFound)
 app.use(errorHandler)
 
 // Set port for the server

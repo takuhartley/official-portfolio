@@ -24,15 +24,26 @@ import { listUsers, deleteUser } from '../../Redux/Actions/userActions.js'
 // SCSS
 
 const UserTable = () => {
-  const navigate = useNavigate()
+  // Hook for accessing the dispatch function to dispatch actions
   const dispatch = useDispatch()
+  // Hook for accessing the `userList` slice of state
   const userList = useSelector(state => state.userList)
+  // Destructuring `users` from `userList`
   const { users } = userList
+  // Hook for accessing the `userLogin` slice of state
   const userLogin = useSelector(state => state.userLogin)
+  // Destructuring `userInfo` from `userLogin`
   const { userInfo } = userLogin
+  // Hook for accessing the `userDelete` slice of state
   const userDelete = useSelector(state => state.userDelete)
+  // Destructuring `successUserDelete` from `userDelete` and renaming it to `successDelete`
   const { successUserDelete: successDelete } = userDelete
 
+  // Hook for accessing the `navigate` function to navigate to different routes
+  const navigate = useNavigate()
+
+  // Use effect hook to perform the `listUsers` action if the user is an admin
+  // and navigate to the login page if the user is not an admin
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers())
@@ -41,7 +52,9 @@ const UserTable = () => {
     }
   }, [userInfo, dispatch, successDelete, navigate])
 
+  // Function for deleting a user with a given `id`
   const deleteHandler = id => {
+    // Confirm with the user before deleting the user
     if (window.confirm('Are you sure?')) {
       dispatch(deleteUser(id))
     }
@@ -62,7 +75,37 @@ const UserTable = () => {
               <TableCell align='left'>Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody></TableBody>
+          <TableBody>
+            {users.map(user => (
+              <TableRow
+                key={user._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align='left'>{user._id}</TableCell>
+                <TableCell align='left'>{user.firstName}</TableCell>
+                <TableCell align='left'>{user.lastName}</TableCell>
+                <TableCell align='left'>{user.userName}</TableCell>
+                <TableCell align='left'>{user.email}</TableCell>
+                <TableCell align='left'>
+                  {user.isAdmin ? (
+                    <>
+                      <CheckIcon />
+                    </>
+                  ) : (
+                    <>
+                      <ErrorIcon />
+                    </>
+                  )}
+                </TableCell>
+                <TableCell align='left'>
+                  <RouterLink to={`users/${user._id}/edit`}>
+                    <EditIcon />
+                  </RouterLink>
+                  <DeleteIcon onClick={() => deleteHandler(user._id)} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
       </TableContainer>
     </div>

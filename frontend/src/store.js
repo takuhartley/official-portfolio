@@ -8,6 +8,7 @@ import {
   projectCreateReducer,
   projectUpdateReducer
 } from './Redux/Reducers/projectReducers'
+
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -17,6 +18,15 @@ import {
   userDeleteReducer,
   userUpdateReducer
 } from './Redux/Reducers/userReducers'
+
+import {
+  imageUploadReducer,
+  imageListReducer,
+  imageDetailsReducer,
+  imageUpdateReducer,
+  imageDeleteReducer
+} from './Redux/Reducers/imageReducers'
+
 const reducer = combineReducers({
   projectList: projectListReducer,
   projectDetails: projectDetailsReducer,
@@ -29,7 +39,12 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
-  userUpdate: userUpdateReducer
+  userUpdate: userUpdateReducer,
+  imageUpload: imageUploadReducer,
+  imageList: imageListReducer,
+  imageDetails: imageDetailsReducer,
+  imageUpdate: imageUpdateReducer,
+  imageDelete: imageDeleteReducer
 })
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

@@ -64,7 +64,7 @@ function Card ({ children }) {
         // If hovered we want it to overlap other cards when it scales up
         zIndex: isHovered ? 2 : 1,
         // Interpolate function to handle css changes
-        transform: animatedProps.xys.interpolate(
+        transform: animatedProps.xys.to(
           (x, y, s) =>
             `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
         )
@@ -75,19 +75,12 @@ function Card ({ children }) {
   )
 }
 const ProjectCard = ({ project }) => {
-  const image = project.images.thumbnail.image
-  console.log(image)
   return (
     <>
       <div className='project-card'>
         <RouterLink to={`/projects/${project._id}`}>
           <Card>
             <div className='project-card-thumbnail-container'>
-              <img
-                className='project-card-thumbnail'
-                src={project.images.thumbnail.image}
-                alt={project.title}
-              />
               <div className='overlay'></div>
             </div>
             <div className='project-card-header'>
