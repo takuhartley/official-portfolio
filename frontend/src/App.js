@@ -4,7 +4,7 @@ import Login from './Components/Login/Login.jsx'
 import Logout from './Components/Header/Logout/Logout.jsx'
 import Projects from './Pages/Projects/Projects.jsx'
 import Project from './Pages/Project/Project.jsx'
-import NewProject from './Pages/Dashboard/NewProject/NewProject.jsx'
+import NewProjectPage from './Pages/Dashboard/NewProjectPage/NewProjectPage.jsx'
 import About from './Pages/About/About.jsx'
 import Contact from './Pages/Contact/Contact.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
@@ -24,7 +24,7 @@ const App = () => {
             <Route index element={<Projects />} />
             <Route path=':id' element={<Project />} />
             <Route path=':id/edit' element={<EditProject />} />
-            <Route path='new' element={<NewProject />} />
+            <Route path='new' element={<NewProjectPage />} />
           </Route>
           <Route path='/images'>
             <Route index element={<ImageSetting />} />

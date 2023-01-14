@@ -107,6 +107,7 @@ function DashboardContent () {
             </IconButton>
             <Typography variant='h6' noWrap component='div'>
               Robby Dashboard
+              <RouterLink to={`/projects/new`}>New Project</RouterLink>
             </Typography>
           </Toolbar>
         </AppBar>
