@@ -7,17 +7,19 @@ const MAX_FILE_SIZE = 5000000 // 5MB
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log('Receiving file:', file) // <-- added this line
     cb(null, 'Images') // set the destination to the public/images folder
   },
   filename: function (req, file, cb) {
-    console.log(file)
+    console.log('middleware' + file)
     cb(null, Date.now() + '-' + file.originalname) // set the file name to the fieldname plus the current timestamp
   }
 })
 
 const fileFilter = (req, file, cb) => {
-  console.log(file.mimetype)
-  console.log(file.originalname)
+  console.log('File mimetype:', file.mimetype) // <-- added this line
+  console.log('File original name:', file.originalname) // <-- added this line
+  console.log('Request body:', req.body) // <-- added this line
   if (ALLOWED_MIME_TYPES.includes(file.mimetype)) {
     console.log('File Type OK')
     cb(null, true)

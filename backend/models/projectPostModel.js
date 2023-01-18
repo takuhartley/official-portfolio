@@ -11,19 +11,21 @@ const ProjectSchema = new Schema(
       type: String,
       required: true
     },
+    subTitle: {
+      type: String,
+      required: true
+    },
     description: {
       type: String,
       required: true
     },
     published: {
       type: Boolean,
-      default: false,
-      required: true
+      default: false
     },
     likes: {
       type: Number,
-      default: 0,
-      required: true
+      default: 0
     },
     images: [
       {

@@ -13,22 +13,19 @@ import ImageSetting from './Components/ImageSetting/ImageSetting.jsx'
 import NotFound from './Components/NotFound/NotFound.jsx'
 import EditProject from './Pages/Dashboard/ProjectEdit/ProjectEdit.jsx'
 import ImageUpload from './Components/ImageUpload/ImageUpload.jsx'
-
+import Header from './Components/Header/Header.jsx'
 const App = () => {
   return (
     <>
       <div>
+        <Header />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/projects'>
             <Route index element={<Projects />} />
             <Route path=':id' element={<Project />} />
-            <Route path=':id/edit' element={<EditProject />} />
             <Route path='new' element={<NewProjectPage />} />
-          </Route>
-          <Route path='/images'>
-            <Route index element={<ImageSetting />} />
-            <Route path='upload' element={<ImageUpload />} />
+            <Route path=':id/edit' element={<EditProject />} />
           </Route>
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />

@@ -44,6 +44,9 @@ const ProjectTable = () => {
       dispatch(deleteProject(id))
     }
   }
+  const handleEdit = id => {
+    navigate(`/projects/${id}/edit`)
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -73,9 +76,8 @@ const ProjectTable = () => {
               </TableCell>
               <TableCell align='left'>{project.likes}</TableCell>
               <TableCell align='left'>
-                <RouterLink to={`projects/${project._id}/edit`}>
-                  <EditIcon />
-                </RouterLink>
+                <EditIcon onClick={() => handleEdit(project._id)} />
+
                 <DeleteIcon onClick={() => deleteHandler(project._id)} />
               </TableCell>
             </TableRow>

@@ -5,7 +5,7 @@ const NotFound = () => {
   useEffect(() => {
     setTimeout(() => {
       navigate('/')
-    }, 1500)
+    }, 3000)
   }, [navigate])
   return <div>Error 404 Page Not Found</div>
 }

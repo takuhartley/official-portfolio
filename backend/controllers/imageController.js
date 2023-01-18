@@ -1,21 +1,39 @@
 import asyncHandler from 'express-async-handler'
 import Image from '../models/imageModel.js'
-import { upload } from '../middleware/imageMiddleware.js'
+//import { upload } from '../middleware/imageMiddleware.js'
 
-const imageUpload = asyncHandler(upload.single('file'), async (req, res) => {
+const imageUpload = asyncHandler(async (req, res) => {
   try {
     // Check if a file was actually uploaded
-    console.log('This is from express image controller' + '-' + req.file)
-    // Create a new image object with the uploaded image data
-    const image = new Image({})
-
+    if (!req.file) {
+      return res.status(400).send({ message: 'No file was uploaded' })
+    }
+    // Check if the file has a non-empty originalname
+    if (!req.file.originalname) {
+      return res.status(400).send({ message: 'The image must have a filename' })
+    }
+    // Create new image object
+    const newImage = new Image({
+      name: req.body.name,
+      desc: req.body.desc,
+      mimetype: req.file.mimetype,
+      path: req.file.path,
+      originalname: req.file.originalname,
+      size: req.file.size,
+      author: req.user._id,
+      filename: req.file.filename
+    })
+    console.log('Image request: ', req.file)
+    console.log('Body request: ', req.body)
+    console.log(newImage)
     // Save the image to the database
-    await image.save()
+    await newImage.save()
+    console.log('Image uploaded and saved successfully')
 
     // Return a success message
-    return res.send({
+    return res.status(201).send({
       message: 'Image uploaded and saved successfully',
-      data: image
+      data: newImage
     })
   } catch (error) {
     // Return an error message
@@ -39,20 +57,20 @@ const deleteImageById = asyncHandler(async (req, res) => {
 })
 
 const getAllImages = asyncHandler(async (req, res) => {
-  // find all images in the database
-  const images = await Image.find({})
-  if (!images || images.length === 0) {
-    // if no images are found, return a custom message
-    return res.status(200).json({
-      success: true,
-      message: 'No images in database'
+  try {
+    // find all images in the database
+    const images = await Image.find({})
+    res.json({ images })
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
     })
   }
   // if images are found, return the list of images
   return res.status(200).json({
     success: true,
-    message: 'Images retrieved successfully',
-    data: images
+    error: err.message
   })
 })
 

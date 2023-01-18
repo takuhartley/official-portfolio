@@ -1,25 +1,34 @@
 import mongoose from 'mongoose'
+import mongooseGridFS from 'mongoose-gridfs'
+const Schema = mongoose.Schema
 
-const ImageSchema = new mongoose.Schema(
+// let gfs
+// const conn = mongoose.connection
+// conn.once('open', () => {
+//   gfs = new mongooseGridFS({
+//     collection: 'image',
+//     model: 'Image',
+//     mongooseConnection: conn
+//   })
+// })
+
+const ImageSchema = new Schema(
   {
     name: {
-      type: String,
-      required: true,
-      unique: true
+      type: String
     },
     mimetype: {
-      type: String,
-      required: true
+      type: String
     },
     path: {
-      type: String,
-      required: true
+      type: String
     },
     originalname: String,
     size: {
-      type: Number,
-      required: true
+      type: Number
     },
+    filename: String,
+    desc: String,
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -30,6 +39,7 @@ const ImageSchema = new mongoose.Schema(
     timestamps: true
   }
 )
+
 const Image = mongoose.model('Image', ImageSchema)
 
 export default Image

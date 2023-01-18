@@ -1,4 +1,3 @@
-// Dependencies
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom'
@@ -21,24 +20,14 @@ import {
 
 const ProjectEditPage = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
-  // Get the Project ID
   const projectId = id
+  const navigate = useNavigate()
   // Define State
   const [title, setTitle] = useState('')
-  const [subTitle, setSubTitle] = useState('')
-  const [image, setImage] = useState('')
   const [description, setDescription] = useState('')
-  const [privateStatus, setPrivateStatus] = useState(false)
-  const [published, setPublished] = useState(false)
-  const [stack, setStack] = useState('')
-  const [language, setLanguage] = useState([])
-  const [database, setDatabase] = useState('')
-  const [stateManagement, setStateManagement] = useState('')
-  const [gitHub, setGitHub] = useState('')
-  const [url, setUrl] = useState('')
-  const [uploading, setUploading] = useState(false)
-
+  const [subTitle, setSubTitle] = useState()
+  const [published, setPublished] = useState()
+  const [likes, setLikes] = useState()
   // Dispatch Redux
   const dispatch = useDispatch()
   // Define project details from state
@@ -46,35 +35,33 @@ const ProjectEditPage = () => {
   const { loading, error, project } = projectDetails
   // Define project update state
   const projectUpdate = useSelector(state => state.projectUpdate)
-  const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate
-  } = projectUpdate
-
+  const { success: successUpdate } = projectUpdate
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+  console.log(project.title)
+  console.log(typeof projectId)
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PROJECT_UPDATE_RESET })
-      navigate('/dashboard')
+      navigate(`/project/${projectId}/edit`)
     } else {
       if (!project.title || project._id !== projectId) {
         dispatch(listProjectDetails(projectId))
       } else {
         setTitle(project.title)
-        setSubTitle(project.subTitle)
-        setImage(project.image)
         setDescription(project.description)
-        setPrivateStatus(project.privateStatus)
-        setLanguage(project.language)
-        setStack(project.stack)
-        setDatabase(project.database)
-        setStateManagement(project.stateManagement)
-        setGitHub(project.gitHub)
-        setUrl(project.url)
+        setSubTitle(project.subTitle)
+        setLikes(project.likes)
+        setPublished(project.published)
       }
     }
-  }, [dispatch, navigate, project, projectId, successUpdate])
-
+  }, [dispatch, id, navigate, project, projectId, successUpdate, userInfo])
+  useEffect(() => {
+    if (successUpdate) {
+      navigate(`/projects/${projectId}/edit`)
+      dispatch({ type: PROJECT_UPDATE_RESET })
+    }
+  }, [successUpdate, dispatch, navigate])
   const submitHandler = e => {
     e.preventDefault()
     dispatch(
@@ -83,41 +70,72 @@ const ProjectEditPage = () => {
         title,
         subTitle,
         description,
-        image,
         published,
-        privateStatus,
-        stack,
-        language,
-        database,
-        stateManagement,
-        gitHub,
-        url
+        likes
       })
     )
   }
 
-  const uploadFileHandler = async e => {
-    const file = e.target.files[0]
-    const formData = new FormData()
-    formData.append('image', file)
-    setUploading(true)
+  return (
+    <>
+      <Container>
+        <form onSubmit={submitHandler}>
+          <FormControl fullWidth>
+            <InputLabel htmlFor='title'>Title</InputLabel>
+            <Input
+              id='title'
+              type='text'
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel htmlFor='subTitle'>SubTitle</InputLabel>
+            <Input
+              id='subTitle'
+              type='text'
+              value={subTitle}
+              onChange={e => setSubTitle(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel htmlFor='description'>Description</InputLabel>
+            <TextField
+              id='description'
+              multiline
+              rows={4}
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={published}
+                    onChange={e => setPublished(e.target.checked)}
+                  />
+                }
+                label='Published'
+              />
+            </FormGroup>
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel htmlFor='likes'>Likes</InputLabel>
+            <Input
+              id='likes'
+              type='number'
+              value={likes}
+              onChange={e => setLikes(e.target.value)}
+            />
+          </FormControl>
 
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-
-      const { data } = await axios.post('/api/upload', formData, config)
-      setImage(data)
-      setUploading(false)
-    } catch (error) {
-      console.error(error)
-      setUploading(false)
-    }
-  }
-  return <div className='project_edit'></div>
+          <button type='submit'>Update Project</button>
+        </form>
+      </Container>
+    </>
+  )
 }
 
 export default ProjectEditPage

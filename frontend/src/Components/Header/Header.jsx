@@ -6,8 +6,12 @@ const Header = () => {
   return (
     <>
       <div className='header'>
-        <Logo />
-        <Navigation />
+        <div className='header-logo'>
+          <Logo />
+        </div>
+        <div className='header-navigation'>
+          <Navigation />
+        </div>
       </div>
     </>
   )

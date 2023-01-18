@@ -1,5 +1,7 @@
 import express from 'express'
-const router = express.Router()
+import multer from 'multer'
+import mime from 'mime-types'
+//import GridFSStorage from 'multer-gridfs-storage'
 import { protect, admin } from '../middleware/authMiddleware.js'
 import {
   imageUpload,
@@ -8,11 +10,40 @@ import {
   deleteImageById,
   getAllImages
 } from '../controllers/imageController.js'
-// Define the image upload route
-router.post('/upload', protect, admin, imageUpload)
 
+const ALLOWED_MIME_TYPES = ['image/png', 'image/jpeg', 'image/gif']
+const MAX_FILE_SIZE = 5000000 // 5MB
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'Images') // set the destination to the public/images folder
+  },
+  filename: function (req, file, cb) {
+    console.log('middleware' + file)
+    cb(null, Date.now() + '-' + file.originalname) // set the file name to the fieldname plus the current timestamp
+    console.log('Stored locally ' + file)
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  console.log('File Filter ' + file.mimetype)
+  if (ALLOWED_MIME_TYPES.includes(file.mimetype)) {
+    cb(null, true)
+  } else {
+    cb(new Error('Invalid file type'), false)
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: MAX_FILE_SIZE
+  }
+})
+
+const router = express.Router()
+router.post('/upload', upload.single('file'), protect, admin, imageUpload)
 router.route('/').get(getAllImages)
-
 router
   .route('/:id')
   .get(getImageById)

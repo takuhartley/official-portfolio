@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
-// Material UI
 import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -11,50 +10,51 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import Link from '@mui/material/Link'
-
-// Material UI Icons
+import TextField from '@mui/material/TextField'
 import CheckIcon from '@mui/icons-material/Check'
 import ErrorIcon from '@mui/icons-material/Error'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-
-// Actions
-import { listUsers, deleteUser } from '../../Redux/Actions/userActions.js'
-
-// SCSS
+import {
+  listUsers,
+  deleteUser,
+  updateUserProfile
+} from '../../Redux/Actions/userActions.js'
 
 const UserTable = () => {
-  // Hook for accessing the dispatch function to dispatch actions
   const dispatch = useDispatch()
-  // Hook for accessing the `userList` slice of state
   const userList = useSelector(state => state.userList)
-  // Destructuring `users` from `userList`
   const { users } = userList
-  // Hook for accessing the `userLogin` slice of state
   const userLogin = useSelector(state => state.userLogin)
-  // Destructuring `userInfo` from `userLogin`
   const { userInfo } = userLogin
-  // Hook for accessing the `userDelete` slice of state
   const userDelete = useSelector(state => state.userDelete)
-  // Destructuring `successUserDelete` from `userDelete` and renaming it to `successDelete`
   const { successUserDelete: successDelete } = userDelete
-
-  // Hook for accessing the `navigate` function to navigate to different routes
+  const userEdit = useSelector(state => state.userUpdateProfile)
+  const { successUserEdit: successEdit } = userEdit
   const navigate = useNavigate()
 
-  // Use effect hook to perform the `listUsers` action if the user is an admin
-  // and navigate to the login page if the user is not an admin
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers())
     } else {
       navigate('/login')
     }
-  }, [userInfo, dispatch, successDelete, navigate])
+  }, [userInfo, dispatch, successDelete, successEdit, navigate])
 
-  // Function for deleting a user with a given `id`
+  const [editingUser, setEditingUser] = useState({})
+
+  const editHandler = user => {
+    setEditingUser(user)
+  }
+  const saveHandler = e => {
+    e.preventDefault()
+    const { _id, firstName, lastName, userName, email, isAdmin } = editingUser
+    const userData = { _id, firstName, lastName, userName, email, isAdmin }
+    dispatch(updateUserProfile(userData))
+    setEditingUser({})
+  }
+
   const deleteHandler = id => {
-    // Confirm with the user before deleting the user
     if (window.confirm('Are you sure?')) {
       dispatch(deleteUser(id))
     }
@@ -81,28 +81,92 @@ const UserTable = () => {
                 key={user._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell align='left'>{user._id}</TableCell>
-                <TableCell align='left'>{user.firstName}</TableCell>
-                <TableCell align='left'>{user.lastName}</TableCell>
-                <TableCell align='left'>{user.userName}</TableCell>
-                <TableCell align='left'>{user.email}</TableCell>
-                <TableCell align='left'>
-                  {user.isAdmin ? (
-                    <>
-                      <CheckIcon />
-                    </>
-                  ) : (
-                    <>
-                      <ErrorIcon />
-                    </>
-                  )}
-                </TableCell>
-                <TableCell align='left'>
-                  <RouterLink to={`users/${user._id}/edit`}>
-                    <EditIcon />
-                  </RouterLink>
-                  <DeleteIcon onClick={() => deleteHandler(user._id)} />
-                </TableCell>
+                {editingUser._id === user._id ? (
+                  <>
+                    <TableCell align='left'>
+                      <TextField defaultValue={user._id} disabled />
+                    </TableCell>
+                    <TableCell align='left'>
+                      <TextField
+                        defaultValue={user.firstName}
+                        onChange={e =>
+                          setEditingUser({
+                            ...editingUser,
+                            firstName: e.target.value
+                          })
+                        }
+                      />
+                    </TableCell>
+                    <TableCell align='left'>
+                      <TextField
+                        defaultValue={user.lastName}
+                        onChange={e =>
+                          setEditingUser({
+                            ...editingUser,
+                            lastName: e.target.value
+                          })
+                        }
+                      />
+                    </TableCell>
+                    <TableCell align='left'>
+                      <TextField
+                        defaultValue={user.userName}
+                        onChange={e =>
+                          setEditingUser({
+                            ...editingUser,
+                            userName: e.target.value
+                          })
+                        }
+                      />
+                    </TableCell>
+                    <TableCell align='left'>
+                      <TextField
+                        defaultValue={user.email}
+                        onChange={e =>
+                          setEditingUser({
+                            ...editingUser,
+                            email: e.target.value
+                          })
+                        }
+                      />
+                    </TableCell>
+                    <TableCell align='left'>
+                      <TextField
+                        defaultValue={user.isAdmin}
+                        onChange={e =>
+                          setEditingUser({
+                            ...editingUser,
+                            isAdmin: e.target.value
+                          })
+                        }
+                      />
+                    </TableCell>
+                    <TableCell align='left'>
+                      <Button onClick={saveHandler}>
+                        <CheckIcon />
+                      </Button>
+                    </TableCell>
+                  </>
+                ) : (
+                  <>
+                    <TableCell align='left'>{user._id}</TableCell>
+                    <TableCell align='left'>{user.firstName}</TableCell>
+                    <TableCell align='left'>{user.lastName}</TableCell>
+                    <TableCell align='left'>{user.userName}</TableCell>
+                    <TableCell align='left'>{user.email}</TableCell>
+                    <TableCell align='left'>
+                      {user.isAdmin ? 'Yes' : 'No'}
+                    </TableCell>
+                    <TableCell align='left'>
+                      <Button onClick={() => editHandler(user)}>
+                        <EditIcon />
+                      </Button>
+                      <Button onClick={() => deleteHandler(user._id)}>
+                        <DeleteIcon />
+                      </Button>
+                    </TableCell>
+                  </>
+                )}
               </TableRow>
             ))}
           </TableBody>

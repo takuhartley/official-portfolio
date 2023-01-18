@@ -39,22 +39,21 @@ export const listProjects = () => async dispatch => {
 }
 
 export const listProjectDetails = id => async dispatch => {
+  dispatch({ type: PROJECT_DETAILS_REQUEST })
   try {
-    dispatch({ type: PROJECT_DETAILS_REQUEST })
-
-    const { data } = await axios.get(`/api/projects/${id}`)
-
+    const response = await axios.get(`/api/projects/${id}`)
     dispatch({
       type: PROJECT_DETAILS_SUCCESS,
-      payload: data
+      payload: response.data
     })
   } catch (error) {
+    let errorMessage = error.message
+    if (error.response && error.response.data && error.response.data.message) {
+      errorMessage = error.response.data.message
+    }
     dispatch({
       type: PROJECT_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
+      payload: errorMessage
     })
   }
 }
@@ -95,33 +94,31 @@ export const deleteProject = id => async (dispatch, getState) => {
   }
 }
 
-export const createProject = () => async (dispatch, getState) => {
+export const createProject = projectData => async (dispatch, getState) => {
   try {
     dispatch({
       type: PROJECT_CREATE_REQUEST
     })
-
+    if (!projectData.title || !projectData.description) {
+      throw new Error('Title and description are required.')
+    }
     const {
       userLogin: { userInfo }
     } = getState()
-
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`
       }
     }
 
-    const { data } = await axios.post(`/api/projects`, {}, config)
+    const { data } = await axios.post(`/api/projects/new`, projectData, config)
 
     dispatch({
       type: PROJECT_CREATE_SUCCESS,
       payload: data
     })
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+    const message = error.response?.data?.message ?? error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
@@ -149,7 +146,7 @@ export const updateProject = project => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.put(
+    const { data } = await axios.patch(
       `/api/projects/${project._id}`,
       project,
       config

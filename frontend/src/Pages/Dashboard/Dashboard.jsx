@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { styled, useTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import { useDispatch, useSelector } from 'react-redux'
 import Box from '@mui/material/Box'
 import MuiAppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -11,6 +12,7 @@ import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import MenuIcon from '@mui/icons-material/Menu'
 import UserTable from '../../Components/UserTable/UserTable'
+import ImageTable from '../../Components/ImageTable/ImageTable'
 import ProjectTable from '../../Components/ProjectTable/ProjectTable'
 import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded'
 import Header from '../../Components/Header/Header'
@@ -31,6 +33,8 @@ import TryIcon from '@mui/icons-material/Try'
 import PersonIcon from '@mui/icons-material/Person'
 import BookIcon from '@mui/icons-material/Book'
 import ImageIcon from '@mui/icons-material/Image'
+import NewProjectPage from './NewProjectPage/NewProjectPage'
+import ImageSetting from '../../Components/ImageSetting/ImageSetting'
 const drawerWidth = 240
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
@@ -81,7 +85,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function DashboardContent () {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
-  const [seletec, setSelected] = useState(false)
+  const [seleted, setSelected] = useState(false)
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -106,7 +113,7 @@ function DashboardContent () {
               <MenuIcon />
             </IconButton>
             <Typography variant='h6' noWrap component='div'>
-              Robby Dashboard
+              Welcome {userInfo.firstName}
               <RouterLink to={`/projects/new`}>New Project</RouterLink>
             </Typography>
           </Toolbar>
@@ -184,6 +191,15 @@ function DashboardContent () {
         </Drawer>
         <Main open={open}>
           <Container>
+            <div>
+              <NewProjectPage />
+            </div>
+            <div>
+              <ImageSetting />
+            </div>
+            <div>
+              <ImageTable />
+            </div>
             <div>
               <UserTable />
             </div>

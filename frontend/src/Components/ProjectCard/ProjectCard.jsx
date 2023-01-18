@@ -20,7 +20,7 @@ function Card ({ children }) {
       // We store under a single key (xys) instead of separate keys ...
       // ... so that we can use animatedProps.xys.interpolate() to ...
       // ... easily generate the css transform value below.
-      xys: [0, 0, 1],
+      xys: [1, 1, 1],
       // Setup physics
       config: { mass: 10, tension: 400, friction: 40, precision: 0.00001 }
     }

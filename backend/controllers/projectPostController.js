@@ -45,6 +45,7 @@ const updateProjectPostById = asyncHandler(async (req, res) => {
       {
         author: req.user._id,
         title: req.body.title,
+        subTitle: req.body.subTitle,
         description: req.body.description,
         published: req.body.published,
         likes: req.body.likes,
