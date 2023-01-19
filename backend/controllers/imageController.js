@@ -87,11 +87,7 @@ const getImageById = asyncHandler(async (req, res) => {
     })
   }
   // if the image is found, return the image
-  return res.status(200).json({
-    success: true,
-    message: 'Image retrieved successfully',
-    data: image
-  })
+  return res.status(200).json(image)
 })
 
 const updateImageById = asyncHandler(async (req, res) => {

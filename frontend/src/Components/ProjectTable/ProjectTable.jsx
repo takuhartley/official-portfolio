@@ -54,6 +54,10 @@ const ProjectTable = () => {
           <TableRow>
             <TableCell align='left'>ID</TableCell>
             <TableCell align='left'>Project Name</TableCell>
+            <TableCell align='left'>Project Sub Title</TableCell>
+            <TableCell align='left'>Project Description</TableCell>
+            <TableCell align='left'>Project Categories</TableCell>
+            <TableCell align='left'>Project Images</TableCell>
             <TableCell align='left'>Published</TableCell>
             <TableCell align='left'>Likes</TableCell>
             <TableCell align='left'>Action</TableCell>
@@ -67,6 +71,18 @@ const ProjectTable = () => {
             >
               <TableCell align='left'>{project._id}</TableCell>
               <TableCell align='left'>{project.title}</TableCell>
+              <TableCell align='left'>{project.subTitle}</TableCell>
+              <TableCell align='left'>{project.description}</TableCell>
+              <TableCell align='left'>
+                {project.categories.map((category, index) => (
+                  <span key={index}>{category} </span>
+                ))}
+              </TableCell>
+              <TableCell align='left'>
+                {project.images.map((image, index) => (
+                  <span key={index}>{image} </span>
+                ))}
+              </TableCell>
               <TableCell align='left'>
                 {project.published ? (
                   <CheckIcon color='primary' />

@@ -8,7 +8,7 @@ const MAX_FILE_SIZE = 5000000 // 5MB
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log('Receiving file:', file) // <-- added this line
-    cb(null, 'Images') // set the destination to the public/images folder
+    cb(null, '/Images') // set the destination to the public/images folder
   },
   filename: function (req, file, cb) {
     console.log('middleware' + file)

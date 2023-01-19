@@ -9,7 +9,7 @@ import Container from '@mui/material/Container'
 import ProjectCard from '../../Components/ProjectCard/ProjectCard'
 import { listProjects } from '../../Redux/Actions/projectActions'
 import ErrorMessage from '../../Components/ErrorMessage/ErrorMessage'
-import Loading from '../../Components/Loading/Loading'
+import LoadingComponent from '../../Components/LoadingComponent/LoadingComponent'
 
 //import Message from '../../Components/Message/Message'
 import './Projects.scss'
@@ -26,17 +26,9 @@ const Projects = () => {
       .then(() => setLoading(false))
       .catch(err => setError(err))
   }, [dispatch])
-
-  if (loading) {
-    return <Loading />
-  }
-
-  if (error) {
-    return <ErrorMessage error={error} />
-  }
   return (
     <>
-      <Box sx={{ flexGrow: 1, p: 2 }}>
+      {loading && <LoadingComponent />} : {<Box sx={{ flexGrow: 1, p: 2 }}>
         <Grid2
           xs
           display='flex'
@@ -52,7 +44,7 @@ const Projects = () => {
             </Grid>
           ))}
         </Grid2>
-      </Box>
+      </Box>}
     </>
   )
 }

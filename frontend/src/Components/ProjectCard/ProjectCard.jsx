@@ -5,6 +5,13 @@ import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded
 import './ProjectCard.scss'
 import { useSpring, animated } from 'react-spring'
 
+const DAMPEN = 50
+const CONFIG = { mass: 10, tension: 400, friction: 40, precision: 0.00001 }
+const CARD_CLASS = 'card'
+const CARD_HOVERED_CLASS = 'card--hovered'
+const Z_INDEX_HOVERED = 2
+const Z_INDEX_NOT_HOVERED = 1
+
 function Card ({ children }) {
   // We add this ref to card element and use in onMouseMove event ...
   // ... to get element's offset and dimensions.
@@ -22,58 +29,59 @@ function Card ({ children }) {
       // ... easily generate the css transform value below.
       xys: [1, 1, 1],
       // Setup physics
-      config: { mass: 10, tension: 400, friction: 40, precision: 0.00001 }
+      config: CONFIG
     }
   })
 
+  const handleMouseEnter = () => {
+    setHovered(true)
+  }
+
+  const handleMouseMove = ({ clientX, clientY }) => {
+    // Get mouse x position within card
+    const x = clientX - (ref.current.offsetLeft - window.scrollX)
+
+    // Get mouse y position within card
+    const y = clientY - (ref.current.offsetTop - window.scrollY)
+
+    // Set animated values based on mouse position and card dimensions
+    const xys = [
+      -(y - ref.current.clientHeight / 2) / DAMPEN,
+      (x - ref.current.clientWidth / 2) / DAMPEN,
+      1.07
+    ]
+
+    // Update values to animate to
+    setAnimatedProps({ xys: xys })
+  }
+  const handleMouseLeave = () => {
+    setHovered(false)
+    setAnimatedProps({ xys: [0, 0, 1] })
+  }
+
   return (
-    <animated.div
-      ref={ref}
-      className='card'
-      onMouseEnter={() => setHovered(true)}
-      onMouseMove={({ clientX, clientY }) => {
-        // Get mouse x position within card
-        const x =
-          clientX -
-          (ref.current.offsetLeft -
-            (window.scrollX || window.pageXOffset || document.body.scrollLeft))
-
-        // Get mouse y position within card
-        const y =
-          clientY -
-          (ref.current.offsetTop -
-            (window.scrollY || window.pageYOffset || document.body.scrollTop))
-
-        // Set animated values based on mouse position and card dimensions
-        const dampen = 50 // Lower the number the less rotation
-        const xys = [
-          -(y - ref.current.clientHeight / 2) / dampen, // rotateX
-          (x - ref.current.clientWidth / 2) / dampen, // rotateY
-          1.07 // Scale
-        ]
-
-        // Update values to animate to
-        setAnimatedProps({ xys: xys })
-      }}
-      onMouseLeave={() => {
-        setHovered(false)
-        // Set xys back to original
-        setAnimatedProps({ xys: [0, 0, 1] })
-      }}
-      style={{
-        // If hovered we want it to overlap other cards when it scales up
-        zIndex: isHovered ? 2 : 1,
-        // Interpolate function to handle css changes
-        transform: animatedProps.xys.to(
-          (x, y, s) =>
-            `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
-        )
-      }}
-    >
-      {children}
-    </animated.div>
+    <>
+      <animated.div
+        ref={ref}
+        className={`${CARD_CLASS} ${isHovered ? CARD_HOVERED_CLASS : ''}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          // If hovered we want it to overlap other cards when it scales up
+          zIndex: isHovered ? Z_INDEX_HOVERED : Z_INDEX_NOT_HOVERED,
+          transform: animatedProps.xys.to(
+            (x, y, s) =>
+              `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
+          )
+        }}
+      >
+        {children}
+      </animated.div>
+    </>
   )
 }
+
 const ProjectCard = ({ project }) => {
   return (
     <>
@@ -90,6 +98,7 @@ const ProjectCard = ({ project }) => {
               </div>
               <h3 className='project-card-subtitle'>{project.subTitle}</h3>{' '}
               <div className='project-card-like'>
+                <p>{project.likes}</p>
                 <FavoriteBorderRoundedIcon />
               </div>
             </div>

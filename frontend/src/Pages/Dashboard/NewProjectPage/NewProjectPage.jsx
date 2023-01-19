@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { createProject } from '../../../Redux/Actions/projectActions.js'
 import CategoryDropdown from '../../../Components/CategoryDropdown/CategoryDropdown'
 import { Container, Box, Button, Checkbox } from '@mui/material'
+import ImageDropdown from '../../../Components/ImageDropdown/ImageDropdown'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import './NewProjectPage.scss'
@@ -18,6 +19,7 @@ const NewProjectPage = () => {
     images: [],
     categories: []
   })
+  console.log(formData)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -42,11 +44,18 @@ const NewProjectPage = () => {
       ...formData,
       [e.target.name]: e.target.value
     })
+    console.log(formData)
   }
   const handleCheckboxChange = e => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.checked
+      published: e.target.checked
+    })
+  }
+  const handleImageSelect = imageId => {
+    setFormData({
+      ...formData,
+      images: [...formData.images, imageId]
     })
   }
   return (
@@ -113,6 +122,12 @@ const NewProjectPage = () => {
         </Box>
         <Box mb={2} className='new-project-categories'>
           <CategoryDropdown className='new-project-categories-dropdown' />
+        </Box>
+        <Box mb={2} className='new-project-categories'>
+          <ImageDropdown
+            onChange={handleImageSelect}
+            className='new-project-categories-dropdown'
+          />
         </Box>
         <Box mb={2} className='new-project-submit'>
           <Button

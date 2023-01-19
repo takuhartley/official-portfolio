@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import AlertComponent from '../AlertComponent/AlertComponent'
+import LoadingComponent from '../LoadingComponent/LoadingComponent'
 
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -21,12 +23,13 @@ import CheckIcon from '@mui/icons-material/Check'
 import ErrorIcon from '@mui/icons-material/Error'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
+import './ImageTable.scss'
 
 const ImageTable = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const imageList = useSelector(state => state.imageList)
-  const { images } = imageList
+  const { loading, error, images } = imageList
   const imageDelete = useSelector(state => state.imageDelete)
   const { success: successDelete } = imageDelete
   const userLogin = useSelector(state => state.userLogin)
@@ -47,46 +50,105 @@ const ImageTable = () => {
   const handleEdit = id => {
     navigate(`/images/${id}/edit`)
   }
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-        <TableHead>
-          <TableRow>
-            <TableCell align='left'>ID</TableCell>
-            <TableCell align='left'>Image Name</TableCell>
-            <TableCell align='left'>Description</TableCell>
-            <TableCell align='left'>Mime Type</TableCell>
-            <TableCell align='left'>Path</TableCell>
-            <TableCell align='left'>Original Name</TableCell>
-            <TableCell align='left'>Size</TableCell>
-            <TableCell align='left'>Author</TableCell>
-            <TableCell align='left'>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {images.map(image => (
-            <TableRow
-              key={image._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align='left'>{image._id}</TableCell>
-              <TableCell align='left'>{image.name}</TableCell>
-              <TableCell align='left'>{image.desc}</TableCell>
-              <TableCell align='left'>{image.mimetype}</TableCell>
-              <TableCell align='left'>{image.path}</TableCell>
-              <TableCell align='left'>{image.originalname}</TableCell>
-              <TableCell align='left'>{image.size}</TableCell>
-              <TableCell align='left'>{image.author}</TableCell>
-              <TableCell align='left'>
-                <EditIcon onClick={() => handleEdit(image.id)} />
 
-                <DeleteIcon onClick={() => deleteHandler(image._id)} />
+  return (
+    <>
+      {loading && <LoadingComponent></LoadingComponent>}
+      {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
+      <TableContainer component={Paper} className='table-container'>
+        <Table
+          sx={{ minWidth: 650 }}
+          aria-label='simple table'
+          className='table'
+        >
+          <TableHead className='table-head'>
+            <TableRow className='table-row'>
+              <TableCell align='left' className='table-cell'>
+                ID
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Image
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Image Name
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Description
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Mime Type
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Path
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Original Name
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Size
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Author
+              </TableCell>
+              <TableCell align='left' className='table-cell'>
+                Actions
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody className='table-body'>
+            {images.map(image => (
+              <TableRow
+                key={image._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                className='table-row'
+              >
+                <TableCell align='left' className='table-cell'>
+                  {image._id}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  <img
+                    src={`/Images/${image.filename}`}
+                    alt={image.name}
+                    className='table-img'
+                  />
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.name}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.desc}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.mimetype}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.path}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.originalname}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.size}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  {image.author}
+                </TableCell>
+                <TableCell align='left' className='table-cell'>
+                  <EditIcon
+                    onClick={() => handleEdit(image._id)}
+                    className='table-icon'
+                  />
+                  <DeleteIcon
+                    onClick={() => deleteHandler(image._id)}
+                    className='table-icon'
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   )
 }
 

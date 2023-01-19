@@ -40,7 +40,7 @@ app.use('/api/blogs', blogPostRoutes)
 // Use error middleware
 // app.use(notFound)
 app.use(errorHandler)
-
+app.use('/Images', express.static('./Images'))
 // Set port for the server
 const PORT = process.env.PORT || 5000
 

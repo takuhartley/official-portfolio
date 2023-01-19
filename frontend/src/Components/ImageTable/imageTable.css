@@ -1,0 +1,26 @@
+.table-container .table {
+  min-width: 650px;
+}
+
+.table-container .table-head .table-row .table-cell {
+  align: left;
+}
+
+.table-container .table-body .table-row:last-child td,
+.table-container .table-body .table-row:last-child th {
+  border: 0;
+}
+
+.table-container .table-body .table-row .table-cell {
+  align: left;
+}
+
+.table-container .table-body .table-row .table-img {
+  max-height: 128px;
+  min-height: 64px;
+}
+
+.table-container .table-body .table-row .table-icon {
+  /* Add styles for the icons here */
+}
+/*# sourceMappingURL=imageTable.css.map */

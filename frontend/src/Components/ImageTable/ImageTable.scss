@@ -1,0 +1,30 @@
+.table-container {
+  .table {
+    min-width: 650px;
+  }
+  .table-head {
+    .table-row {
+      .table-cell {
+        align: left;
+      }
+    }
+  }
+  .table-body {
+    .table-row {
+      &:last-child td,
+      &:last-child th {
+        border: 0;
+      }
+      .table-cell {
+        align: left;
+      }
+      .table-img {
+        max-height: 128px;
+        min-height: 64px;
+      }
+      .table-icon {
+        /* Add styles for the icons here */
+      }
+    }
+  }
+}

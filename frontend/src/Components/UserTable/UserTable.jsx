@@ -59,7 +59,6 @@ const UserTable = () => {
       dispatch(deleteUser(id))
     }
   }
-  console.log(users)
   return (
     <div>
       <TableContainer component={Paper}>

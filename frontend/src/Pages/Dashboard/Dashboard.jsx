@@ -12,7 +12,6 @@ import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
 import MenuIcon from '@mui/icons-material/Menu'
 import UserTable from '../../Components/UserTable/UserTable'
-import ImageTable from '../../Components/ImageTable/ImageTable'
 import ProjectTable from '../../Components/ProjectTable/ProjectTable'
 import FiberNewRoundedIcon from '@mui/icons-material/FiberNewRounded'
 import Header from '../../Components/Header/Header'
@@ -196,9 +195,6 @@ function DashboardContent () {
             </div>
             <div>
               <ImageSetting />
-            </div>
-            <div>
-              <ImageTable />
             </div>
             <div>
               <UserTable />

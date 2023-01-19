@@ -9,32 +9,38 @@ import About from './Pages/About/About.jsx'
 import Contact from './Pages/Contact/Contact.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import Home from './Pages/Home/Home.jsx'
-import ImageSetting from './Components/ImageSetting/ImageSetting.jsx'
 import NotFound from './Components/NotFound/NotFound.jsx'
 import EditProject from './Pages/Dashboard/ProjectEdit/ProjectEdit.jsx'
 import ImageUpload from './Components/ImageUpload/ImageUpload.jsx'
+import ImageSetting from './Components/ImageSetting/ImageSetting.jsx'
+import ImagedDetails from './Components/ImageDetails/ImageDetails.jsx'
+import ImageEdit from './Components/ImageEdit/ImageEdit.jsx'
 import Header from './Components/Header/Header.jsx'
 const App = () => {
   return (
     <>
-      <div>
-        <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/projects'>
-            <Route index element={<Projects />} />
-            <Route path=':id' element={<Project />} />
-            <Route path='new' element={<NewProjectPage />} />
-            <Route path=':id/edit' element={<EditProject />} />
-          </Route>
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/logout' element={<Logout />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </div>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/projects'>
+          <Route index element={<Projects />} />
+          <Route path=':id' element={<Project />} />
+          <Route path='new' element={<NewProjectPage />} />
+          <Route path=':id/edit' element={<EditProject />} />
+        </Route>
+        <Route path='/images'>
+          <Route index element={<ImageSetting />} />
+          <Route path=':id' element={<ImagedDetails />} />
+          <Route path='upload' element={<ImageUpload />} />
+          <Route path=':id/edit' element={<ImageEdit />} />
+        </Route>
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/logout' element={<Logout />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </>
   )
 }

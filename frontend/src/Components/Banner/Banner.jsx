@@ -1,29 +1,46 @@
 import React from 'react'
-import Container from '@mui/material/Container' // import PlaceRoundedIcon from '@mui/icons-material/PlaceRounded'
+import { Link } from 'react-router-dom'
+import { Box, Button } from '@mui/material'
 import './Banner.scss'
+
 const Banner = () => {
   return (
     <>
-      <Container className='banner'>
-        <p className='banner-title'>Robert T. Hartley</p>
-        <p className='banner-subtitle'>
-          Hi there{' '}
+      <div className='banner-container'>
+        <p className='banner-container__title'>Robert T. Hartley</p>
+        <p className='banner-container__subtitle'>
+          Hi there
           <span role='img' aria-label='Wave'>
             👋🏼
-          </span>{' '}
-          I'm a Front-End Developer{' '}
+          </span>
+          <br />
+          I'm a Full-Stack Developer
           <span role='img' aria-label='Coding'>
             👨🏻‍💻
-          </span>{' '}
+          </span>
           / Agile IT Business Analyst
+          <span role='img' aria-label='Glasses'>
+            👓
+          </span>
         </p>
-        <div className='banner-location'>
-          Currently in Japan{' '}
+        <div className='banner-container__location'>
+          Currently in Tokyo, Japan
           <span role='img' aria-label='Tokyo Tower'>
             🗼
           </span>
         </div>
-      </Container>
+        <Box mt={3} className='banner-container__button-wrapper'>
+          <Link to='/about' className='banner-container__button-link'>
+            <Button
+              variant='outlined'
+              color='primary'
+              className='banner-container__button'
+            >
+              Add+
+            </Button>
+          </Link>
+        </Box>
+      </div>
     </>
   )
 }
