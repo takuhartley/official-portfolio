@@ -34,7 +34,6 @@ const ImageUpload = () => {
     formData.append('file', selectedFile)
     formData.append('name', imageName)
     formData.append('desc', imageDesc)
-    console.log(formData)
     const start = performance.now()
     dispatch(uploadImage(formData))
     const end = performance.now()

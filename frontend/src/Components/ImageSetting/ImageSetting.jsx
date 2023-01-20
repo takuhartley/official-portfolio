@@ -8,7 +8,6 @@ const ImageSetting = () => {
     <div>
       <ImageUpload />
       <ImageTable />
-      <ImageDetails />
     </div>
   )
 }

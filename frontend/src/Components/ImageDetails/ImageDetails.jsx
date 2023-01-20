@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const ImageDetails = () => {
   const { id } = useParams()
   const imageId = id
-  console.log('ImageID ' + imageId)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     id: '',
@@ -27,9 +26,9 @@ const ImageDetails = () => {
     path: '',
     originalname: '',
     size: 0,
-    author: ''
+    author: '',
+    filename: ''
   })
-  console.log(formData)
   const dispatch = useDispatch()
   const imageDetails = useSelector(state => state.imageDetails)
   const { loading, error, image } = imageDetails
@@ -45,7 +44,8 @@ const ImageDetails = () => {
         desc: image.desc,
         path: image.path,
         originalname: image.originalname,
-        size: image.size
+        size: image.size,
+        filename: image.filename
       })
     }
   }, [image, setFormData])
@@ -70,6 +70,9 @@ const ImageDetails = () => {
       </div>
       <div>
         <p id='originalname'>Original Name: {formData.originalname}</p>
+      </div>
+      <div>
+        <p id='filename'>File Name: {formData.filename}</p>
       </div>
       <div>
         <p id='size'>Size: {formData.size}</p>

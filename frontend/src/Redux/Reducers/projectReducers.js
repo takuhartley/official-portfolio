@@ -16,7 +16,11 @@ import {
   PROJECT_UPDATE_SUCCESS,
   PROJECT_UPDATE_FAIL,
   PROJECT_UPDATE_RESET,
-  PROJECT_DETAILS_RESET
+  PROJECT_DETAILS_RESET,
+  PROJECT_IMAGES_REQUEST,
+  PROJECT_IMAGES_SUCCESS,
+  PROJECT_IMAGES_FAIL,
+  PROJECT_IMAGES_RESET
 } from '../Constants/projectConstants'
 
 export const projectListReducer = (state = { projects: [] }, action) => {
@@ -87,6 +91,21 @@ export const projectUpdateReducer = (state = { project: {} }, action) => {
     case PROJECT_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     case PROJECT_UPDATE_RESET:
+      return { project: {} }
+    default:
+      return state
+  }
+}
+
+export const projectImagesReducer = (state = { projectImages: {} }, action) => {
+  switch (action.type) {
+    case PROJECT_IMAGES_REQUEST:
+      return { loading: true }
+    case PROJECT_IMAGES_SUCCESS:
+      return { loading: false, success: true, project_images: action.payload }
+    case PROJECT_IMAGES_FAIL:
+      return { loading: false, error: action.payload }
+    case PROJECT_IMAGES_RESET:
       return { project: {} }
     default:
       return state

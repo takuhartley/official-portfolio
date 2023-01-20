@@ -1,0 +1,12 @@
+.image-details-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  #image-details-component {
+    width: 80%;
+    img {
+      width: 50px;
+    }
+  }
+}

@@ -23,12 +23,8 @@ const imageUpload = asyncHandler(async (req, res) => {
       author: req.user._id,
       filename: req.file.filename
     })
-    console.log('Image request: ', req.file)
-    console.log('Body request: ', req.body)
-    console.log(newImage)
     // Save the image to the database
     await newImage.save()
-    console.log('Image uploaded and saved successfully')
 
     // Return a success message
     return res.status(201).send({
@@ -79,15 +75,12 @@ const getImageById = asyncHandler(async (req, res) => {
   const imageId = req.params.id
   // find the image in the database by ID
   const image = await Image.findById(imageId)
-  if (!image) {
-    // if no image is found, return a custom message
-    return res.status(404).json({
-      success: false,
-      message: 'Image not found'
-    })
+  if (image) {
+    res.json(image)
+  } else {
+    res.status(404)
+    throw new Error('Image not found')
   }
-  // if the image is found, return the image
-  return res.status(200).json(image)
 })
 
 const updateImageById = asyncHandler(async (req, res) => {

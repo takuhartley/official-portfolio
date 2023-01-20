@@ -6,7 +6,8 @@ import {
   projectDetailsReducer,
   projectDeleteReducer,
   projectCreateReducer,
-  projectUpdateReducer
+  projectUpdateReducer,
+  projectImagesReducer
 } from './Redux/Reducers/projectReducers'
 
 import {
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   projectDelete: projectDeleteReducer,
   projectCreate: projectCreateReducer,
   projectUpdate: projectUpdateReducer,
+  projectImages: projectImagesReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,

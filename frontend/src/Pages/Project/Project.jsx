@@ -11,7 +11,6 @@ const Project = () => {
   const projectDetails = useSelector(state => state.projectDetails)
   const { project, loading, error } = projectDetails
   const { title, subTitle, description, ...images } = project
-  console.log(images)
 
   useEffect(() => {
     if (!project._id || project._id !== id) {

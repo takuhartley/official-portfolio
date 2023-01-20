@@ -19,7 +19,7 @@ const NewProjectPage = () => {
     images: [],
     categories: []
   })
-  console.log(formData)
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -44,7 +44,6 @@ const NewProjectPage = () => {
       ...formData,
       [e.target.name]: e.target.value
     })
-    console.log(formData)
   }
   const handleCheckboxChange = e => {
     setFormData({

@@ -3,14 +3,15 @@ import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   listProjectDetails,
-  updateProject
+  updateProject,
+  getProjectImage
 } from '../../../Redux/Actions/projectActions.js'
-import { listImageDetails } from '../../../Redux/Actions/imageUploadActions.js'
 import { PROJECT_UPDATE_RESET } from '../../../Redux/Constants/projectConstants.js'
 
 import AlertComponent from '../../../Components/AlertComponent/AlertComponent'
 import LoadingComponent from '../../../Components/LoadingComponent/LoadingComponent'
 import ImageDropdown from '../../../Components/ImageDropdown/ImageDropdown'
+import ImageDetailsComponent from '../../../Components/ImageDetailsComponent/ImageDetailsComponent'
 import {
   Input,
   InputLabel,
@@ -20,7 +21,8 @@ import {
   FormControlLabel,
   FormControl,
   TextField,
-  Box
+  Box,
+  Button
 } from '@mui/material'
 
 const ProjectEditPage = () => {
@@ -28,38 +30,32 @@ const ProjectEditPage = () => {
   const projectId = id
   const navigate = useNavigate()
   // Define State
-  const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(true)
   const [formData, setFormData] = useState({
     author: '',
     title: '',
     subTitle: '',
     description: '',
-    published: '',
+    published: false,
     likes: 0,
     images: [],
     categories: []
   })
-  console.log(formData)
+  console.log('Form Data: ' + JSON.stringify(formData))
   // Dispatch Redux
   const dispatch = useDispatch()
   // Define project details from state
   const projectDetails = useSelector(state => state.projectDetails)
   const { loading, error, project } = projectDetails
-  // const imageDetails = useSelector(state => state.imageDetails)
-  // const { imageDetails: image } = imageDetails
-  // console.log(imageDetails)
-  // Define project update state
   const projectUpdate = useSelector(state => state.projectUpdate)
   const { success: successUpdate } = projectUpdate
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
-  console.log(userInfo)
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
       navigate('/login')
     } else {
       dispatch(listProjectDetails(projectId))
-      dispatch(listImageDetails())
     }
   }, [dispatch, navigate, projectId, userInfo])
   useEffect(() => {
@@ -76,6 +72,12 @@ const ProjectEditPage = () => {
       })
     }
   }, [project, setFormData])
+  useEffect(() => {
+    if (successUpdate) {
+      navigate(`/projects/${project._id}`)
+      dispatch({ type: PROJECT_UPDATE_RESET })
+    }
+  }, [successUpdate, dispatch, navigate, project._id])
   const submitHandler = e => {
     e.preventDefault()
     dispatch(
@@ -92,95 +94,120 @@ const ProjectEditPage = () => {
       })
     )
   }
-  const handleImageSelect = imageId => {
-    setFormData({
-      ...formData,
-      images: [...formData.images, imageId]
-    })
+  const handleImageSelect = image => {
+    if (formData.images) {
+      setFormData({
+        ...formData,
+        images: [...formData.images]
+      })
+    } else {
+      setFormData({
+        ...formData,
+        images: [image._id]
+      })
+    }
   }
 
   return (
     <>
       {editMode ? (
-        <Container>
-          <form onSubmit={submitHandler}>
-            <FormControl fullWidth>
-              <InputLabel htmlFor='title'>Title</InputLabel>
-              <Input
-                id='title'
-                type='text'
-                value={formData.title}
-                onChange={e =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor='subTitle'>SubTitle</InputLabel>
-              <Input
-                id='subTitle'
-                type='text'
-                value={formData.subTitle}
-                onChange={e =>
-                  setFormData({ ...formData, subTitle: e.target.value })
-                }
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor='description'>Description</InputLabel>
-              <TextField
-                id='description'
-                multiline
-                rows={4}
-                value={formData.description}
-                onChange={e =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={formData.published}
-                      onChange={e =>
-                        setFormData({
-                          ...formData,
-                          published: e.target.checked
-                        })
-                      }
-                    />
+        <>
+          <Container>
+            <div>
+              {formData.images &&
+                formData.images.map((image, index) => (
+                  <ImageDetailsComponent key={index} imageId={image} />
+                ))}
+            </div>
+          </Container>
+          <Container>
+            <form onSubmit={submitHandler}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor='title'>Title</InputLabel>
+                <Input
+                  id='title'
+                  type='text'
+                  value={formData.title ?? ''}
+                  onChange={e =>
+                    setFormData({ ...formData, title: e.target.value })
                   }
-                  label='Published'
                 />
-              </FormGroup>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor='likes'>Likes</InputLabel>
-              <Input
-                id='likes'
-                type='number'
-                value={formData.likes}
-                onChange={e =>
-                  setFormData({ ...formData, likes: e.target.value })
-                }
-              />
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel htmlFor='display'>Display</InputLabel>
-              <Input
-                id='display'
-                type='text'
-                value={formData.display}
-                onChange={e =>
-                  setFormData({ ...formData, display: e.target.value })
-                }
-              />
-            </FormControl>
-            <button type='submit'>Update Project</button>
-          </form>
-        </Container>
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel htmlFor='subTitle'>SubTitle</InputLabel>
+                <Input
+                  id='subTitle'
+                  type='text'
+                  value={formData.subTitle ?? ''}
+                  onChange={e =>
+                    setFormData({ ...formData, subTitle: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel htmlFor='description'>Description</InputLabel>
+                <TextField
+                  id='description'
+                  multiline
+                  rows={4}
+                  value={formData.description ?? ''}
+                  onChange={e =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={formData.published ?? false}
+                        onChange={e =>
+                          setFormData({
+                            ...formData,
+                            published: e.target.checked
+                          })
+                        }
+                      />
+                    }
+                    label='Published'
+                  />
+                </FormGroup>
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel htmlFor='likes'>Likes</InputLabel>
+                <Input
+                  id='likes'
+                  type='number'
+                  value={formData.likes ?? ''}
+                  onChange={e =>
+                    setFormData({ ...formData, likes: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <InputLabel htmlFor='categories'>Categories</InputLabel>
+                <Input
+                  id='categories'
+                  type='text'
+                  value={formData.categories ?? ''}
+                  onChange={e =>
+                    setFormData({ ...formData, categories: e.target.value })
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <ImageDropdown
+                  onChange={handleImageSelect}
+                  className='new-project-categories-dropdown'
+                />
+              </FormControl>
+              <Button type='submit' variant='contained' color='primary'>
+                Update
+              </Button>
+            </form>
+          </Container>
+        </>
       ) : loading ? (
         <LoadingComponent />
       ) : error ? (
@@ -188,33 +215,22 @@ const ProjectEditPage = () => {
       ) : (
         <Container>
           <div>
-            <p id='title'>{formData.title}</p>
+            <p id='title'>Title: {formData.title}</p>
           </div>
           <div>
-            <p id='subTitle'>{formData.subTitle}</p>
+            <p id='subTitle'>Sub-Title: {formData.subTitle}</p>
           </div>
           <div>
-            <p id='description'>{formData.description}</p>
+            <p id='description'>Description: {formData.description}</p>
           </div>
           <div>
-            <p id='likes'>{formData.likes}</p>
+            <p id='likes'>Likes: {formData.likes}</p>
           </div>
           <div>
-            <p id='display'>{formData.display}</p>
-          </div>
-          <div>
-            {formData.images.map((image, index) => (
-              <div>
-                <span key={index}>{image} </span>
-              </div>
-            ))}
-          </div>
-          <div>
-            {formData.categories.map((categories, index) => (
-              <div>
-                <span key={index}>{categories} </span>
-              </div>
-            ))}
+            {formData.images &&
+              formData.images.map((id, index) => (
+                <ImageDetailsComponent key={index} imageId={id} />
+              ))}
           </div>
         </Container>
       )}

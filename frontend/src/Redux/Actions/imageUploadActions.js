@@ -30,7 +30,7 @@ export const uploadImage = imageData => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`
       }
     }
-    console.log('Image Data' + imageData)
+
     const { data } = await axios.post(`/api/images/upload`, imageData, config)
     dispatch({
       type: IMAGE_UPLOAD_SUCCESS,
@@ -75,10 +75,10 @@ export const listImages = () => async dispatch => {
 export const listImageDetails = id => async dispatch => {
   try {
     dispatch({ type: IMAGE_DETAILS_REQUEST })
-    const { data } = await axios.get(`/api/images/${id}`)
+    const response = await axios.get(`/api/images/${id}`)
     dispatch({
       type: IMAGE_DETAILS_SUCCESS,
-      payload: data
+      payload: response.data
     })
   } catch (error) {
     dispatch({

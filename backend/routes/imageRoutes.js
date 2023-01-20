@@ -18,14 +18,11 @@ const storage = multer.diskStorage({
     cb(null, 'Images') // set the destination to the public/images folder
   },
   filename: function (req, file, cb) {
-    console.log('middleware' + file)
     cb(null, Date.now() + '-' + file.originalname) // set the file name to the fieldname plus the current timestamp
-    console.log('Stored locally ' + file)
   }
 })
 
 const fileFilter = (req, file, cb) => {
-  console.log('File Filter ' + file.mimetype)
   if (ALLOWED_MIME_TYPES.includes(file.mimetype)) {
     cb(null, true)
   } else {

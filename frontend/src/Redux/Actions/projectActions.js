@@ -14,7 +14,11 @@ import {
   PROJECT_CREATE_FAIL,
   PROJECT_UPDATE_REQUEST,
   PROJECT_UPDATE_SUCCESS,
-  PROJECT_UPDATE_FAIL
+  PROJECT_UPDATE_FAIL,
+  PROJECT_IMAGES_REQUEST,
+  PROJECT_IMAGES_SUCCESS,
+  PROJECT_IMAGES_FAIL,
+  PROJECT_IMAGES_RESET
 } from '../Constants/projectConstants'
 import { logout } from '../Actions/userActions'
 
@@ -124,6 +128,29 @@ export const createProject = projectData => async (dispatch, getState) => {
     }
     dispatch({
       type: PROJECT_CREATE_FAIL,
+      payload: message
+    })
+  }
+}
+
+export const getProjectImage = id => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROJECT_IMAGES_REQUEST
+    })
+
+    const response = await axios.get(`/api/images/${id}`)
+    dispatch({
+      type: PROJECT_IMAGES_SUCCESS,
+      payload: response
+    })
+  } catch (error) {
+    const message = error.response?.data?.message ?? error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: PROJECT_IMAGES_FAIL,
       payload: message
     })
   }
