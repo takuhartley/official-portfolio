@@ -18,7 +18,6 @@ import {
   CATEGORY_IMAGES_REQUEST,
   CATEGORY_IMAGES_SUCCESS,
   CATEGORY_IMAGES_FAIL,
-  CATEGORY_IMAGES_RESET
 } from '../Constants/categoryConstants'
 import { logout } from '../Actions/userActions'
 

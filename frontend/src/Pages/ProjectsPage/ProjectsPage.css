@@ -1,0 +1,123 @@
+.card {
+  border-radius: 25px;
+  border: 2px solid transparent;
+}
+
+.card--hovered {
+  border: 5px solid currentColor;
+  -webkit-animation: rainbow-border 1s linear infinite;
+          animation: rainbow-border 1s linear infinite;
+}
+
+.card--hovered .project-card-header {
+  -webkit-animation: rainbow-text 1s linear infinite;
+          animation: rainbow-text 1s linear infinite;
+}
+
+.card--hovered .overlay {
+  -webkit-animation: fade-in 1s;
+          animation: fade-in 1s;
+}
+
+@-webkit-keyframes rainbow-border {
+  0% {
+    border-color: red;
+  }
+  20% {
+    border-color: orange;
+  }
+  40% {
+    border-color: yellow;
+  }
+  60% {
+    border-color: green;
+  }
+  80% {
+    border-color: blue;
+  }
+  100% {
+    border-color: purple;
+  }
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-color: red;
+  }
+  20% {
+    border-color: orange;
+  }
+  40% {
+    border-color: yellow;
+  }
+  60% {
+    border-color: green;
+  }
+  80% {
+    border-color: blue;
+  }
+  100% {
+    border-color: purple;
+  }
+}
+
+@-webkit-keyframes rainbow-text {
+  0% {
+    color: red;
+  }
+  20% {
+    color: orange;
+  }
+  40% {
+    color: yellow;
+  }
+  60% {
+    color: green;
+  }
+  80% {
+    color: blue;
+  }
+  100% {
+    color: purple;
+  }
+}
+
+@keyframes rainbow-text {
+  0% {
+    color: red;
+  }
+  20% {
+    color: orange;
+  }
+  40% {
+    color: yellow;
+  }
+  60% {
+    color: green;
+  }
+  80% {
+    color: blue;
+  }
+  100% {
+    color: purple;
+  }
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*# sourceMappingURL=ProjectsPage.css.map */

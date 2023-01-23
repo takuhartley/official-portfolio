@@ -1,14 +1,14 @@
 import React from 'react'
-import Banner from '../../Components/Banner/Banner'
+import BannerComponent from '../../Components/BannerComponent/BannerComponent'
 import Footer from '../../Components/Footer/Footer'
-import Projects from '../Projects/Projects'
-import './Home.scss'
+import ProjectsPage from '../ProjectsPage/ProjectsPage'
+import './HomePage.scss'
 const Home = () => {
   return (
     <>
       <div className='Home'>
-        <Banner />
-        <Projects />
+        <BannerComponent />
+        <ProjectsPage />
         <Footer />
       </div>
     </>

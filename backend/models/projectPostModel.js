@@ -48,7 +48,7 @@ const ProjectSchema = new Schema(
         url: {
           type: String
         },
-        description: {
+        name: {
           type: String
         }
       }

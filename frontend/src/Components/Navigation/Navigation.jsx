@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from '@mui/icons-material/Home'
 import './Navigation.scss'
-import { logout } from '../../../Redux/Actions/userActions.js'
+import { logout } from '../../Redux/Actions/userActions.js'
 const Navigation = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -28,6 +28,11 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
+            <Link className='nav-link' to='blogposts'>
+              Blog
+            </Link>
+          </li>
+          <li>
             <Link className='nav-link' to='about'>
               About
             </Link>
@@ -48,6 +53,11 @@ const Navigation = () => {
           <li>
             <Link onClick={logoutHandler} className='nav-link'>
               Logout
+            </Link>
+          </li>
+          <li>
+            <Link className='nav-link' to='playground'>
+              Playground
             </Link>
           </li>
         </ul>

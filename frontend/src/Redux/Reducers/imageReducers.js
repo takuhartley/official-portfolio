@@ -5,7 +5,6 @@ import {
   IMAGE_DETAILS_REQUEST,
   IMAGE_DETAILS_SUCCESS,
   IMAGE_DETAILS_FAIL,
-  IMAGE_DETAILS_CLEAR,
   IMAGE_DELETE_REQUEST,
   IMAGE_DELETE_SUCCESS,
   IMAGE_DELETE_FAIL,
@@ -17,7 +16,6 @@ import {
   IMAGE_UPDATE_FAIL,
   IMAGE_DETAILS_RESET
 } from '../Constants/imageConstants'
-import axios from 'axios'
 
 const initialState = {
   image: null,

@@ -17,8 +17,7 @@ import {
   PROJECT_UPDATE_FAIL,
   PROJECT_IMAGES_REQUEST,
   PROJECT_IMAGES_SUCCESS,
-  PROJECT_IMAGES_FAIL,
-  PROJECT_IMAGES_RESET
+  PROJECT_IMAGES_FAIL
 } from '../Constants/projectConstants'
 import { logout } from '../Actions/userActions'
 
@@ -45,7 +44,7 @@ export const listProjects = () => async dispatch => {
 export const listProjectDetails = projectId => async dispatch => {
   try {
     dispatch({ type: PROJECT_DETAILS_REQUEST })
-    
+
     const { data } = await axios.get(`/api/projects/${projectId}`)
     console.log('Redux Actions ' + JSON.stringify(data))
     dispatch({

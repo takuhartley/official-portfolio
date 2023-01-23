@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProjectDetails } from '../../Redux/Actions/projectActions'
-import Grid from '@mui/material/Unstable_Grid2'
-import Container from '@mui/material/Container'
 import LoadingComponent from '../../Components/LoadingComponent/LoadingComponent'
 import AlertComponent from '../../Components/AlertComponent/AlertComponent'
-import './Project.scss'
-const Project = () => {
+import './ProjectDetailsPage.scss'
+const ProjectDetailsPage = () => {
   const { id } = useParams()
   const projectId = id
   console.log(id)
@@ -22,7 +20,8 @@ const Project = () => {
     likes: 0,
     images: [],
     categories: [],
-    thumbnail: ''
+    thumbnail: '',
+    links: []
   })
   console.log(formData)
   const dispatch = useDispatch()
@@ -44,7 +43,8 @@ const Project = () => {
         published: project.published,
         likes: project.likes,
         images: project.images,
-        categories: project.categories
+        categories: project.categories,
+        links: project.links
       })
   }, [
     project._id,
@@ -53,6 +53,7 @@ const Project = () => {
     project.description,
     project.images,
     project.likes,
+    project.links,
     project.published,
     project.subTitle,
     project.thumbnail,
@@ -86,6 +87,16 @@ const Project = () => {
             <p id='author' className='author'>
               By: {formData.author.firstName}
             </p>
+            {formData.links.map((link, index) => (
+              <a
+                key={index}
+                className='project-image'
+                href={link.url}
+                alt={link.name}
+              >
+                {link.name}
+              </a>
+            ))}
 
             <p id='likes' className='likes'>
               Likes: {formData.likes}
@@ -99,4 +110,4 @@ const Project = () => {
     </>
   )
 }
-export default Project
+export default ProjectDetailsPage

@@ -17,10 +17,6 @@ import {
   CATEGORY_UPDATE_FAIL,
   CATEGORY_UPDATE_RESET,
   CATEGORY_DETAILS_RESET,
-  CATEGORY_IMAGES_REQUEST,
-  CATEGORY_IMAGES_SUCCESS,
-  CATEGORY_IMAGES_FAIL,
-  CATEGORY_IMAGES_RESET
 } from '../Constants/categoryConstants'
 
 export const categoriesListReducer = (state = { categories: [] }, action) => {

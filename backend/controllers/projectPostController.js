@@ -47,6 +47,12 @@ const getAllProjectPosts = asyncHandler(async (req, res) => {
 
 const updateProjectPostById = asyncHandler(async (req, res) => {
   try {
+    // Extract the URL from the request body
+    const { url } = req.body.links
+    // Validate the URL
+    if (!url.match(/^https?:\/\//)) {
+      return res.status(400).json({ message: 'Invalid URL format' })
+    }
     // Find the project post by ID and update it
     const updatedProjectPost = await ProjectPost.findByIdAndUpdate(
       req.params.id,
@@ -58,7 +64,8 @@ const updateProjectPostById = asyncHandler(async (req, res) => {
         published: req.body.published,
         likes: req.body.likes,
         images: req.body.images,
-        categories: req.body.categories
+        categories: req.body.categories,
+        links: req.body.links
       },
       { new: true }
     )

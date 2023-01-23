@@ -46,6 +46,23 @@ const About = () => {
           <li>₿ FinTech/Crypto/Blockchain</li>
           <li>🧠 Machine Learning/AI</li>
         </ul>
+        <ul className='about-page-second-body__list'>
+          <li>😂Japanese Culture👍</li>
+          <li>🔥Anime/Manga🔥</li>
+          <li>🧚💀Pixel Art💀🧚</li>
+          <li>😍Animals 🐻🥰</li>
+          <li>👀Working Out❤️</li>
+          <li>⭐Gym✔️</li>
+          <li>Skiing⛷️/Snowboarding</li>
+        </ul>
+      </div>
+      <div className='about-page-second-body'>
+        <a
+          href='\Assets\Business-Analyst_Resume_v1.7_10302022.pdf'
+          download='\Assets\Business-Analyst_Resume_v1.7_10302022.pdf'
+        >
+          Resume
+        </a>
       </div>
     </Container>
   )

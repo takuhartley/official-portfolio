@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Link as RouterLink, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   listProjectDetails,
-  updateProject,
-  getProjectImage
+  updateProject
 } from '../../../Redux/Actions/projectActions.js'
-import { PROJECT_UPDATE_RESET } from '../../../Redux/Constants/projectConstants.js'
+// import { PROJECT_UPDATE_RESET } from '../../../Redux/Constants/projectConstants.js'
 
 import AlertComponent from '../../../Components/AlertComponent/AlertComponent'
 import LoadingComponent from '../../../Components/LoadingComponent/LoadingComponent'
 import ImageDropdown from '../../../Components/ImageDropdown/ImageDropdown'
-import ImageDetailsComponent from '../../../Components/ImageDetailsComponent/ImageDetailsComponent'
+// import ImageDetailsComponent from '../../../Components/ImageDetailsComponent/ImageDetailsComponent'
 import {
   Input,
   InputLabel,
@@ -21,14 +20,13 @@ import {
   FormControlLabel,
   FormControl,
   TextField,
-  Box,
   Button
 } from '@mui/material'
 import './ProjectEdit.scss'
 const ProjectEditPage = () => {
   const { id } = useParams()
   const projectId = id
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   // Define State
   const [editMode, setEditMode] = useState(true)
   const [formData, setFormData] = useState({
