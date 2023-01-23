@@ -38,10 +38,12 @@ const ImageUpload = () => {
     dispatch(uploadImage(formData))
     const end = performance.now()
     setLoadingTime(end - start)
+    navigate(`/dashboard`)
   }
 
   return (
     <>
+      <h1>Image Upload</h1>
       {loading && <LoadingComponent />}
       <form onSubmit={onSubmit}>
         <div {...getRootProps()}>

@@ -21,7 +21,9 @@ import AlertComponent from '../../Components/AlertComponent/AlertComponent'
 
 const ImageEdit = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
+  console.log(id)
+  const imageId = id
+  console.log(imageId)
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -36,13 +38,12 @@ const ImageEdit = () => {
   const dispatch = useDispatch()
   const imageDetails = useSelector(state => state.imageDetails)
   const { loading, error, image } = imageDetails
-  useEffect(() => {
-    dispatch(listImageDetails(id))
-  }, [dispatch, id])
 
   useEffect(() => {
-    if (image) {
-      dispatch(listImageDetails(id))
+    if (!image || image._id !== imageId) {
+      dispatch(listImageDetails(imageId))
+      console.log(image)
+    } else {
       setFormData({
         id: image._id,
         name: image.name,
@@ -54,7 +55,8 @@ const ImageEdit = () => {
         filename: image.filename
       })
     }
-  }, [dispatch, id, image])
+  }, [dispatch, id, image, imageId])
+
   const handleChange = e => {
     setFormData({
       ...formData,

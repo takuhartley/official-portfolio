@@ -27,6 +27,13 @@ import {
   imageUpdateReducer,
   imageDeleteReducer
 } from './Redux/Reducers/imageReducers'
+import {
+  categoriesListReducer,
+  categoryDetailsReducer,
+  categoryCreateReducer,
+  categoryUpdateReducer,
+  categoryDeleteReducer
+} from './Redux/Reducers/categoryReducers'
 
 const reducer = combineReducers({
   projectList: projectListReducer,
@@ -46,7 +53,12 @@ const reducer = combineReducers({
   imageList: imageListReducer,
   imageDetails: imageDetailsReducer,
   imageUpdate: imageUpdateReducer,
-  imageDelete: imageDeleteReducer
+  imageDelete: imageDeleteReducer,
+  categoriesList: categoriesListReducer,
+  categoryDetails: categoryDetailsReducer,
+  categoryCreate: categoryCreateReducer,
+  categoryUpdate: categoryUpdateReducer,
+  categoryDelete: categoryDeleteReducer
 })
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

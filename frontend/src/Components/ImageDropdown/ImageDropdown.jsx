@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormHelperText from '@mui/material/FormHelperText'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
 import AlertComponent from '../AlertComponent/AlertComponent'
 import LoadingComponent from '../LoadingComponent/LoadingComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { listImages } from '../../Redux/Actions/imageUploadActions.js'
+import {
+  Button,
+  Select,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  InputLabel
+} from '@mui/material'
 
-const ImageDropdown = (props) => {
+const ImageDropdown = props => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const imageList = useSelector(state => state.imageList)
@@ -24,32 +27,56 @@ const ImageDropdown = (props) => {
       navigate('/login')
     }
   }, [userInfo, dispatch, navigate])
-  const handleChange = e => {
-    props.onChange(e.target.value)
+  const [selectedImage, setSelectedImage] = useState('')
+  const handleAddImage = () => {
+    // Pass the selectedImage value to the parent component's function to add it to the images array
+    props.handleImageSelect(selectedImage)
   }
+  const handleImageChange = event => {
+    setSelectedImage(event.target.value)
+  }
+
   return (
-    <div>
-      {loading && <LoadingComponent></LoadingComponent>}
-      {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
-      {images && (
-        <FormControl>
-          <InputLabel id='image-select-label'>Image</InputLabel>
-          <Select
-            labelId='image-select-label'
-            id='image-select'
-            onChange={handleChange}
-          >
-            {images.map(image => (
-              <MenuItem key={image._id} value={image._id}>
-                {image.name}
-              </MenuItem>
-            ))}
-          </Select>
-          <FormHelperText>Select an Image</FormHelperText>
-        </FormControl>
-      )}
-    </div>
+    <>
+      <div>
+        {loading && <LoadingComponent></LoadingComponent>}
+        {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
+        {images && (
+          <>
+            <div>
+              <h1>Image Dropdown</h1>
+            </div>
+            <div>
+              <FormControl>
+                <InputLabel id='image-select-label'>Image</InputLabel>
+                <Select
+                  labelId='image-select-label'
+                  id='image-select'
+                  onChange={handleImageChange}
+                  value={selectedImage}
+                >
+                  {images.map(image => (
+                    <MenuItem key={image._id} value={image._id}>
+                      {image.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>Select an Thumbnail</FormHelperText>
+              </FormControl>
+            </div>
+            <div>
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={handleAddImage}
+              >
+                Add
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   )
 }
-
 export default ImageDropdown

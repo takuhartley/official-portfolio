@@ -1,11 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { createProject } from '../../../Redux/Actions/projectActions.js'
 import CategoryDropdown from '../../../Components/CategoryDropdown/CategoryDropdown'
 import { Container, Box, Button, Checkbox } from '@mui/material'
+import AlertComponent from '../../../Components/AlertComponent/AlertComponent'
+import LoadingComponent from '../../../Components/LoadingComponent/LoadingComponent'
 import ImageDropdown from '../../../Components/ImageDropdown/ImageDropdown'
 import TextField from '@mui/material/TextField'
+import { listImages } from '../../../Redux/Actions/imageUploadActions.js'
+
+import {
+  Select,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  InputLabel
+} from '@mui/material'
+
 import FormControlLabel from '@mui/material/FormControlLabel'
 import './NewProjectPage.scss'
 const NewProjectPage = () => {
@@ -17,12 +31,33 @@ const NewProjectPage = () => {
     published: false,
     likes: 0,
     images: [],
-    categories: []
+    categories: [],
+    thumbnail: ''
   })
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const imageList = useSelector(state => state.imageList)
+  const { loading, error, images } = imageList
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listImages())
+    } else {
+      navigate('/login')
+    }
+  }, [userInfo, dispatch, navigate])
+
+  const [selectedImage, setSelectedImage] = useState('')
+  const handleAddImage = () => {
+    // Pass the selectedImage value to the parent component's function to add it to the images array
+    handleThumbnailSelect(selectedImage)
+  }
+  const handleImageChange = event => {
+    setSelectedImage(event.target.value)
+  }
   const handleSubmit = e => {
     e.preventDefault()
     const projectData = {
@@ -33,7 +68,8 @@ const NewProjectPage = () => {
       published: formData.published,
       likes: formData.likes,
       images: formData.images,
-      categories: formData.categories
+      categories: formData.categories,
+      thumbnail: formData.thumbnail
     }
     dispatch(createProject(projectData))
     navigate('/dashboard')
@@ -51,14 +87,23 @@ const NewProjectPage = () => {
       published: e.target.checked
     })
   }
-  const handleImageSelect = imageId => {
+  const handleThumbnailSelect = thumbnailId => {
     setFormData({
       ...formData,
-      images: [...formData.images, imageId]
+      thumbnail: thumbnailId
     })
   }
+  const handleCategorySelect = categoryId => {
+    setFormData({
+      ...formData,
+      categories: [...formData.categories, categoryId]
+    })
+  }
+  console.log(formData)
   return (
     <Container maxWidth='sm' className='new-project-container'>
+      <h1>New Project</h1>
+      {formData.thumbnail ?? <>{formData.thumbnail}</>}
       <form onSubmit={handleSubmit} className='new-project-form'>
         <Box mb={2} className='new-project-title'>
           <TextField
@@ -119,22 +164,53 @@ const NewProjectPage = () => {
             className='new-project-likes-input'
           />
         </Box>
+        <>
+          <Box mb={2} className='new-project-likes'>
+            {loading && <LoadingComponent></LoadingComponent>}
+            {error && (
+              <AlertComponent severity='danger'>{error}</AlertComponent>
+            )}
+            {images && (
+              <>
+                <div>
+                  <h1>Thumbnail Selector</h1>
+                </div>
+                <div>
+                  <FormControl>
+                    <InputLabel id='image-select-label'>Image</InputLabel>
+                    <Select
+                      labelId='image-select-label'
+                      id='image-select'
+                      onChange={handleImageChange}
+                      value={selectedImage}
+                    >
+                      {images.map(image => (
+                        <MenuItem key={image._id} value={image._id}>
+                          {image.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <FormHelperText>Select an Thumbnail</FormHelperText>
+                  </FormControl>
+                </div>
+                <div>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={handleAddImage}
+                  >
+                    Add
+                  </Button>
+                </div>
+              </>
+            )}
+          </Box>
+        </>
         <Box mb={2} className='new-project-categories'>
-          <CategoryDropdown className='new-project-categories-dropdown' />
-        </Box>
-        <Box mb={2} className='new-project-categories'>
-          <ImageDropdown
-            onChange={handleImageSelect}
-            className='new-project-categories-dropdown'
-          />
+          <CategoryDropdown onAddCategory={handleCategorySelect} />
         </Box>
         <Box mb={2} className='new-project-submit'>
-          <Button
-            variant='contained'
-            color='primary'
-            type='submit'
-            className='new-project-submit-button'
-          >
+          <Button type='submit' variant='contained' color='primary'>
             Create Project
           </Button>
         </Box>

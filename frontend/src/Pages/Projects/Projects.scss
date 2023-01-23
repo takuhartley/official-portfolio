@@ -1,9 +1,65 @@
-.projects {
-  background-color: white;
-  .projects-grid {
-    .projects-grid-item {
-      height: auto;
-      width: auto;
+.card {
+  border-radius: 25px;
+  border: 2px solid transparent;
+
+  &--hovered {
+    border: 5px solid currentColor;
+    animation: rainbow-border 1s linear infinite;
+    .project-card-header {
+      animation: rainbow-text 1s linear infinite;
     }
+    .overlay {
+      animation: fade-in 1s;
+    }
+  }
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-color: red;
+  }
+  20% {
+    border-color: orange;
+  }
+  40% {
+    border-color: yellow;
+  }
+  60% {
+    border-color: green;
+  }
+  80% {
+    border-color: blue;
+  }
+  100% {
+    border-color: purple;
+  }
+}
+
+@keyframes rainbow-text {
+  0% {
+    color: red;
+  }
+  20% {
+    color: orange;
+  }
+  40% {
+    color: yellow;
+  }
+  60% {
+    color: green;
+  }
+  80% {
+    color: blue;
+  }
+  100% {
+    color: purple;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
   }
 }

@@ -5,6 +5,7 @@ import AlertComponent from '../../Components/AlertComponent/AlertComponent'
 import LoadingComponent from '../../Components/LoadingComponent/LoadingComponent'
 import './ImageComponent.scss'
 const ImageDetailsComponent = ({ imageId }) => {
+  console.log('Image Details ' + JSON.stringify(imageId))
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -17,37 +18,18 @@ const ImageDetailsComponent = ({ imageId }) => {
   })
   const dispatch = useDispatch()
   const imageDetails = useSelector(state => state.imageDetails)
-  const { loading, error, image } = imageDetails
-
+  const { loading, error, imageData: image } = imageDetails
+  console.log('Image Details ' + JSON.stringify(image))
   useEffect(() => {
     dispatch(listImageDetails(imageId))
-  }, [dispatch, imageId])
-  useEffect(() => {
-    if (image) {
-      setFormData({
-        id: image._id,
-        author: image.author,
-        name: image.name,
-        desc: image.desc,
-        path: image.path,
-        originalname: image.originalname,
-        size: image.size,
-        filename: image.filename
-      })
-    }
-  }, [image, setFormData])
-  console.log(formData)
+    console.log('Image Details ' + JSON.stringify(imageId))
+  }, [dispatch, imageId, formData.id, image, formData.name])
+  console.log(image)
   return (
     <>
-     <div className="image-details-container" id="image-details-component">
-      {loading ? (
-        <LoadingComponent />
-      ) : error ? (
-        <AlertComponent />
-      ) : (
-        <img src={`/Images/${formData.filename}`} alt={formData.name} />
-      )}
-    </div>
+      <div className='image-details-container' id='image-details-component'>
+        <img src={formData.filename} alt={formData.name} />
+      </div>
     </>
   )
 }

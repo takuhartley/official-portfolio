@@ -42,23 +42,18 @@ export const listProjects = () => async dispatch => {
   }
 }
 
-export const listProjectDetails = id => async dispatch => {
-  dispatch({ type: PROJECT_DETAILS_REQUEST })
+export const listProjectDetails = projectId => async dispatch => {
   try {
-    const response = await axios.get(`/api/projects/${id}`)
+    dispatch({ type: PROJECT_DETAILS_REQUEST })
+    
+    const { data } = await axios.get(`/api/projects/${projectId}`)
+    console.log('Redux Actions ' + JSON.stringify(data))
     dispatch({
       type: PROJECT_DETAILS_SUCCESS,
-      payload: response.data
-    })
+      payload: data
+    }) //update payload to include images array
   } catch (error) {
-    let errorMessage = error.message
-    if (error.response && error.response.data && error.response.data.message) {
-      errorMessage = error.response.data.message
-    }
-    dispatch({
-      type: PROJECT_DETAILS_FAIL,
-      payload: errorMessage
-    })
+    dispatch({ type: PROJECT_DETAILS_FAIL, payload: error.message })
   }
 }
 

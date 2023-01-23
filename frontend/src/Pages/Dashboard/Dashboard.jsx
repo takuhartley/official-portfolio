@@ -34,6 +34,7 @@ import BookIcon from '@mui/icons-material/Book'
 import ImageIcon from '@mui/icons-material/Image'
 import NewProjectPage from './NewProjectPage/NewProjectPage'
 import ImageSetting from '../../Components/ImageSetting/ImageSetting'
+import CategoryComponent from '../../Components/CategoryComponent/CategoryComponent'
 const drawerWidth = 240
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
@@ -192,6 +193,9 @@ function DashboardContent () {
           <Container>
             <div>
               <NewProjectPage />
+            </div>
+            <div>
+              <CategoryComponent />
             </div>
             <div>
               <ImageSetting />

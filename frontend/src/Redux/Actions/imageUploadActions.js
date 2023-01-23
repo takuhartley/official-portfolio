@@ -72,13 +72,14 @@ export const listImages = () => async dispatch => {
   }
 }
 
-export const listImageDetails = id => async dispatch => {
+export const listImageDetails = imageId => async dispatch => {
   try {
     dispatch({ type: IMAGE_DETAILS_REQUEST })
-    const response = await axios.get(`/api/images/${id}`)
+    const { data } = await axios.get(`/api/images/${imageId}`)
+    console.log('Redux Actions ' + JSON.stringify(data))
     dispatch({
       type: IMAGE_DETAILS_SUCCESS,
-      payload: response.data
+      payload: data
     })
   } catch (error) {
     dispatch({

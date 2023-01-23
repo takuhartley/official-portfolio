@@ -18,8 +18,18 @@ import {
   IMAGE_DETAILS_RESET
 } from '../Constants/imageConstants'
 import axios from 'axios'
-export const imageUploadReducer = (state = {}, action) => {
-  switch (action.type) {
+
+const initialState = {
+  image: null,
+  images: [],
+  repos: [],
+  loading: false,
+  error: {}
+}
+
+export const imageUploadReducer = (state = initialState, action) => {
+  const { type, payload } = action
+  switch (type) {
     case IMAGE_UPLOAD_REQUEST:
       return { ...state, loading: true }
     case IMAGE_UPLOAD_SUCCESS:
@@ -27,84 +37,91 @@ export const imageUploadReducer = (state = {}, action) => {
         ...state,
         loading: false,
         success: true,
-        images: [...state.images, action.payload]
+        images: payload
       }
     case IMAGE_UPLOAD_FAIL:
-      return { ...state, loading: false, error: action.payload }
+      return { ...state, loading: false, error: payload }
     default:
       return state
   }
 }
 
 export const imageListReducer = (state = { images: [] }, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case IMAGE_LIST_REQUEST:
       return { loading: true, images: [] }
     case IMAGE_LIST_SUCCESS:
       return {
         loading: false,
-        images: action.payload.images
+        images: payload.images
       }
     case IMAGE_LIST_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: payload }
     default:
       return state
   }
 }
 
-export const imageDetailsReducer = (state = { image: {} }, action) => {
-  switch (action.type) {
+export const imageDetailsReducer = (state = { images: [] }, action) => {
+  const { type, payload } = action
+  switch (type) {
     case IMAGE_DETAILS_REQUEST:
       return { ...state, loading: true }
     case IMAGE_DETAILS_SUCCESS:
-      return { loading: false, image: action.payload }
+      return {
+        loading: false,
+        image: payload
+      }
     case IMAGE_DETAILS_FAIL:
-      return { loading: false, error: action.payload }
+      return { loading: false, error: payload }
     case IMAGE_DETAILS_RESET:
-      return { image: {} }
+      return { image: {}, images: [] } //include images array
     default:
       return state
   }
 }
 
 export const imageUpdateReducer = (state = { images: [] }, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case IMAGE_UPDATE_REQUEST:
       return { ...state, loading: true }
     case IMAGE_UPDATE_SUCCESS:
       return {
         ...state,
         loading: false,
-        images: [...state.images, action.payload]
+        images: [...state.images, payload]
       }
     case IMAGE_UPDATE_FAIL:
-      return { ...state, loading: false, error: action.payload }
+      return { ...state, loading: false, error: payload }
     default:
       return state
   }
 }
 export const imageDeleteReducer = (state = { images: [] }, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case IMAGE_UPLOAD_REQUEST:
       return { ...state, loading: true }
     case IMAGE_UPLOAD_SUCCESS:
       return {
         ...state,
         loading: false,
-        images: [...state.images, action.payload]
+        images: [...state.images, payload]
       }
     case IMAGE_UPLOAD_FAIL:
-      return { ...state, loading: false, error: action.payload }
+      return { ...state, loading: false, error: payload }
     case IMAGE_DELETE_REQUEST:
       return { ...state, loading: true }
     case IMAGE_DELETE_SUCCESS:
       return {
         ...state,
         loading: false,
-        images: state.images.filter(image => image.id !== action.payload)
+        images: state.images.filter(image => image.id !== payload)
       }
     case IMAGE_DELETE_FAIL:
-      return { ...state, loading: false, error: action.payload }
+      return { ...state, loading: false, error: payload }
     default:
       return state
   }

@@ -1,4 +1,4 @@
-.project-card {
+#project-card-container {
   width: 300px;
   height: 400px;
   text-align: left;
@@ -8,18 +8,17 @@
   align-items: center;
   a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 0.75em;
   }
   .project-card-thumbnail-container {
-    border-radius: 25px;
-    .project-card-thumbnail {
+    #project-card-thumbnail {
       z-index: -10;
       position: absolute;
       top: 0;
-      width: 300px;
-      height: 400px;
-      object-position: 50% 50%;
+      width: 100%;
+      height: 100%;
+      object-position: center;
       object-fit: cover;
       margin-left: auto;
       margin-right: auto;
@@ -32,8 +31,8 @@
       bottom: 0;
       left: 0;
       right: 0;
-      width: 300px;
-      height: 400px;
+      width: 100%;
+      height: 100%;
       opacity: 0.5;
       transition: 0.5s ease;
       background-color: #000000;
@@ -43,13 +42,14 @@
       opacity: 0;
     }
   }
-  .project-card-header {
+  #project-card-header {
     width: 300px;
     height: 400px;
     padding: 50px;
-    .project-card-title-group {
+    #project-card-title-group {
       display: flex;
-      justify-content:flex-end .project-card-title {
+      justify-content: flex-end;
+      #project-card-title {
         h1 {
           font-size: 0.75em;
           word-spacing: 4px;
@@ -57,7 +57,7 @@
         }
       }
     }
-    .project-card-sub_title {
+    #project-card-subtitle {
       position: relative;
       padding-top: 20px;
       font-size: 0.75em;
@@ -65,7 +65,7 @@
       line-height: 140%;
       font-weight: 400;
     }
-    .project-card-like {
+    #project-card-like {
       position: absolute;
       bottom: 0;
       right: 0;

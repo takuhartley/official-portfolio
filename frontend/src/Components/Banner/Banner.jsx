@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import './Banner.scss'
 
 const Banner = () => {
   return (
     <>
       <div className='banner-container'>
-        <p className='banner-container__title'>Robert T. Hartley</p>
-        <p className='banner-container__subtitle'>
+        <Typography variant='h2' className='banner-container__title'>
+          Robert T. Hartley
+        </Typography>
+        <Typography variant='h4' className='banner-container__subtitle'>
           Hi there
           <span role='img' aria-label='Wave'>
             👋🏼
@@ -22,13 +24,13 @@ const Banner = () => {
           <span role='img' aria-label='Glasses'>
             👓
           </span>
-        </p>
-        <div className='banner-container__location'>
+        </Typography>
+        <Typography variant='subtitle1' className='banner-container__location'>
           Currently in Tokyo, Japan
           <span role='img' aria-label='Tokyo Tower'>
             🗼
           </span>
-        </div>
+        </Typography>
         <Box mt={3} className='banner-container__button-wrapper'>
           <Link to='/about' className='banner-container__button-link'>
             <Button
@@ -36,7 +38,7 @@ const Banner = () => {
               color='primary'
               className='banner-container__button'
             >
-              Add+
+              Learn more
             </Button>
           </Link>
         </Box>

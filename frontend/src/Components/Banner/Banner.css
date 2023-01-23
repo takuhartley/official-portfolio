@@ -1,22 +1,43 @@
 .banner-container {
-  border: 1px dotted red;
   height: 400px;
   padding: 2rem;
+  color: #faf9f6;
+  text-align: center;
 }
 
-.banner-container__title {
+.banner-container .banner-container__title {
   font-size: 2rem;
   padding: 1rem;
 }
 
-.banner-container__subtitle {
+.banner-container .banner-container__subtitle {
   font-size: 1.5rem;
   padding: 1rem;
 }
 
-.banner-container__location {
+.banner-container .banner-container__location {
   font-size: 1rem;
   padding: 1rem;
+}
+
+.banner-container .banner-container__button-wrapper {
+  text-align: center;
+}
+
+.banner-container .banner-container__button-link {
+  text-align: center;
+}
+
+.banner-container .banner-container__button {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .banner-container {
+    height: auto;
+    padding: 1rem;
+    text-align: center;
+  }
 }
 
 /* additional styles for Container, Box, Link, and Button components */

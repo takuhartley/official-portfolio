@@ -17,6 +17,10 @@ const createProjectPost = asyncHandler(async (req, res) => {
 
 const getProjectPostById = asyncHandler(async (req, res) => {
   const project = await ProjectPost.findById(req.params.id)
+    .populate('author', 'firstName')
+    .populate('images')
+    .populate('categories')
+    .populate('thumbnail', 'filename')
   if (project) {
     res.json(project)
   } else {
@@ -28,7 +32,11 @@ const getProjectPostById = asyncHandler(async (req, res) => {
 const getAllProjectPosts = asyncHandler(async (req, res) => {
   try {
     const projects = await ProjectPost.find({})
-    res.json({ projects })
+      .populate('images')
+      .populate('thumbnail')
+      .populate('categories')
+
+    res.json(projects)
   } catch (err) {
     res.status(500).json({
       success: false,

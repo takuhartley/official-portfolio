@@ -1,5 +1,63 @@
-.footer {
-    max-height: 200px;
-    height: 200px;
-    
+#footer-main {
+  background: #4169e1;
+  padding: 20px;
+  text-align: center;
+
+  #footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+
+    #footer-copyright {
+      p {
+        margin: 0;
+        color: #faf9f6;
+      }
+    }
+
+    #footer-contact-info {
+      p {
+        margin: 0;
+        color: #faf9f6;
+      }
+    }
+
+    #footer-social-media {
+      a {
+        margin-right: 20px;
+        color: #faf9f6;
+
+        &:hover {
+          color: #ff3131;
+        }
+      }
+    }
+
+    #footer-additional-info {
+      p {
+        margin: 0;
+        color: #faf9f6;
+      }
+    }
+  }
+}
+
+// Media Queries
+
+@media (max-width: 600px) {
+  #footer-main {
+    #footer-content {
+      flex-wrap: wrap;
+
+      #footer-copyright,
+      #footer-contact-info,
+      #footer-social-media,
+      #footer-additional-info {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
 }

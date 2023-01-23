@@ -55,6 +55,7 @@ const ImageTable = () => {
     <>
       {loading && <LoadingComponent></LoadingComponent>}
       {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
+      <h1>Image Table</h1>
       <TableContainer component={Paper} className='table-container'>
         <Table
           sx={{ minWidth: 650 }}

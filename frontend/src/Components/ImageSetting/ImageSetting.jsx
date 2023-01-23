@@ -6,6 +6,7 @@ import ImageDetails from '../ImageDetails/ImageDetails'
 const ImageSetting = () => {
   return (
     <div>
+      <h1>Image Settings</h1>
       <ImageUpload />
       <ImageTable />
     </div>

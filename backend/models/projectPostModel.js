@@ -5,7 +5,7 @@ const ProjectSchema = new Schema(
   {
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'Users'
+      ref: 'User'
     },
     title: {
       type: String,
@@ -33,10 +33,24 @@ const ProjectSchema = new Schema(
         ref: 'Image'
       }
     ],
+    thumbnail: {
+      type: Schema.Types.ObjectId,
+      ref: 'Image'
+    },
     categories: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Category'
+      }
+    ],
+    links: [
+      {
+        url: {
+          type: String
+        },
+        description: {
+          type: String
+        }
       }
     ]
   },

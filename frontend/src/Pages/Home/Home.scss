@@ -1,3 +1,40 @@
+$colors: #a7c7e7, #4169e1, #0a0b0a;
 .Home {
-  background-color: #a7c7e7;
+  animation: color-animation 10s ease-in-out infinite;
+}
+
+@keyframes color-animation {
+  0% {
+    background: #a7c7e7;
+  }
+  33.33% {
+    background: #4169e1;
+  }
+  66.66% {
+    background: #0a0b0a;
+  }
+  100% {
+    background: #a7c7e7;
+  }
+}
+
+@media (max-width: 600px) {
+  .Home {
+    animation: color-animation-mobile 10s ease-in-out infinite;
+  }
+}
+
+@keyframes color-animation-mobile {
+  0% {
+    background: #a7c7e7;
+  }
+  33.33% {
+    background: #4169e1;
+  }
+  66.66% {
+    background: #0a0b0a;
+  }
+  100% {
+    background: #a7c7e7;
+  }
 }

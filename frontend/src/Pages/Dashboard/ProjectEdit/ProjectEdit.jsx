@@ -24,7 +24,7 @@ import {
   Box,
   Button
 } from '@mui/material'
-
+import './ProjectEdit.scss'
 const ProjectEditPage = () => {
   const { id } = useParams()
   const projectId = id
@@ -51,17 +51,13 @@ const ProjectEditPage = () => {
   const { success: successUpdate } = projectUpdate
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
+
   useEffect(() => {
-    if (!userInfo || !userInfo.isAdmin) {
-      navigate('/login')
-    } else {
+    if (!project._id) {
       dispatch(listProjectDetails(projectId))
-    }
-  }, [dispatch, navigate, projectId, userInfo])
-  useEffect(() => {
-    if (project) {
+    } else {
       setFormData({
-        author: project._id,
+        id: project._id,
         title: project.title,
         subTitle: project.subTitle,
         description: project.description,
@@ -71,13 +67,19 @@ const ProjectEditPage = () => {
         categories: project.categories
       })
     }
-  }, [project, setFormData])
-  useEffect(() => {
-    if (successUpdate) {
-      navigate(`/projects/${project._id}`)
-      dispatch({ type: PROJECT_UPDATE_RESET })
-    }
-  }, [successUpdate, dispatch, navigate, project._id])
+  }, [
+    dispatch,
+    project._id,
+    project.categories,
+    project.description,
+    project.images,
+    project.likes,
+    project.published,
+    project.subTitle,
+    project.title,
+    projectId
+  ])
+
   const submitHandler = e => {
     e.preventDefault()
     dispatch(
@@ -110,24 +112,18 @@ const ProjectEditPage = () => {
 
   return (
     <>
+      <Container>
+        <h1>Edit Project</h1>
+      </Container>
       {editMode ? (
         <>
-          <Container>
-            <div>
-              {formData.images &&
-                formData.images.map((image, index) => (
-                  <ImageDetailsComponent key={index} imageId={image} />
-                ))}
-            </div>
-          </Container>
           <Container>
             <form onSubmit={submitHandler}>
               <FormControl fullWidth>
                 <InputLabel htmlFor='title'>Title</InputLabel>
                 <Input
-                  id='title'
                   type='text'
-                  value={formData.title ?? ''}
+                  value={formData.title}
                   onChange={e =>
                     setFormData({ ...formData, title: e.target.value })
                   }
@@ -136,7 +132,6 @@ const ProjectEditPage = () => {
               <FormControl fullWidth>
                 <InputLabel htmlFor='subTitle'>SubTitle</InputLabel>
                 <Input
-                  id='subTitle'
                   type='text'
                   value={formData.subTitle ?? ''}
                   onChange={e =>
@@ -147,7 +142,6 @@ const ProjectEditPage = () => {
               <FormControl fullWidth>
                 <InputLabel htmlFor='description'>Description</InputLabel>
                 <TextField
-                  id='description'
                   multiline
                   rows={4}
                   value={formData.description ?? ''}
@@ -186,15 +180,21 @@ const ProjectEditPage = () => {
                 />
               </FormControl>
               <FormControl fullWidth>
-                <InputLabel htmlFor='categories'>Categories</InputLabel>
-                <Input
-                  id='categories'
-                  type='text'
-                  value={formData.categories ?? ''}
-                  onChange={e =>
-                    setFormData({ ...formData, categories: e.target.value })
-                  }
-                />
+                {formData.categories &&
+                  formData.categories.map((category, index) => (
+                    <div
+                      key={index}
+                      className='category-tag'
+                      id={`category-${index}`}
+                    >
+                      <p
+                        className='category-tag-name'
+                        id={`category-tag-name-${index}`}
+                      >
+                        {category.name}
+                      </p>
+                    </div>
+                  ))}
               </FormControl>
               <FormControl fullWidth>
                 <ImageDropdown
@@ -206,6 +206,20 @@ const ProjectEditPage = () => {
                 Update
               </Button>
             </form>
+          </Container>
+          <Container>
+            <div id='image-container'>
+              {formData.images &&
+                formData.images.map((image, index) => (
+                  <div key={index} className='image-box'>
+                    <img
+                      className='project-image'
+                      src={`/Images/${image.filename}`}
+                      alt={image.name}
+                    />
+                  </div>
+                ))}
+            </div>
           </Container>
         </>
       ) : loading ? (
@@ -226,12 +240,7 @@ const ProjectEditPage = () => {
           <div>
             <p id='likes'>Likes: {formData.likes}</p>
           </div>
-          <div>
-            {formData.images &&
-              formData.images.map((id, index) => (
-                <ImageDetailsComponent key={index} imageId={id} />
-              ))}
-          </div>
+          <div></div>
         </Container>
       )}
     </>
