@@ -3,7 +3,7 @@
   border: 2px solid transparent;
 
   &--hovered {
-    border: 5px solid currentColor;
+    border: 2.5px solid currentColor;
     animation: rainbow-border 1s linear infinite;
     .project-card-header {
       animation: rainbow-text 1s linear infinite;

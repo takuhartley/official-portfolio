@@ -23,6 +23,11 @@ import BlogPostsReadAllPage from './Components/BlogPostsReadAllPage/BlogPostsRea
 import BlogPostCreateComponent from './Components/BlogPostCreateComponent/BlogPostCreateComponent'
 import BlogPostEditComponent from './Components/BlogPostEditComponent/BlogPostEditComponent.jsx'
 import BlogPostReadOneComponent from './Components/BlogPostReadOneComponent/BlogPostReadOneComponent.jsx'
+import SkillsReadAllPage from './Components/SkillsReadAllPage/SkillsReadAllPage'
+import SkillsCreateComponent from './Components/SkillsCreateComponent/SkillsCreateComponent'
+import SkillsEditComponent from './Components/SkillsEditComponent/SkillsEditComponent'
+import SkillsReadOneComponent from './Components/SkillsReadOneComponent/SkillsReadOneComponent'
+
 const App = () => {
   return (
     <>
@@ -46,6 +51,12 @@ const App = () => {
           <Route path=':id' element={<ImagedDetails />} />
           <Route path='upload' element={<ImageUpload />} />
           <Route path=':id/edit' element={<ImageEdit />} />
+        </Route>
+        <Route path='/skills'>
+          <Route index element={<SkillsReadAllPage />} />
+          <Route path='create' element={<SkillsCreateComponent />} />
+          <Route path=':id/edit' element={<SkillsEditComponent />} />
+          <Route path=':id' element={<SkillsReadOneComponent />} />
         </Route>
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />

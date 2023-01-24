@@ -4,7 +4,7 @@
 }
 
 .card--hovered {
-  border: 5px solid currentColor;
+  border: 2.5px solid currentColor;
   -webkit-animation: rainbow-border 1s linear infinite;
           animation: rainbow-border 1s linear infinite;
 }
