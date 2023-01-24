@@ -1,0 +1,54 @@
+@media (max-width: 768px) {
+  #image-upload-container {
+    max-width: 100%;
+  }
+  #image-upload-container .dropzone {
+    padding: 16px;
+  }
+  #image-upload-container #image-upload-title {
+    font-size: 1.5rem;
+  }
+}
+
+#image-upload-container {
+  max-width: sm;
+}
+
+#image-upload-container .dropzone {
+  border: dashed;
+  border-color: #4caf50;
+  border-width: 2px;
+  padding: 24px;
+  text-align: center;
+}
+
+#image-upload-container .dropzone:hover {
+  cursor: pointer;
+}
+
+#image-upload-container #image-upload-title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+#image-upload-container #image-upload-loading .MuiCircularProgress-colorInherit {
+  color: #4caf50;
+}
+
+#image-upload-container #image-upload-form {
+  margin-top: 16px;
+}
+
+#image-upload-container #image-upload-form .image-name-input,
+#image-upload-container #image-upload-form .image-desc-input {
+  width: 100%;
+}
+
+#image-upload-container #image-upload-form #image-upload-button {
+  margin-top: 16px;
+}
+
+#image-upload-container #image-preview {
+  max-width: 100%;
+}
+/*# sourceMappingURL=ImageUpload.css.map */

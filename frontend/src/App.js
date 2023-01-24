@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Login from './Components/Login/Login.jsx'
 import Logout from './Components/Header/Logout/Logout.jsx'
 import ProjectsPage from './Pages/ProjectsPage/ProjectsPage.jsx'
@@ -29,9 +30,10 @@ import SkillsEditComponent from './Components/SkillsEditComponent/SkillsEditComp
 import SkillsReadOneComponent from './Components/SkillsReadOneComponent/SkillsReadOneComponent'
 
 const App = () => {
+  const location = useLocation()
   return (
     <>
-      <Header />
+      {location.pathname === '/dashboard' ? null : <Header />}
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/projects'>
@@ -66,7 +68,7 @@ const App = () => {
         <Route path='/playground' element={<Playground />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-      <Footer />
+      {location.pathname === '/' ? null : <Footer />}
     </>
   )
 }

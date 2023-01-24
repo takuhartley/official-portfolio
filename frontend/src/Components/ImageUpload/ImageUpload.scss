@@ -1,0 +1,50 @@
+$primary-color: #4caf50; // or any desired color
+$spacing-unit: 8px; // or any desired value
+
+@media (max-width: 768px) {
+  #image-upload-container {
+    max-width: 100%;
+    .dropzone {
+      padding: $spacing-unit * 2;
+    }
+    #image-upload-title {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+#image-upload-container {
+  max-width: sm;
+  .dropzone {
+    border: dashed;
+    border-color: $primary-color;
+    border-width: 2px;
+    padding: $spacing-unit * 3;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  #image-upload-title {
+    font-size: 2rem;
+    margin-bottom: $spacing-unit;
+  }
+  #image-upload-loading {
+    & .MuiCircularProgress-colorInherit {
+      color: $primary-color;
+    }
+  }
+  #image-upload-form {
+    margin-top: $spacing-unit * 2;
+    .image-name-input,
+    .image-desc-input {
+      width: 100%;
+    }
+    #image-upload-button {
+      margin-top: $spacing-unit * 2;
+    }
+  }
+  #image-preview {
+    max-width: 100%;
+  }
+}
