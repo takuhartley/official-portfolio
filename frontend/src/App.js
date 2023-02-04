@@ -7,7 +7,6 @@ import ProjectsPage from './Pages/ProjectsPage/ProjectsPage.jsx'
 import ProjectDetailsPage from './Pages/ProjectDetailsPage/ProjectDetailsPage.jsx'
 import NewProjectPage from './Pages/Dashboard/NewProjectPage/NewProjectPage.jsx'
 import About from './Pages/About/About.jsx'
-import Contact from './Pages/Contact/Contact.jsx'
 import Dashboard from './Pages/Dashboard/Dashboard.jsx'
 import HomePage from './Pages/HomePage/HomePage.jsx'
 import NotFound from './Components/NotFound/NotFound.jsx'
@@ -61,7 +60,6 @@ const App = () => {
           <Route path=':id' element={<SkillsReadOneComponent />} />
         </Route>
         <Route path='/about' element={<About />} />
-        <Route path='/contact' element={<Contact />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
