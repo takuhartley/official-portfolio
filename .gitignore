@@ -1,5 +1,6 @@
 
 /build
+/Images
 
 .DS_Store
 .env
