@@ -8,7 +8,6 @@ import CategoryDropdown from '../../CategoryComponents/CategoryDropdown/Category
 import { Container, Box, Button, Checkbox } from '@mui/material'
 import AlertComponent from '../../AlertComponent/AlertComponent'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
-import ImageDropdown from '../../ImageComponents/ImageDropdown/ImageDropdown'
 import TextField from '@mui/material/TextField'
 import { listImages } from '../../../Redux/Actions/imageUploadActions.js'
 
@@ -99,72 +98,71 @@ const NewProjectPage = () => {
       categories: [...formData.categories, categoryId]
     })
   }
-  console.log(formData)
   return (
-    <Container maxWidth='sm' className='new-project-container'>
-      <h1>New Project</h1>
-      {formData.thumbnail ?? <>{formData.thumbnail}</>}
-      <form onSubmit={handleSubmit} className='new-project-form'>
-        <Box mb={2} className='new-project-title'>
-          <TextField
-            name='title'
-            value={formData.title}
-            onChange={handleChange}
-            placeholder='Title'
-            variant='outlined'
-            fullWidth
-            className='new-project-title-input'
-          />
-        </Box>
-        <Box mb={2} className='new-project-subtitle'>
-          <TextField
-            name='subTitle'
-            value={formData.subTitle}
-            onChange={handleChange}
-            placeholder='Sub-Title'
-            variant='outlined'
-            fullWidth
-            className='new-project-subtitle-input'
-          />
-        </Box>
-        <Box mb={2} className='new-project-description'>
-          <TextField
-            name='description'
-            value={formData.description}
-            onChange={handleChange}
-            placeholder='Description'
-            variant='outlined'
-            fullWidth
-            className='new-project-description-input'
-          />
-        </Box>
-        <Box mb={2} className='new-project-published'>
-          <FormControlLabel
-            control={
-              <Checkbox
-                name='published'
-                checked={formData.published}
-                onChange={handleCheckboxChange}
-                color='primary'
-                className='new-project-published-checkbox'
-              />
-            }
-            label='Published'
-            className='new-project-published-label'
-          />
-        </Box>
-        <Box mb={2} className='new-project-likes'>
-          <TextField
-            name='likes'
-            value={formData.likes}
-            onChange={handleChange}
-            placeholder='Likes'
-            variant='outlined'
-            fullWidth
-            className='new-project-likes-input'
-          />
-        </Box>
-        <>
+    <>
+      <Container maxWidth='sm' className='new-project-container'>
+        <h2 className='project-post-create__title'>Create Project</h2>
+        {formData.thumbnail ?? <>{formData.thumbnail}</>}
+        <form onSubmit={handleSubmit} className='new-project-form'>
+          <Box mb={2} className='new-project-title'>
+            <TextField
+              name='title'
+              value={formData.title}
+              onChange={handleChange}
+              placeholder='Title'
+              variant='outlined'
+              fullWidth
+              className='new-project-title-input'
+            />
+          </Box>
+          <Box mb={2} className='new-project-subtitle'>
+            <TextField
+              name='subTitle'
+              value={formData.subTitle}
+              onChange={handleChange}
+              placeholder='Sub-Title'
+              variant='outlined'
+              fullWidth
+              className='new-project-subtitle-input'
+            />
+          </Box>
+          <Box mb={2} className='new-project-description'>
+            <TextField
+              name='description'
+              value={formData.description}
+              onChange={handleChange}
+              placeholder='Description'
+              variant='outlined'
+              fullWidth
+              className='new-project-description-input'
+            />
+          </Box>
+          <Box mb={2} className='new-project-published'>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name='published'
+                  checked={formData.published}
+                  onChange={handleCheckboxChange}
+                  color='primary'
+                  className='new-project-published-checkbox'
+                />
+              }
+              label='Published'
+              className='new-project-published-label'
+            />
+          </Box>
+          <Box mb={2} className='new-project-likes'>
+            <TextField
+              name='likes'
+              value={formData.likes}
+              onChange={handleChange}
+              placeholder='Likes'
+              variant='outlined'
+              fullWidth
+              className='new-project-likes-input'
+            />
+          </Box>
           <Box mb={2} className='new-project-likes'>
             {loading && <LoadingComponent></LoadingComponent>}
             {error && (
@@ -172,9 +170,6 @@ const NewProjectPage = () => {
             )}
             {images && (
               <>
-                <div>
-                  <h1>Thumbnail Selector</h1>
-                </div>
                 <div>
                   <FormControl>
                     <InputLabel id='image-select-label'>Image</InputLabel>
@@ -205,17 +200,17 @@ const NewProjectPage = () => {
               </>
             )}
           </Box>
-        </>
-        <Box mb={2} className='new-project-categories'>
-          <CategoryDropdown onAddCategory={handleCategorySelect} />
-        </Box>
-        <Box mb={2} className='new-project-submit'>
-          <Button type='submit' variant='contained' color='primary'>
-            Create Project
-          </Button>
-        </Box>
-      </form>
-    </Container>
+          <Box mb={2} className='new-project-categories'>
+            <CategoryDropdown onAddCategory={handleCategorySelect} />
+          </Box>
+          <Box mb={2} className='new-project-submit'>
+            <Button type='submit' variant='contained' color='primary'>
+              Create Project
+            </Button>
+          </Box>
+        </form>
+      </Container>
+    </>
   )
 }
 export default NewProjectPage

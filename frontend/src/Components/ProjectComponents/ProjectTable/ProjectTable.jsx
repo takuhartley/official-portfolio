@@ -36,14 +36,13 @@ const ProjectTable = () => {
       dispatch(listProjects())
     }
   }, [dispatch, projects._id])
-  console.log(projects)
   const deleteHandler = id => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteProject(id))
     }
   }
   const handleEdit = id => {
-    navigate(`/projects/${id}/edit`)
+    navigate(`/dashboard/project-setting/${id}/edit`)
   }
   return (
     <>

@@ -1,0 +1,37 @@
+.blog-post-read-one-page {
+  height: 100%;
+  padding: 20px;
+  text-align: left;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+.blog-post-read-one-page__title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  line-height: 2.5rem;
+}
+
+.blog-post-read-one-page__body {
+  line-height: 2.5rem;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.blog-post-read-one-page__categories {
+  margin-bottom: 20px;
+}
+
+.blog-post-read-one-page__categories-title {
+  font-size: 22px;
+}
+
+.blog-post-read-one-page__likes-title {
+  font-size: 22px;
+}
+
+.blog-post-read-one-page__likes-value {
+  font-size: 18px;
+}
+/*# sourceMappingURL=BlogPostReadOnePage.css.map */

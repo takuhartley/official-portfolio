@@ -5,30 +5,34 @@ const About = () => {
   return (
     <Container maxWidth='sm' className='about-page-container'>
       <div className='about-page-header'>
-        <h1 className='about-page-header-title'>About Me</h1>
+        <h1 className='about-page-header-title'>A little about me</h1>
         <hr />
       </div>
       <div className='about-page-body'>
         <p className='about-page-main-body__text'>
-          I have a few main interests that I like to explore further on. In
-          reality, I have too many interests to keep track of, so it's nice to
-          have them on my official website.
+          I have a passion for exploring a few main interests in depth. In
+          actuality, I have a multitude of interests that I find it challenging
+          to keep track of, and it's convenient to have them organized on my
+          personal website.
         </p>
         <ul className='about-page-main-body__list'>
           <li>
-            I like getting out and exploring 🏙, so you might run into me in
-            Tokyo! Though I doubt you know what I look like lol
+            I enjoy venturing out and discovering new places, so you may run
+            into me in Tokyo. However, I doubt you would recognize me.
           </li>
           <li>
-            I like to think I'm a photographer, but my current camera broke so
-            I'm just a guy with lenses...HAHA
+            I consider myself a photographer, but currently I am unable to
+            practice my craft as my camera is out of commission. Nonetheless, I
+            have a collection of lenses that I still enjoy working with.
           </li>
           <li>
             I'm weirdly really into ichthyology and aquascaping or anything
             related to fresh water aquariums
           </li>
-          <li>I am a seasonal skier/snowboarder</li>
-          <li>Not a botanist but a plantsman</li>
+          <li>
+            Although I am not a botanist, I have a strong admiration for plants
+            and consider myself a plantsman.
+          </li>
         </ul>
       </div>
       <div className='about-page-second-body'>

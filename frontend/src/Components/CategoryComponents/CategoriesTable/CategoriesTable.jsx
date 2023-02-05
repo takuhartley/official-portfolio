@@ -58,7 +58,8 @@ const CategoriesTable = () => {
             <TableRow>
               <TableCell align='left'>ID</TableCell>
               <TableCell align='left'>Category Name</TableCell>
-              <TableCell align='left'>Category Sub Title</TableCell>
+              <TableCell align='left'>Category Description</TableCell>
+              <TableCell align='left'>Category Color</TableCell>
               <TableCell align='left'>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -71,9 +72,9 @@ const CategoriesTable = () => {
                 <TableCell align='left'>{category._id}</TableCell>
                 <TableCell align='left'>{category.name}</TableCell>
                 <TableCell align='left'>{category.description}</TableCell>
+                <TableCell align='left'>{category.color}</TableCell>
                 <TableCell align='left'>
                   <EditIcon onClick={() => handleEdit(category._id)} />
-
                   <DeleteIcon onClick={() => deleteHandler(category._id)} />
                 </TableCell>
               </TableRow>

@@ -4,7 +4,7 @@ import Category from '../models/categoriesModel.js'
 
 // Create a new category
 const createCategory = asyncHandler(async (req, res) => {
-  const { name, description } = req.body
+  const { name, description, color } = req.body
 
   // Check if a category with the same name already exists
   const existingCategory = await Category.findOne({ name })
@@ -15,7 +15,8 @@ const createCategory = asyncHandler(async (req, res) => {
   // Create a new category
   const newCategory = new Category({
     name,
-    description
+    description,
+    color
   })
 
   // Save the category to the database
@@ -71,7 +72,7 @@ const getCategoryById = asyncHandler(async (req, res) => {
 
   try {
     // Make the API call to retrieve the category by ID
-    const category = await Category.findById(id);
+    const category = await Category.findById(id)
 
     // Send the response with the retrieved category
     res.json(category)

@@ -12,6 +12,7 @@ import { useSpring, animated } from 'react-spring'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
 import './ProjectsPage.scss'
+import '../../Components/ProjectComponents/ProjectCard/ProjectCard.scss'
 const DAMPEN = 50
 const CONFIG = { mass: 10, tension: 400, friction: 40, precision: 0.00001 }
 const CARD_CLASS = 'card'
@@ -97,19 +98,6 @@ const ProjectsPage = () => {
   }, [dispatch])
   return (
     <>
-      <Box sx={{ flexGrow: 1, p: 2 }}>
-        Welcome to my portfolio! Here you will find a curated selection of my
-        recent work, showcasing my skills and experience in various fields. Each
-        project listed below includes a brief overview, as well as images and
-        links to view more details. Whether you are looking for inspiration, or
-        seeking a professional for your next project, I hope my portfolio will
-        provide a glimpse into the quality of my work and my ability to deliver
-        results. Please take your time to browse through my portfolio and feel
-        free to contact me if you have any questions or to discuss your next
-        project. Thank you for your interest in my work, and I look forward to
-        the opportunity to connect with you! Please let me know if you want me
-        to add or change anything.
-      </Box>
       {loading ? (
         <LoadingComponent />
       ) : (

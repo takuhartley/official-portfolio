@@ -1,0 +1,67 @@
+.blog-post-card {
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.blog-post-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blog-post-card a:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+  .blog-post-card {
+    width: 600px;
+  }
+}
+
+.blog-post-card__author-created-at {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.blog-post-card__author {
+  font-weight: bold;
+  color: grey;
+  font-size: smaller;
+}
+
+.blog-post-card__created-at {
+  font-style: italic;
+  color: grey;
+  font-size: smaller;
+}
+
+.blog-post-card__title {
+  margin-bottom: 20px;
+}
+
+.blog-post-card__body {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 20px;
+}
+
+.blog-post-card__categories {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.blog-post-card__likes {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+/*# sourceMappingURL=BlogPostCardComponent.css.map */

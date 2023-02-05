@@ -1,0 +1,32 @@
+.dashboard-page {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #faf9f6;
+}
+
+.dashboard-page .welcome-section {
+  width: 80%;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.dashboard-page .welcome-section .welcome-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dashboard-page .welcome-section .welcome-text {
+  font-size: 18px;
+  line-height: 1.5;
+}
+/*# sourceMappingURL=DashboardPage.css.map */

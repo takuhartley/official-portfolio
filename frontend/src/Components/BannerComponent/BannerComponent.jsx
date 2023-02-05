@@ -1,14 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Button, Typography } from '@mui/material'
-import './Banner.scss'
+import './BannerComponent.scss'
 
 const Banner = () => {
   return (
     <>
       <div className='banner-container'>
         <Typography variant='h2' className='banner-container__title'>
-          Robert T. Hartley
+          Robert Hartley
         </Typography>
         <Typography variant='h4' className='banner-container__subtitle'>
           Hi there

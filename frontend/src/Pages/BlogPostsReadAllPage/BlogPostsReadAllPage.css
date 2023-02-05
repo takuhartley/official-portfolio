@@ -1,0 +1,29 @@
+#blog-posts-container {
+  margin: 40px 0;
+}
+
+#blog-posts-container #blog-posts-header {
+  text-align: center;
+  margin: 20px;
+}
+
+#blog-posts-container #blog-posts-header h1.blog-posts-title {
+  font-weight: bold;
+}
+
+#blog-posts-container #blog-posts-list .blog-posts-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#blog-posts-container #blog-posts-list .blog-posts-list .blog-post {
+  width: 300px;
+  margin: 1rem;
+}
+/*# sourceMappingURL=BlogPostsReadAllPage.css.map */

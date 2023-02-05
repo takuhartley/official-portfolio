@@ -1,0 +1,32 @@
+$breakpoint: 768px;
+
+.category-settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  @media (min-width: $breakpoint) {
+    flex-direction: row;
+  }
+}
+
+.category-settings-header {
+  text-align: center;
+  width: 100%;
+
+  @media (min-width: $breakpoint) {
+    width: auto;
+  }
+}
+
+.category-settings-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  @media (min-width: $breakpoint) {
+    font-size: 48px;
+  }
+}

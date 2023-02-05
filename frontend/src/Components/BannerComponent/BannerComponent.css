@@ -1,0 +1,48 @@
+.banner-container {
+  height: 400px;
+  padding: 2rem;
+  color: #000000;
+  text-align: center;
+}
+
+.banner-container .banner-container__title {
+  font-size: 4rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.banner-container .banner-container__subtitle {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.banner-container .banner-container__location {
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.banner-container .banner-container__button-wrapper {
+  text-align: center;
+}
+
+.banner-container .banner-container__button-link {
+  text-align: center;
+}
+
+.banner-container .banner-container__button {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .banner-container {
+    height: auto;
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+/* additional styles for Container, Box, Link, and Button components */
+/* you may need to import the scss variables and mixins
+  that you use in your project */
+/*# sourceMappingURL=BannerComponent.css.map */

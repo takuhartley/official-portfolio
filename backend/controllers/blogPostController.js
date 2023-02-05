@@ -47,7 +47,7 @@ const searchBlogPost = asyncHandler(async (req, res) => {
 })
 // Read 1
 const getBlogPostById = asyncHandler(async (req, res) => {
-  const blog = await BlogPost.findById(req.params.id)
+  const blog = await BlogPost.findById(req.params.id).populate('categories')
   if (!blog) {
     return res.status(404).send({ error: 'Blog Post not found' })
   }
@@ -57,8 +57,11 @@ const getBlogPostById = asyncHandler(async (req, res) => {
 // Read all
 const getAllBlogPosts = asyncHandler(async (req, res) => {
   try {
-    const blogPosts = await BlogPost.find()
-    res.send({ success: true, blogPosts })
+    const blogs = await BlogPost.find({})
+
+      .populate('categories')
+      .populate('author')
+    res.send(blogs)
   } catch (error) {
     res.send({ success: false, error: error.message })
   }

@@ -29,6 +29,10 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    thumbnail: {
+      type: Schema.Types.ObjectId,
+      ref: 'Image'
+    },
     isAdmin: {
       type: Boolean,
       required: true,

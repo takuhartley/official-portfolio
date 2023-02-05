@@ -29,12 +29,12 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <Link className='nav-link' to='blogposts'>
+            <Link className='nav-link' to='/blog-posts'>
               Blog
             </Link>
           </li>
           <li>
-            <Link className='nav-link' to='about'>
+            <Link className='nav-link' to='/about'>
               About
             </Link>
           </li>

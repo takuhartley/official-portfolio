@@ -24,7 +24,7 @@ const ContactPage = () => {
           <form onSubmit={handleSubmit}>
             <div className='form-group'>
               <TextField
-                id='email'
+                id='contact-email'
                 label='Email'
                 value={email}
                 onChange={e => setEmail(e.target.value)}
@@ -33,7 +33,7 @@ const ContactPage = () => {
             </div>
             <div className='form-group'>
               <TextField
-                id='subject'
+                id='contact-subject'
                 label='Subject'
                 value={subject}
                 onChange={e => setSubject(e.target.value)}
@@ -42,7 +42,7 @@ const ContactPage = () => {
             </div>
             <div className='form-group'>
               <TextField
-                id='description'
+                id='contact-description'
                 label='Description'
                 value={description}
                 onChange={e => setDescription(e.target.value)}

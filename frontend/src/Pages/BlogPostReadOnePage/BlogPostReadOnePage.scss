@@ -1,0 +1,38 @@
+.blog-post-read-one-page {
+  height: 100%;
+  padding: 20px;
+  text-align: left;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+
+  &__title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    line-height: 2.5rem;
+  }
+
+  &__body {
+    line-height: 2.5rem;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  &__categories {
+    margin-bottom: 20px;
+
+    &-title {
+      font-size: 22px;
+    }
+  }
+
+  &__likes {
+    &-title {
+      font-size: 22px;
+    }
+
+    &-value {
+      font-size: 18px;
+    }
+  }
+}

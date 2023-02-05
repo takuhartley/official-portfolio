@@ -15,9 +15,10 @@
     }
   }
   & .about-page-body {
+    line-height: 1.25;
     & .about-page-main-body__text {
       font-size: 18px;
-      line-height: 1.5;
+
       text-align: justify;
     }
     & .about-page-main-body__list {

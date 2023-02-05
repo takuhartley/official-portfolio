@@ -35,7 +35,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/projects', projectPostRoutes)
 app.use('/api/images', imageRoutes)
 app.use('/api/categories', categoryRoutes)
-app.use('/api/blogs', blogPostRoutes)
+app.use('/api/blog-posts', blogPostRoutes)
 
 // Use error middleware
 // app.use(notFound)

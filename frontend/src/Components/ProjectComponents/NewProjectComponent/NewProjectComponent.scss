@@ -1,57 +1,73 @@
 .new-project-container {
-  max-width: 'sm';
+  max-width: 20rem;
+  margin: 0 auto;
+
+  @media (min-width: 600px) {
+    max-width: 30rem;
+  }
+
+  & .project-post-create__title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 
   & .new-project-form {
-    & .new-project-title {
-      & .new-project-title-input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 18px;
-        font-weight: 600;
-      }
-    }
-    & .new-project-subtitle {
-      & .new-project-subtitle-input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-        font-weight: 600;
-      }
-    }
-    & .new-project-description {
-      & .new-project-description-input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-        font-weight: 600;
-      }
-    }
-    & .new-project-published {
-      & .new-project-published-label {
-        font-size: 14px;
-        font-weight: 600;
-        color: #444;
-      }
-      & .new-project-published-checkbox {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    & .new-project-likes {
-      & .new-project-likes-input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-        font-weight: 600;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & .new-project-title {
+    width: 100%;
+  }
+
+  & .new-project-title-input {
+    width: 100%;
+  }
+
+  & .new-project-subtitle {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  & .new-project-subtitle-input {
+    width: 100%;
+  }
+
+  & .new-project-description {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  & .new-project-description-input {
+    width: 100%;
+  }
+
+  & .new-project-published-checkbox {
+    margin: 0;
+  }
+
+  & .new-project-published-label {
+    display: flex;
+    align-items: center;
+  }
+
+  & .new-project-likes {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  & .new-project-likes-input {
+    width: 100%;
+  }
+
+  & .new-project-categories {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  & .new-project-submit {
+    width: 100%;
+    margin-top: 2rem;
   }
 }

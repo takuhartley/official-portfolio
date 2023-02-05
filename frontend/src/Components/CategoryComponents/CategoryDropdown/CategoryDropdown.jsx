@@ -31,7 +31,6 @@ const CategoryDropdown = props => {
     <>
       {loading && <LoadingComponent></LoadingComponent>}
       {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
-      <div>CategoryDropdown</div>
       <div>
         <FormControl>
           <InputLabel id='image-select-label'>Category</InputLabel>

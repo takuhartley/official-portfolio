@@ -8,7 +8,6 @@ import './ProjectDetailsPage.scss'
 const ProjectDetailsPage = () => {
   const { id } = useParams()
   const projectId = id
-  console.log(id)
   const [formData, setFormData] = useState({
     id: '',
     author: '',

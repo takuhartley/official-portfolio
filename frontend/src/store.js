@@ -27,6 +27,7 @@ import {
   imageUpdateReducer,
   imageDeleteReducer
 } from './Redux/Reducers/imageReducers'
+
 import {
   categoriesListReducer,
   categoryDetailsReducer,
@@ -34,6 +35,14 @@ import {
   categoryUpdateReducer,
   categoryDeleteReducer
 } from './Redux/Reducers/categoryReducers'
+
+import {
+  blogPostReadAllReducer,
+  blogPostReadOneReducer,
+  blogPostCreateReducer,
+  blogPostUpdateReducer,
+  blogPostDeleteReducer
+} from './Redux/Reducers/blogPostReducers.js'
 
 const reducer = combineReducers({
   projectList: projectListReducer,
@@ -58,7 +67,12 @@ const reducer = combineReducers({
   categoryDetails: categoryDetailsReducer,
   categoryCreate: categoryCreateReducer,
   categoryUpdate: categoryUpdateReducer,
-  categoryDelete: categoryDeleteReducer
+  categoryDelete: categoryDeleteReducer,
+  blogPostReadAll: blogPostReadAllReducer,
+  blogPostReadOne: blogPostReadOneReducer,
+  blogPostCreate: blogPostCreateReducer,
+  blogPostUpdate: blogPostUpdateReducer,
+  blogPostDelete: blogPostDeleteReducer
 })
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))

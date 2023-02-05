@@ -155,7 +155,7 @@ const ProjectCard = ({ projectData }) => {
               </div>
               <h3 className='project-card-subtitle' id='project-card-subtitle'>
                 {formData.subTitle}
-              </h3>{' '}
+              </h3>
               <div className='project-card-like' id='project-card-like'>
                 <p id='project-card-like-count'>{formData.likes}</p>
                 <FavoriteBorderRoundedIcon

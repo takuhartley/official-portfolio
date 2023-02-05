@@ -17,7 +17,7 @@ import {
   CATEGORY_UPDATE_FAIL,
   CATEGORY_IMAGES_REQUEST,
   CATEGORY_IMAGES_SUCCESS,
-  CATEGORY_IMAGES_FAIL,
+  CATEGORY_IMAGES_FAIL
 } from '../Constants/categoryConstants'
 import { logout } from '../Actions/userActions'
 
@@ -95,8 +95,8 @@ export const createCategory = categoryData => async (dispatch, getState) => {
     dispatch({
       type: CATEGORY_CREATE_REQUEST
     })
-    if (!categoryData.title || !categoryData.description) {
-      throw new Error('Title and description are required.')
+    if (!categoryData.name) {
+      throw new Error('Categpry name is required.')
     }
     const {
       userLogin: { userInfo }
@@ -108,7 +108,7 @@ export const createCategory = categoryData => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(
-      `/api/CATEGORYs/new`,
+      `/api/categories/new`,
       categoryData,
       config
     )

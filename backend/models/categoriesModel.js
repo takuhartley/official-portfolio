@@ -9,18 +9,9 @@ const CategorySchema = new Schema(
     description: {
       type: String
     },
-    blogPost: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'BlogPost'
-      }
-    ],
-    projectPost: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'ProjectPost'
-        }
-    ]
+    color: {
+      type: String
+    }
   },
   {
     timestamps: true
