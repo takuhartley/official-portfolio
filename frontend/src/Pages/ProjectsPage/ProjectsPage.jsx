@@ -11,7 +11,6 @@ import LoadingComponent from '../../Components/LoadingComponent/LoadingComponent
 import { useSpring, animated } from 'react-spring'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
-import '../../Components/ProjectCard/ProjectCard.scss'
 import './ProjectsPage.scss'
 const DAMPEN = 50
 const CONFIG = { mass: 10, tension: 400, friction: 40, precision: 0.00001 }

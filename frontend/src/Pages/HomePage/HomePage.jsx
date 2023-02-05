@@ -1,9 +1,9 @@
-import React, { useRef, forwardRef } from 'react'
+import React, { useRef, forwardRef, useContext } from 'react'
 import BannerComponent from '../../Components/BannerComponent/BannerComponent'
-import Footer from '../../Components/Footer/Footer'
+import Footer from '../../Layout/Footer/Footer'
 import ProjectsPage from '../ProjectsPage/ProjectsPage'
-import ContactComponent from '../../Components/ContactComponent/ContactComponent.jsx'
-
+import ContactComponent from '../../Pages/ContactPage/ContactPage'
+import { ThemeContext } from '../../App.js'
 import './HomePage.scss'
 
 const Overlay = forwardRef(({ caption, scroll }, ref) => (
@@ -74,12 +74,16 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => (
 ))
 
 const Home = () => {
+  const { theme } = useContext(ThemeContext)
   const overlay = useRef()
   const caption = useRef()
   const scroll = useRef(0)
   return (
     <>
-      <div className='Home'>
+      <div
+        className='Home'
+        style={{ backgroundColor: theme === 'light' ? 'white' : 'black' }}
+      >
         <BannerComponent />
         <ProjectsPage />
         <ContactComponent />

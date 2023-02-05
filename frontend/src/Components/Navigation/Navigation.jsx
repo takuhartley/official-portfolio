@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import HomeIcon from '@mui/icons-material/Home'
+import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton'
 import './Navigation.scss'
 import { logout } from '../../Redux/Actions/userActions.js'
 const Navigation = () => {
@@ -59,6 +60,9 @@ const Navigation = () => {
             <Link className='nav-link' to='playground'>
               Playground
             </Link>
+          </li>
+          <li>
+            <ThemeToggleButton />
           </li>
         </ul>
       </div>

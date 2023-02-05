@@ -1,0 +1,72 @@
+.about-page-container {
+  padding: 20px;
+}
+
+.about-page-container .about-page-header .about-page-header-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+}
+
+.about-page-container .about-page-header hr {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+.about-page-container .about-page-body .about-page-main-body__text {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.about-page-container .about-page-body .about-page-main-body__list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.about-page-container .about-page-body .about-page-main-body__list li {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.about-page-container .about-page-second-body {
+  border-radius: 25px;
+  border: 1px dotted black;
+  padding: 20px;
+}
+
+.about-page-container .about-page-second-body .about-page-second-body__hr {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+.about-page-container .about-page-second-body .about-page-second-body__header {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+}
+
+.about-page-container .about-page-second-body .about-page-second-body__text {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: justify;
+  padding: 20px;
+}
+
+.about-page-container .about-page-second-body .about-page-second-body__list {
+  list-style-type: none;
+  padding: 0;
+  padding: 20px;
+}
+
+.about-page-container .about-page-second-body .about-page-second-body__list li {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+/*# sourceMappingURL=AboutPage.css.map */
