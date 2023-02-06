@@ -4,14 +4,19 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createProject } from '../../../Redux/Actions/projectActions.js'
+import { listImages } from '../../../Redux/Actions/imageUploadActions.js'
+import { listCategories } from '../../../Redux/Actions/categoryActions.js'
+
 import CategoryDropdown from '../../CategoryComponents/CategoryDropdown/CategoryDropdown'
-import { Container, Box, Button, Checkbox } from '@mui/material'
 import AlertComponent from '../../AlertComponent/AlertComponent'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
-import TextField from '@mui/material/TextField'
-import { listImages } from '../../../Redux/Actions/imageUploadActions.js'
 
 import {
+  TextField,
+  Container,
+  Box,
+  Button,
+  Checkbox,
   Select,
   FormControl,
   FormHelperText,
@@ -21,7 +26,16 @@ import {
 
 import FormControlLabel from '@mui/material/FormControlLabel'
 import './NewProjectComponent.scss'
+
 const NewProjectPage = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const categoriesList = useSelector(state => state.categoriesList)
+  const imageList = useSelector(state => state.imageList)
+  const userLogin = useSelector(state => state.userLogin)
+  const { categories } = categoriesList
+  const { loading, error, images } = imageList
+  const { userInfo } = userLogin
   const [formData, setFormData] = useState({
     author: '',
     title: '',
@@ -33,30 +47,51 @@ const NewProjectPage = () => {
     categories: [],
     thumbnail: ''
   })
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const imageList = useSelector(state => state.imageList)
-  const { loading, error, images } = imageList
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
-
+  const [selectedThumbnail, setSelectedThumbnail] = useState('')
+  const [selectedCategories, setSelectedCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('')
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listImages())
+      dispatch(listCategories())
     } else {
       navigate('/login')
     }
   }, [userInfo, dispatch, navigate])
+  const handleAddCategory = () => {
+    setSelectedCategories([...selectedCategories, selectedCategory])
+    setSelectedCategory('')
+    setFormData({
+      ...formData,
+      categories: [...formData.categories, selectedCategory]
+    })
+  }
+  const handleAddThumbnail = () => {
+    setSelectedThumbnail('')
+    setFormData({
+      ...formData,
+      thumbnail: selectedThumbnail
+    })
+  }
+  const handleThumbnailChange = event => {
+    setSelectedThumbnail(event.target.value)
+  }
+  const handleCategoryChange = event => {
+    setSelectedCategory(event.target.value)
+  }
+  const handleCheckboxChange = e => {
+    setFormData({
+      ...formData,
+      published: e.target.checked
+    })
+  }
+  const handleChange = e => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
-  const [selectedImage, setSelectedImage] = useState('')
-  const handleAddImage = () => {
-    // Pass the selectedImage value to the parent component's function to add it to the images array
-    handleThumbnailSelect(selectedImage)
-  }
-  const handleImageChange = event => {
-    setSelectedImage(event.target.value)
-  }
   const handleSubmit = e => {
     e.preventDefault()
     const projectData = {
@@ -74,35 +109,10 @@ const NewProjectPage = () => {
     navigate('/dashboard')
   }
 
-  const handleChange = e => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-  const handleCheckboxChange = e => {
-    setFormData({
-      ...formData,
-      published: e.target.checked
-    })
-  }
-  const handleThumbnailSelect = thumbnailId => {
-    setFormData({
-      ...formData,
-      thumbnail: thumbnailId
-    })
-  }
-  const handleCategorySelect = categoryId => {
-    setFormData({
-      ...formData,
-      categories: [...formData.categories, categoryId]
-    })
-  }
   return (
     <>
       <Container maxWidth='sm' className='new-project-container'>
         <h2 className='project-post-create__title'>Create Project</h2>
-        {formData.thumbnail ?? <>{formData.thumbnail}</>}
         <form onSubmit={handleSubmit} className='new-project-form'>
           <Box mb={2} className='new-project-title'>
             <TextField
@@ -113,6 +123,7 @@ const NewProjectPage = () => {
               variant='outlined'
               fullWidth
               className='new-project-title-input'
+              required
             />
           </Box>
           <Box mb={2} className='new-project-subtitle'>
@@ -124,6 +135,7 @@ const NewProjectPage = () => {
               variant='outlined'
               fullWidth
               className='new-project-subtitle-input'
+              required
             />
           </Box>
           <Box mb={2} className='new-project-description'>
@@ -135,6 +147,9 @@ const NewProjectPage = () => {
               variant='outlined'
               fullWidth
               className='new-project-description-input'
+              multiline
+              rows={4}
+              required
             />
           </Box>
           <Box mb={2} className='new-project-published'>
@@ -155,53 +170,104 @@ const NewProjectPage = () => {
           <Box mb={2} className='new-project-likes'>
             <TextField
               name='likes'
+              type='number'
               value={formData.likes}
               onChange={handleChange}
               placeholder='Likes'
               variant='outlined'
               fullWidth
               className='new-project-likes-input'
+              inputProps={{ min: 0 }}
+              required
             />
           </Box>
-          <Box mb={2} className='new-project-likes'>
-            {loading && <LoadingComponent></LoadingComponent>}
+          <Box mb={2} className='new-project-images'>
+            {loading && <LoadingComponent />}
             {error && (
               <AlertComponent severity='danger'>{error}</AlertComponent>
             )}
             {images && (
               <>
+                <FormControl>
+                  <InputLabel id='image-select-label'>Image</InputLabel>
+                  <Select
+                    labelId='image-select-label'
+                    id='image-select'
+                    onChange={handleThumbnailChange}
+                    value={selectedThumbnail}
+                  >
+                    {images.map(image => (
+                      <MenuItem key={image._id} value={image._id}>
+                        {image.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText>Select a Thumbnail</FormHelperText>
+                </FormControl>
+                <div>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={handleAddThumbnail}
+                  >
+                    Add
+                  </Button>
+                </div>
+                {selectedThumbnail && (
+                  <p>Added thumbnail: {selectedThumbnail}</p>
+                )}
+                {formData.thumbnail && (
+                  <p>
+                    Added Thumbnail on Form Data:
+                    {formData.thumbnail}
+                  </p>
+                )}
+              </>
+            )}
+          </Box>
+          <Box mb={2} className='new-project-categories'>
+            {categories && (
+              <>
                 <div>
                   <FormControl>
-                    <InputLabel id='image-select-label'>Image</InputLabel>
+                    <InputLabel id='categorie-select-label'>
+                      Category
+                    </InputLabel>
                     <Select
-                      labelId='image-select-label'
-                      id='image-select'
-                      onChange={handleImageChange}
-                      value={selectedImage}
+                      labelId='categorie-select-label'
+                      id='categorie-select'
+                      onChange={handleCategoryChange}
+                      value={selectedCategory}
                     >
-                      {images.map(image => (
-                        <MenuItem key={image._id} value={image._id}>
-                          {image.name}
+                      {categories.map(category => (
+                        <MenuItem key={category._id} value={category._id}>
+                          {category.name}
                         </MenuItem>
                       ))}
                     </Select>
-                    <FormHelperText>Select an Thumbnail</FormHelperText>
+                    <FormHelperText>Select a Category</FormHelperText>
                   </FormControl>
                 </div>
                 <div>
                   <Button
                     variant='contained'
                     color='primary'
-                    onClick={handleAddImage}
+                    onClick={handleAddCategory}
                   >
                     Add
                   </Button>
                 </div>
+                {selectedCategories.length > 0 && (
+                  <p>Added categories: {selectedCategories.join(', ')}</p>
+                )}
+                {formData.categories.length > 0 && (
+                  <p>
+                    Added categories on Form Data:
+                    {formData.categories.join(', ')}
+                  </p>
+                )}
               </>
             )}
-          </Box>
-          <Box mb={2} className='new-project-categories'>
-            <CategoryDropdown onAddCategory={handleCategorySelect} />
           </Box>
           <Box mb={2} className='new-project-submit'>
             <Button type='submit' variant='contained' color='primary'>

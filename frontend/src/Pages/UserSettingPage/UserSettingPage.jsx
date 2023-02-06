@@ -3,7 +3,7 @@ import UserTable from '../../Components/UserTable/UserTable'
 const UserSettingPage = () => {
   return (
     <>
-      User Settings
+      User Settings ⚙️
       <UserTable />
     </>
   )

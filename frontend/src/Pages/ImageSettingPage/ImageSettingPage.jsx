@@ -10,7 +10,7 @@ const ImageSetting = () => {
       <Box className='image-settings-container'>
         <Container maxWidth='lg'>
           <div className='image-settings-header'>
-            <h1 className='image-settings-title'>Image Settings</h1>
+            <h1 className='image-settings-title'>Image Settings ⚙️</h1>
           </div>
           <div className='image-settings-content'>
             <ImageUpload />

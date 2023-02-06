@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormHelperText from '@mui/material/FormHelperText'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
 import AlertComponent from '../../AlertComponent/AlertComponent'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { listCategories } from '../../../Redux/Actions/categoryActions.js'
+import {
+  Button,
+  Select,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  InputLabel
+} from '@mui/material'
 
 const CategoryDropdown = props => {
   const navigate = useNavigate()
@@ -22,10 +25,14 @@ const CategoryDropdown = props => {
       dispatch(listCategories())
     } else {
       navigate('/login')
-    }
+    }    
   }, [userInfo, dispatch, navigate])
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const handleAddCategory = () => {
+    props.handleImageSelect(selectedCategory)
+  }
   const handleChange = e => {
-    props.onChange(e.target.value)
+    setSelectedCategory(e.target.value)
   }
   return (
     <>
@@ -48,6 +55,12 @@ const CategoryDropdown = props => {
           <FormHelperText>Select a Category</FormHelperText>
         </FormControl>
       </div>
+      <div>
+        <Button variant='contained' color='primary' onClick={handleAddCategory}>
+          Add
+        </Button>
+      </div>
+      <div>{selectedCategory}</div>
     </>
   )
 }

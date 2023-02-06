@@ -30,25 +30,21 @@ const ImageUpload = () => {
   })
 
   const imageUpload = useSelector(state => state.imageUpload)
-  const { loading, success, error } = imageUpload
-
-  useEffect(() => {
-    if (success) {
-      dispatch({ type: IMAGE_UPDATE_RESET })
-      navigate(`/dashboard`)
-    }
-  }, [success, dispatch, navigate])
-
+  const { loading, success: successUpload, error } = imageUpload
   const handleSubmit = e => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('file', selectedFile)
     formData.append('name', imageName)
     formData.append('desc', imageDesc)
-
     dispatch(uploadImage(formData))
   }
-
+  useEffect(() => {
+    if (successUpload) {
+      dispatch(IMAGE_UPDATE_RESET)
+      navigate('dashboard/image-setting')
+    }
+  })
   return (
     <Container maxWidth='sm' id='image-upload-container'>
       <Box my={4}>

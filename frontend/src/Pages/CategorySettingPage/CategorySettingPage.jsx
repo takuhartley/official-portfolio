@@ -11,7 +11,7 @@ const CategoryComponent = () => {
       <Box className='category-settings-container'>
         <Container maxWidth='lg'>
           <div className='category-settings-header'>
-            <h3 className='category-settings-title'>Category Settings</h3>
+            <h3 className='category-settings-title'>Category Settings ⚙️</h3>
           </div>
           <div className='category-settings-content'>
             <div className='category-new-container'>
