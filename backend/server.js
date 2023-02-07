@@ -2,7 +2,7 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import colors from 'colors'
-
+import path from 'path'
 // Import database connection function and error middleware
 import connectDB from './config/db.js'
 import { errorHandler } from './middleware/errorMiddleware.js'
@@ -22,15 +22,12 @@ connectDB()
 
 // Initialize Express app
 const app = express()
-
+const __dirname = path.resolve()
 // Parse request body as JSON
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Define routes
-app.get('/', (req, res) => {
-  res.send('API running nicely boss')
-})
 app.use('/api/users', userRoutes)
 app.use('/api/projects', projectPostRoutes)
 app.use('/api/images', imageRoutes)
@@ -41,6 +38,22 @@ app.use('/api/blog-posts', blogPostRoutes)
 // app.use(notFound)
 app.use(errorHandler)
 app.use('/Images', express.static('./Images'))
+// Production
+if (process.env.NODE_ENV === 'production') {
+  console.log('production')
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+  console.log('Got here')
+} else {
+  console.log('Is this triggering?')
+
+  app.get('/', (req, res) => {
+    res.send('API is running....')
+  })
+}
 // Set port for the server
 const PORT = process.env.PORT || 5000
 

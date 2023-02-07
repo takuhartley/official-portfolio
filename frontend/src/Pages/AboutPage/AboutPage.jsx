@@ -1,6 +1,11 @@
 import React from 'react'
 import './AboutPage.scss'
-import { Container } from '@mui/material'
+import Container from '@mui/material/Container'
+import DownloadIcon from '@mui/icons-material/Download'
+import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 const About = () => {
   return (
     <Container maxWidth='sm' className='about-page-container'>
@@ -61,11 +66,14 @@ const About = () => {
         </ul>
       </div>
       <div className='about-page-second-body'>
+        <p>Resume</p>
         <a
           href='\Assets\Business-Analyst_Resume_v1.7_10302022.pdf'
           download='\Assets\Business-Analyst_Resume_v1.7_10302022.pdf'
         >
-          Resume
+          <Tooltip title='Resume'>
+            <DownloadIcon />
+          </Tooltip>
         </a>
       </div>
     </Container>

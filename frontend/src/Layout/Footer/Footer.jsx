@@ -11,10 +11,6 @@ const Footer = () => {
         <div className='copyright' id='footer-copyright'>
           <p>Copyright © Robert T. Hartley</p>
         </div>
-        <div className='contact-info' id='footer-contact-info'>
-          <p>robert.taku.hartley@gmail.com</p>
-          <p>Japan +81 070 8302 1645</p>
-        </div>
         <div className='social-media' id='footer-social-media'>
           <a
             href='https://github.com/takuhartley'

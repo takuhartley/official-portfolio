@@ -1,6 +1,7 @@
 
 /build
 /Images
+/frontend/build
 
 .DS_Store
 .env
