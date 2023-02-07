@@ -1,7 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import mime from 'mime-types'
-//import GridFSStorage from 'multer-gridfs-storage'
+
 import { protect, admin } from '../middleware/authMiddleware.js'
 import {
   imageUpload,
