@@ -6,7 +6,7 @@ import path from 'path'
 // Import database connection function and error middleware
 import connectDB from './config/db.js'
 import { errorHandler } from './middleware/errorMiddleware.js'
-
+import { S3Client, ListBucketsCommand } from '@aws-sdk/client-s3'
 // Import routes
 import userRoutes from './routes/userRoutes.js'
 import projectPostRoutes from './routes/projectPostRoutes.js'
@@ -16,7 +16,6 @@ import blogPostRoutes from './routes/blogPostRoutes.js'
 
 // Load environment variables
 dotenv.config()
-
 // Connect to database
 connectDB()
 
@@ -48,8 +47,6 @@ if (process.env.NODE_ENV === 'production') {
   )
   console.log('Got here')
 } else {
-  console.log('Is this triggering?')
-
   app.get('/', (req, res) => {
     res.send('API is running....')
   })
