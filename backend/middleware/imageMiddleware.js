@@ -6,12 +6,13 @@ const ALLOWED_MIME_TYPES = ['image/png', 'image/jpeg', 'image/gif']
 const MAX_FILE_SIZE = 5000000 // 5MB
 
 const storage = multer.diskStorage({
+  console.log('Receiving file:', file) // <-- added this line
   destination: (req, file, cb) => {
-    console.log('Receiving file:', file) // <-- added this line
     cb(null, '/Images') // set the destination to the public/images folder
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname) // set the file name to the fieldname plus the current timestamp
+    console.log(file)
+    cb(null, ) // set the file name to the fieldname plus the current timestamp
   }
 })
 

@@ -61,6 +61,7 @@ export const listImages = () => async dispatch => {
       type: IMAGE_LIST_SUCCESS,
       payload: data
     })
+    console.log(data)
   } catch (error) {
     dispatch({
       type: IMAGE_LIST_FAIL,

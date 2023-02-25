@@ -1,8 +1,15 @@
 import express from 'express'
 import multer from 'multer'
 import mime from 'mime-types'
-
+import { config } from 'dotenv-flow'
+config()
 import { protect, admin } from '../middleware/authMiddleware.js'
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  ListObjectsV2Command,
+  S3Client
+} from '@aws-sdk/client-s3'
 import {
   imageUpload,
   getImageById,
@@ -12,13 +19,26 @@ import {
 } from '../controllers/imageController.js'
 
 const ALLOWED_MIME_TYPES = ['image/png', 'image/jpeg', 'image/gif']
+const bucketName = process.env.AWS_BUCKET_NAME
+const bucketRegion = process.env.AWS_BUCKET_REGION
+const bucketAccessKey = process.env.AWS_ACCESS_KEY
+const bucketSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+console.log(process.env.AWS_BUCKET_NAME)
+const s3 = new S3Client({
+  region: bucketRegion,
+  credentials: {
+    accessKeyId: bucketAccessKey,
+    secretAccessKey: bucketSecretAccessKey
+  }
+})
 const MAX_FILE_SIZE = 5000000 // 5MB
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'Images') // set the destination to the public/images folder
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname) // set the file name to the fieldname plus the current timestamp
+    const extension = mime.extension(file.mimetype)
+    cb(null, `${file.fieldname}-${Date.now()}.${extension}`)
   }
 })
 

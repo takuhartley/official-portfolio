@@ -10,13 +10,19 @@ import {
 } from '../../../Redux/Actions/imageUploadActions.js'
 
 // Material UI
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import {
+  Box,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  Skeleton
+} from '@mui/material'
 
 // Material UI Icons
 import CheckIcon from '@mui/icons-material/Check'
@@ -28,128 +34,100 @@ import './ImageTable.scss'
 const ImageTable = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const imageList = useSelector(state => state.imageList)
-  const { loading, error, images } = imageList
-  const imageDelete = useSelector(state => state.imageDelete)
-  const { success: successDelete } = imageDelete
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
+  const { images, loading, error } = useSelector(state => state.imageList)
+
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (images.length === 0) {
       dispatch(listImages())
-    } else {
-      navigate('/login')
     }
-  }, [userInfo, dispatch, successDelete, navigate])
+  }, [dispatch, images.length])
 
   const deleteHandler = id => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteImage(id))
     }
   }
-  const handleEdit = id => {
-    navigate(`/images/${id}/edit`)
-  }
 
   return (
-    <>
-      {loading && <LoadingComponent></LoadingComponent>}
-      {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
-      <h1>Image Table</h1>
-      <TableContainer component={Paper} className='table-container'>
-        <Table
-          sx={{ minWidth: 650 }}
-          aria-label='simple table'
-          className='table'
-        >
-          <TableHead className='table-head'>
-            <TableRow className='table-row'>
-              <TableCell align='left' className='table-cell'>
-                ID
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Image
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Image Name
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Description
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Mime Type
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Path
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Original Name
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Size
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Author
-              </TableCell>
-              <TableCell align='left' className='table-cell'>
-                Actions
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody className='table-body'>
-            {images.map(image => (
-              <TableRow
-                key={image._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                className='table-row'
-              >
-                <TableCell align='left' className='table-cell'>
-                  {image._id}
+    <Box className='image-table' sx={{ marginTop: 4 }}>
+      <Typography
+        variant='h4'
+        className='image-table__title'
+        sx={{ marginBottom: 2 }}
+      >
+        Image List
+      </Typography>
+      {loading ? (
+        <LoadingComponent className='image-table__loading' />
+      ) : error ? (
+        <AlertComponent
+          className='image-table__alert'
+          severity='info'
+          error={error}
+        />
+      ) : images.length === 0 ? (
+        <AlertComponent className='image-table__alert' severity='info'>
+          No images found.
+        </AlertComponent>
+      ) : (
+        <TableContainer className='image-table__container' component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className='image-table__head-cell'>ID</TableCell>
+                <TableCell className='image-table__head-cell'>Name</TableCell>
+                <TableCell className='image-table__head-cell'>
+                  Last Modified
                 </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  <img
-                    src={`/Images/${image.filename}`}
-                    alt={image.name}
-                    className='table-img'
-                  />
+                <TableCell className='image-table__head-cell'>
+                  Thumbnail
                 </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.name}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.desc}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.mimetype}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.path}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.originalname}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.size}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  {image.author}
-                </TableCell>
-                <TableCell align='left' className='table-cell'>
-                  <EditIcon
-                    onClick={() => handleEdit(image._id)}
-                    className='table-icon'
-                  />
-                  <DeleteIcon
-                    onClick={() => deleteHandler(image._id)}
-                    className='table-icon'
-                  />
+                <TableCell className='image-table__head-cell'>
+                  Actions
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+            </TableHead>
+            <TableBody>
+              {images.map((image, index) => (
+                <TableRow key={index} className='image-table__row'>
+                  <TableCell className='image-table__cell'>
+                    {image._id}
+                  </TableCell>
+                  <TableCell className='image-table__cell'>
+                    {image.name}
+                  </TableCell>
+                  <TableCell className='image-table__cell'>
+                    {new Date(image.lastModified).toLocaleString()}
+                  </TableCell>
+                  <TableCell className='image-table__cell'>
+                    {image.url ? (
+                      <img
+                        src={image.url}
+                        className='image-table__thumbnail'
+                        alt={image.name}
+                      />
+                    ) : (
+                      <Skeleton variant='rectangular' width={60} height={40} />
+                    )}
+                  </TableCell>
+                  <TableCell className='image-table__cell'>
+                    <IconButton
+                      component={RouterLink}
+                      to={`/images/${image._id}/edit`}
+                    >
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => deleteHandler(image._id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </Box>
   )
 }
 

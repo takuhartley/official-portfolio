@@ -3,11 +3,12 @@ import Box from '@mui/material/Box'
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import Collapse from '@mui/material/Collapse'
+import Button from '@mui/material/Button'
 import CloseIcon from '@mui/icons-material/Close'
 
-const AlertComponent = ({ severity, children }) => {
+const AlertComponent = ({ severity, error }) => {
   const [open, setOpen] = React.useState(true)
-
+  console.log(error)
   return (
     <Box sx={{ width: '100%' }}>
       <Collapse in={open}>
@@ -27,10 +28,13 @@ const AlertComponent = ({ severity, children }) => {
           }
           sx={{ mb: 2 }}
         >
-          {children}
+          <span>
+            {typeof error === 'object' ? JSON.stringify(error) : error}
+          </span>
         </Alert>
       </Collapse>
     </Box>
   )
 }
+
 export default AlertComponent

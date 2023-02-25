@@ -22,7 +22,7 @@ const initialState = {
   images: [],
   repos: [],
   loading: false,
-  error: {}
+  error: false
 }
 
 export const imageUploadReducer = (state = initialState, action) => {
@@ -52,7 +52,7 @@ export const imageListReducer = (state = { images: [] }, action) => {
     case IMAGE_LIST_SUCCESS:
       return {
         loading: false,
-        images: payload.images
+        images: payload
       }
     case IMAGE_LIST_FAIL:
       return { loading: false, error: payload }
