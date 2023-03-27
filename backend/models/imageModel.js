@@ -2,16 +2,6 @@ import mongoose from 'mongoose'
 import mongooseGridFS from 'mongoose-gridfs'
 const Schema = mongoose.Schema
 
-// let gfs
-// const conn = mongoose.connection
-// conn.once('open', () => {
-//   gfs = new mongooseGridFS({
-//     collection: 'image',
-//     model: 'Image',
-//     mongooseConnection: conn
-//   })
-// })
-
 const ImageSchema = new Schema(
   {
     name: {

@@ -1,0 +1,22 @@
+.new-project-container {
+  padding: 2rem 0;
+
+  .project-post-create__title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+
+  .new-project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .new-project-submit {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

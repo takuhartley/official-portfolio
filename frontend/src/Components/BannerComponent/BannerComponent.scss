@@ -1,50 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 .banner-container {
-  height: 400px;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; // Align items to the left
+  justify-content: center; // Center content vertically
+  background: linear-gradient(135deg, #40c9ff, #4a4ae8);
   padding: 2rem;
-  color: #000000;
-  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  width: 100vw;
+  max-width: 100%;
+  min-height: 70vh;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
 
-  .banner-container__title {
-    font-size: 4rem;
+.banner-container__tagline,
+.banner-container__title,
+.banner-container__subtitle,
+.banner-container__location {
+  max-width: 60%; // Limit the width of the text
+}
+
+.banner-container__tagline {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  animation: fadeInDown 1s ease;
+}
+
+.banner-container__title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  animation: fadeInDown 1.2s ease;
+}
+
+.banner-container__subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  animation: fadeInDown 1.4s ease;
+}
+
+.banner-container__location {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  animation: fadeInDown 1.6s ease;
+}
+
+.banner-container__button-wrapper {
+  animation: fadeInUp 2s ease;
+  align-self: flex-start; // Align the button to the left
+}
+
+.banner-container__button-link {
+  text-decoration: none;
+}
+
+.banner-container__button {
+  font-weight: 600;
+  text-transform: none;
+}
+
+.banner-container__social-icons {
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem; // Position the social icons in the bottom right corner
+  gap: 0.5rem;
+  animation: fadeInUp 2.2s ease;
+}
+
+.social-icon {
+  margin: 0.25rem;
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #40c9ff;
+}
+
+.banner-container__illustration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../public/Assets/Images/Futuristic Tokyo A Sustainable Metropolis of Tomorrow.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.1;
+  animation: zoomAndPan 30s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomAndPan {
+  0% {
+    transform: scale(1.1) translate(0, 0); // Increase the scale
+  }
+  50% {
+    transform: scale(1.15) translate(-5%, 5%); // Increase the scale
+  }
+  100% {
+    transform: scale(1.1) translate(0, 0); // Increase the scale
+  }
+}
+
+@media (max-width: 767px) {
+  .banner-container {
     padding: 1rem;
-    text-transform: uppercase;
-    font-weight: 600;
+    min-height: 80vh; // Make the banner full height on mobile devices
+    align-items: center;
+    justify-content: space-around; // Distribute the space between content more evenly
   }
 
-  .banner-container__subtitle {
-    font-size: 1.5rem;
-    padding: 1rem;
-  }
-
+  .banner-container__tagline,
+  .banner-container__title,
+  .banner-container__subtitle,
   .banner-container__location {
-    font-size: 1rem;
-    padding: 1rem;
+    max-width: 80%;
+    text-align: center; // Center the text on mobile devices
   }
 
   .banner-container__button-wrapper {
-    text-align: center;
+    align-self: center;
+    margin-bottom: 1rem; // Add some margin at the bottom of the button for spacing
   }
 
-  .banner-container__button-link {
-    text-align: center;
+  .banner-container__social-icons {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .banner-container__tagline {
+    font-size: 1.5rem;
+  }
+
+  .banner-container__title {
+    font-size: 1.75rem;
+  }
+
+  .banner-container__subtitle {
+    font-size: 1rem;
+  }
+
+  .banner-container__location {
+    font-size: 0.9rem;
   }
 
   .banner-container__button {
-    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .banner-container__social-icons {
+    gap: 0.25rem;
+  }
+
+  .social-icon {
+    font-size: 1.25rem;
   }
 }
-
-// Media Queries
-
-@media (max-width: 600px) {
-  .banner-container {
-    height: auto;
-    padding: 1rem;
-    text-align: center;
-  }
-}
-
-/* additional styles for Container, Box, Link, and Button components */
-
-/* you may need to import the scss variables and mixins
-  that you use in your project */

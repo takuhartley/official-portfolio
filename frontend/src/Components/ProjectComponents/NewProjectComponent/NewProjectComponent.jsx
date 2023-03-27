@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,7 +7,7 @@ import { createProject } from '../../../Redux/Actions/projectActions.js'
 import { listImages } from '../../../Redux/Actions/imageUploadActions.js'
 import { listCategories } from '../../../Redux/Actions/categoryActions.js'
 
-import CategoryDropdown from '../../CategoryComponents/CategoryDropdown/CategoryDropdown'
+import ImageDropDown from '../../ImageComponents/ImageDropdown/ImageDropdown'
 import AlertComponent from '../../AlertComponent/AlertComponent'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
 
@@ -21,7 +21,8 @@ import {
   FormControl,
   FormHelperText,
   MenuItem,
-  InputLabel
+  InputLabel,
+  Typography
 } from '@mui/material'
 
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -66,11 +67,11 @@ const NewProjectPage = () => {
       categories: [...formData.categories, selectedCategory]
     })
   }
-  const handleAddThumbnail = () => {
-    setSelectedThumbnail('')
+  const handleAddThumbnail = selectedImage => {
+    setSelectedThumbnail(selectedImage)
     setFormData({
       ...formData,
-      thumbnail: selectedThumbnail
+      thumbnail: selectedImage
     })
   }
   const handleThumbnailChange = event => {
@@ -91,8 +92,11 @@ const NewProjectPage = () => {
       [e.target.name]: e.target.value
     })
   }
-
-  const handleSubmit = e => {
+  // Define the reloadPage callback at the top level
+  const reloadPage = useCallback(() => {
+    window.location.reload()
+  }, [])
+  const handleSubmit = async e => {
     e.preventDefault()
     const projectData = {
       author: formData.author,
@@ -105,14 +109,22 @@ const NewProjectPage = () => {
       categories: formData.categories,
       thumbnail: formData.thumbnail
     }
-    dispatch(createProject(projectData))
+
+    // Wrap the dispatch in an async function to wait for the project creation
+    await dispatch(createProject(projectData))
+
+    // Invoke the callback
+    reloadPage()
+
     navigate('/dashboard')
   }
 
   return (
     <>
       <Container maxWidth='sm' className='new-project-container'>
-        <h2 className='project-post-create__title'>Create Project</h2>
+        <Typography variant='h4' className='project-post-create__title'>
+          Create Project
+        </Typography>
         <form onSubmit={handleSubmit} className='new-project-form'>
           <Box mb={2} className='new-project-title'>
             <TextField
@@ -188,31 +200,7 @@ const NewProjectPage = () => {
             )}
             {images && (
               <>
-                <FormControl>
-                  <InputLabel id='image-select-label'>Image</InputLabel>
-                  <Select
-                    labelId='image-select-label'
-                    id='image-select'
-                    onChange={handleThumbnailChange}
-                    value={selectedThumbnail}
-                  >
-                    {images.map(image => (
-                      <MenuItem key={image._id} value={image._id}>
-                        {image.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  <FormHelperText>Select a Thumbnail</FormHelperText>
-                </FormControl>
-                <div>
-                  <Button
-                    variant='contained'
-                    color='primary'
-                    onClick={handleAddThumbnail}
-                  >
-                    Add
-                  </Button>
-                </div>
+                <ImageDropDown handleImageSelect={handleAddThumbnail} />
                 {selectedThumbnail && (
                   <p>Added thumbnail: {selectedThumbnail}</p>
                 )}
@@ -270,7 +258,12 @@ const NewProjectPage = () => {
             )}
           </Box>
           <Box mb={2} className='new-project-submit'>
-            <Button type='submit' variant='contained' color='primary'>
+            <Button
+              type='submit'
+              variant='contained'
+              color='primary'
+              size='large'
+            >
               Create Project
             </Button>
           </Box>

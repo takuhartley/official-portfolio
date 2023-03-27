@@ -2,15 +2,27 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import BlogPost from '../models/blogPostModel.js'
 import User from '../models/userModel.js'
+import sanitizeHtml from 'sanitize-html' // Import sanitize-html
+
 // Create a new blog post
 const createBlogPost = asyncHandler(async (req, res) => {
   try {
     // Get the logged-in user from the request
     const user = req.user
 
-    // Create a new blog post object with the request body and the user as the author
+    // Sanitize the HTML content
+    const sanitizedBody = sanitizeHtml(req.body.body, {
+      allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'span']),
+      allowedAttributes: {
+        ...sanitizeHtml.defaults.allowedAttributes,
+        span: ['style']
+      }
+    })
+
+    // Create a new blog post object with the sanitized request body and the user as the author
     const blogPost = new BlogPost({
       ...req.body,
+      body: sanitizedBody,
       author: user._id
     })
 
@@ -58,8 +70,7 @@ const getBlogPostById = asyncHandler(async (req, res) => {
 const getAllBlogPosts = asyncHandler(async (req, res) => {
   try {
     const blogs = await BlogPost.find({})
-
-      .populate('categories')
+      .populate('categories', 'name')
       .populate('author')
     res.send(blogs)
   } catch (error) {

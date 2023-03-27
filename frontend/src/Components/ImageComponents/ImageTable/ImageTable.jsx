@@ -2,14 +2,11 @@ import React, { useEffect } from 'react'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import AlertComponent from '../../AlertComponent/AlertComponent'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
-
 import { useDispatch, useSelector } from 'react-redux'
 import {
   listImages,
   deleteImage
 } from '../../../Redux/Actions/imageUploadActions.js'
-
-// Material UI
 import {
   Box,
   IconButton,
@@ -23,8 +20,6 @@ import {
   Typography,
   Skeleton
 } from '@mui/material'
-
-// Material UI Icons
 import CheckIcon from '@mui/icons-material/Check'
 import ErrorIcon from '@mui/icons-material/Error'
 import EditIcon from '@mui/icons-material/Edit'
@@ -49,12 +44,8 @@ const ImageTable = () => {
   }
 
   return (
-    <Box className='image-table' sx={{ marginTop: 4 }}>
-      <Typography
-        variant='h4'
-        className='image-table__title'
-        sx={{ marginBottom: 2 }}
-      >
+    <Box className='image-table'>
+      <Typography variant='h4' className='image-table__title'>
         Image List
       </Typography>
       {loading ? (
@@ -70,7 +61,7 @@ const ImageTable = () => {
           No images found.
         </AlertComponent>
       ) : (
-        <TableContainer className='image-table__container' component={Paper}>
+        <TableContainer component={Paper} className='image-table__container'>
           <Table>
             <TableHead>
               <TableRow>

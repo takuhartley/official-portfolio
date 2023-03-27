@@ -1,5 +1,10 @@
+// Import dependencies
 import express from 'express'
-const router = express.Router()
+import {
+  projectValidationRules,
+  validate
+} from '../middleware/projectValidationRules.js'
+// Import middleware and controllers
 import { protect, admin } from '../middleware/authMiddleware.js'
 import {
   createProjectPost,
@@ -9,11 +14,30 @@ import {
   deleteProjectPostById
 } from '../controllers/projectPostController.js'
 
-router.post('/new', protect, admin, createProjectPost)
+// Initialize router
+const router = express.Router()
+
+// Define routes
+router.post(
+  '/new',
+  protect,
+  admin,
+  projectValidationRules,
+  validate,
+  createProjectPost
+)
 router.route('/').get(getAllProjectPosts)
 router
   .route('/:id')
   .get(getProjectPostById)
-  .patch(protect, admin, updateProjectPostById)
+  .patch(
+    protect,
+    admin,
+    projectValidationRules,
+    validate,
+    updateProjectPostById
+  )
   .delete(protect, admin, deleteProjectPostById)
+
+// Export router
 export default router

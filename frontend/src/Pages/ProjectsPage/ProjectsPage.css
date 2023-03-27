@@ -1,123 +1,168 @@
-.card {
-  border-radius: 25px;
-  border: 2px solid transparent;
+.project-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.card--hovered {
-  border: 2.5px solid currentColor;
-  -webkit-animation: rainbow-border 1s linear infinite;
-          animation: rainbow-border 1s linear infinite;
+.project-card--hovered {
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.card--hovered .project-card-header {
-  -webkit-animation: rainbow-text 1s linear infinite;
-          animation: rainbow-text 1s linear infinite;
+.project-card-thumbnail-container {
+  height: 0;
+  padding-bottom: 56.25%;
+  position: relative;
 }
 
-.card--hovered .overlay {
-  -webkit-animation: fade-in 1s;
-          animation: fade-in 1s;
+.project-card-thumbnail-container img {
+  border-radius: 8px 8px 0 0;
+  height: 100%;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
-@-webkit-keyframes rainbow-border {
-  0% {
-    border-color: red;
-  }
-  20% {
-    border-color: orange;
-  }
-  40% {
-    border-color: yellow;
-  }
-  60% {
-    border-color: green;
-  }
-  80% {
-    border-color: blue;
-  }
-  100% {
-    border-color: purple;
-  }
+.project-card-thumbnail-container .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
-@keyframes rainbow-border {
-  0% {
-    border-color: red;
-  }
-  20% {
-    border-color: orange;
-  }
-  40% {
-    border-color: yellow;
-  }
-  60% {
-    border-color: green;
-  }
-  80% {
-    border-color: blue;
-  }
-  100% {
-    border-color: purple;
-  }
+.project-card-header {
+  padding: 16px;
 }
 
-@-webkit-keyframes rainbow-text {
-  0% {
-    color: red;
-  }
-  20% {
-    color: orange;
-  }
-  40% {
-    color: yellow;
-  }
-  60% {
-    color: green;
-  }
-  80% {
-    color: blue;
-  }
-  100% {
-    color: purple;
-  }
+.project-card-header .project-card-title-group {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-@keyframes rainbow-text {
-  0% {
-    color: red;
-  }
-  20% {
-    color: orange;
-  }
-  40% {
-    color: yellow;
-  }
-  60% {
-    color: green;
-  }
-  80% {
-    color: blue;
-  }
-  100% {
-    color: purple;
-  }
+.project-card-header .project-card-title-group .project-card-title {
+  color: #333333;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  text-transform: capitalize;
 }
 
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-  }
+.project-card-header .project-card-title-group .project-card-arrow-icon {
+  color: #999999;
+  font-size: 24px;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-  }
+.project-card-header .project-card-subtitle {
+  color: #999999;
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.project-card-header .project-card-like {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.project-card-header .project-card-like-count {
+  color: #999999;
+  font-size: 14px;
+  margin: 0 4px 0 8px;
+}
+
+.project-card-header .project-card-like-icon {
+  color: #999999;
+  font-size: 24px;
+}
+
+.project-card-details {
+  padding: 16px;
+}
+
+.project-card-details-title {
+  color: #333333;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 8px;
+  text-transform: capitalize;
+}
+
+.project-card-details-description {
+  color: #666666;
+  font-size: 16px;
+  margin: 0;
+}
+
+.project-card-details-bottom {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 16px 0 0;
+}
+
+.project-card-details-bottom .project-card-likes {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.project-card-details-bottom .project-card-likes-count {
+  color: #999999;
+  font-size: 14px;
+  margin: 0 4px 0 8px;
+}
+
+.project-card-details-bottom .project-card-likes-icon {
+  color: #999999;
+  font-size: 20px;
+}
+
+.project-card-details-bottom .project-card-more {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.project-card-details-bottom .project-card-more span {
+  color: #666666;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 4px;
+  text-transform: uppercase;
+}
+
+.project-card-details-bottom .project-card-more svg {
+  color: #999999;
+  font-size: 20px;
 }
 /*# sourceMappingURL=ProjectsPage.css.map */

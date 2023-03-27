@@ -1,64 +1,96 @@
+// Variables
+$primary-color: #2a2e43;
+$secondary-color: #3f3f3f;
+$accent-color: #777;
+$base-spacing: 16px;
+
+// Typography
+$base-font-family: 'Roboto', sans-serif;
+$base-font-size: 1.1rem;
+$base-line-height: 1.6;
+
 .about-page-container {
-  padding: 20px;
-  & .about-page-header {
-    & .about-page-header-title {
-      font-size: 36px;
+  padding: 2rem 0;
+
+  .about-page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .about-page-header-title {
+      color: #444;
       font-weight: bold;
-      text-align: center;
-      padding: 20px;
+      margin-bottom: 0.5rem;
     }
-    & hr {
-      border: 0;
-      height: 1px;
-      background-color: #ccc;
-      margin: 20px 0;
+
+    hr {
+      border: 1px solid #ccc;
+      width: 50%;
+      margin: 0 auto;
     }
   }
-  & .about-page-body {
-    line-height: 1.25;
-    & .about-page-main-body__text {
-      font-size: 18px;
 
-      text-align: justify;
+  .about-page-body {
+    .about-page-main-body__text {
+      margin-bottom: 1rem;
     }
-    & .about-page-main-body__list {
+
+    .about-page-main-body__list {
       list-style-type: none;
       padding: 0;
+
       li {
-        font-size: 18px;
-        margin-bottom: 10px;
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
       }
     }
   }
-  & .about-page-second-body {
-    border-radius: 25px;
-    border: 1px dotted black;
-    padding: 20px;
-    & .about-page-second-body__hr {
-      border: 0;
-      height: 1px;
-      background-color: #ccc;
-      margin: 20px 0;
-    }
-    & .about-page-second-body__header {
-      font-size: 24px;
-      font-weight: bold;
+
+  .about-page-second-body {
+    margin-top: 2rem;
+
+    .about-page-second-body__header {
       text-align: center;
-      padding: 20px;
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 0.5rem;
     }
-    & .about-page-second-body__text {
-      font-size: 18px;
-      line-height: 1.5;
-      text-align: justify;
-      padding: 20px;
+
+    .about-page-second-body__hr {
+      border: 1px solid #ccc;
+      width: 50%;
+      margin: 0 auto;
     }
-    & .about-page-second-body__list {
+
+    .about-page-second-body__text {
+      margin-bottom: 1rem;
+    }
+
+    .about-page-second-body__list {
       list-style-type: none;
       padding: 0;
-      padding: 20px;
+
       li {
-        font-size: 18px;
-        margin-bottom: 10px;
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .about-page-resume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 2rem;
+
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #444;
+
+      &:hover {
+        color: #777;
       }
     }
   }

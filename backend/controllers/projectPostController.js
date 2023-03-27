@@ -1,6 +1,33 @@
+// Import dependencies
 import asyncHandler from 'express-async-handler'
 import ProjectPost from '../models/projectPostModel.js'
+import Image from '../models/imageModel.js'
+import * as dotenv from 'dotenv'
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+  ListObjectsV2Command
+} from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import * as fs from 'fs/promises'
+import colors from 'colors'
+dotenv.config()
 
+const bucketName = process.env.AWS_BUCKET_NAME
+const bucketRegion = process.env.AWS_BUCKET_REGION
+const bucketAccessKey = process.env.AWS_ACCESS_KEY
+const bucketSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
+
+const s3 = new S3Client({
+  region: bucketRegion,
+  credentials: {
+    accessKeyId: bucketAccessKey,
+    secretAccessKey: bucketSecretAccessKey
+  }
+})
+
+// Create a new project post
 const createProjectPost = asyncHandler(async (req, res) => {
   try {
     const user = req.user._id
@@ -15,45 +42,96 @@ const createProjectPost = asyncHandler(async (req, res) => {
   }
 })
 
+// Get a project post by ID
 const getProjectPostById = asyncHandler(async (req, res) => {
   const project = await ProjectPost.findById(req.params.id)
     .populate('author', 'firstName')
     .populate('images')
     .populate('categories')
     .populate('thumbnail', 'filename')
+
   if (project) {
     res.json(project)
   } else {
-    res.status(404)
-    throw new Error('Project not found')
+    res.status(404).json({ message: 'Project not found' })
   }
 })
 
 const getAllProjectPosts = asyncHandler(async (req, res) => {
   try {
     const projects = await ProjectPost.find({})
-      .populate('images')
       .populate('thumbnail')
       .populate('categories')
+      .populate('images')
 
-    res.json(projects)
+    console.log(colors.green('Projects:'), projects)
+
+    const projectsWithImages = await Promise.all(
+      projects.map(async project => {
+        const projectImages = await Promise.all(
+          project.images.map(async image => {
+            if (image && image.filename) {
+              const imageUrl = await getSignedUrl(
+                s3,
+                new GetObjectCommand({
+                  Bucket: bucketName,
+                  Key: image.filename
+                })
+              )
+              return { ...image._doc, url: imageUrl }
+            }
+            return null
+          })
+        )
+
+        // Get thumbnail URL
+        let thumbnailUrl = null
+        if (project.thumbnail && project.thumbnail.filename) {
+          thumbnailUrl = await getSignedUrl(
+            s3,
+            new GetObjectCommand({
+              Bucket: bucketName,
+              Key: project.thumbnail.filename
+            })
+          )
+        }
+
+        const filteredImageData = projectImages.filter(image => image !== null)
+
+        // Modify the return statement to include the updated `images` array and `thumbnail`
+        return {
+          ...project._doc,
+          thumbnail: thumbnailUrl
+            ? { ...project.thumbnail._doc, url: thumbnailUrl }
+            : project.thumbnail,
+          images:
+            filteredImageData.length > 0
+              ? filteredImageData
+              : project.images.map(image => image._id.toString())
+        }
+      })
+    )
+
+    console.log(colors.green('ProjectsWithImages:'), projectsWithImages)
+    res.json(projectsWithImages)
   } catch (err) {
+    console.log(colors.red('Error:'), err.message)
+
     res.status(500).json({
       success: false,
       error: err.message
     })
   }
 })
-
+// Update a project post by ID
 const updateProjectPostById = asyncHandler(async (req, res) => {
   try {
-    // Extract the URL from the request body
     const { url } = req.body.links
-    // Validate the URL
+
     if (!url.match(/^https?:\/\//)) {
       return res.status(400).json({ message: 'Invalid URL format' })
     }
-    // Find the project post by ID and update it
+
     const updatedProjectPost = await ProjectPost.findByIdAndUpdate(
       req.params.id,
       {
@@ -69,40 +147,39 @@ const updateProjectPostById = asyncHandler(async (req, res) => {
       },
       { new: true }
     )
+
     if (!updatedProjectPost) {
-      return res.status(404).send({ message: 'Project post not found' })
+      return res.status(404).json({ message: 'Project post not found' })
     }
-    // Return a success message
-    return res.send({
+
+    res.json({
       message: 'Project post updated successfully',
       data: updatedProjectPost
     })
   } catch (error) {
-    // Return an error message
-    return res
-      .status(500)
-      .send({ message: 'Error updating project post', error })
+    res.status(500).json({ message: 'Error updating project post', error })
   }
 })
 
+// Delete a project post by ID
 const deleteProjectPostById = asyncHandler(async (req, res) => {
   try {
-    // Find the project by ID and delete it
     const deletedProject = await ProjectPost.findByIdAndDelete(req.params.id)
+
     if (!deletedProject) {
-      return res.status(404).send({ message: 'Project not found' })
+      return res.status(404).json({ message: 'Project not found' })
     }
-    // Return a success message
-    return res.send({
+
+    res.json({
       message: 'Project deleted successfully',
       data: deletedProject
     })
   } catch (error) {
-    // Return an error message
-    return res.status(500).send({ message: 'Error deleting project', error })
+    res.status(500).json({ message: 'Error deleting project', error })
   }
 })
 
+// Export controller functions
 export {
   createProjectPost,
   updateProjectPostById,

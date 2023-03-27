@@ -109,6 +109,7 @@ const getAllImages = asyncHandler(async (req, res) => {
       const dbImages = await Image.find({
         name: { $regex: name, $options: 'i' }
       })
+
       const dbImageDict = {}
       dbImages.forEach(img => (dbImageDict[img.name] = img))
 
@@ -117,6 +118,8 @@ const getAllImages = asyncHandler(async (req, res) => {
       }
 
       const data = await s3.send(new ListObjectsV2Command(listParams))
+      console.log('Data from S3:', data)
+
       images = await Promise.all(
         data.Contents.map(async item => {
           const imageUrl = await getSignedUrl(
@@ -128,6 +131,7 @@ const getAllImages = asyncHandler(async (req, res) => {
           )
 
           let img = {
+            _id: dbImg._id,
             url: imageUrl,
             name: item.Key,
             lastModified: item.LastModified,
@@ -148,30 +152,34 @@ const getAllImages = asyncHandler(async (req, res) => {
           return img
         })
       )
+
+      console.log('Data from MongoDB:', dbImages)
     } else {
       console.log('Fetching all images'.yellow)
-      const listParams = {
-        Bucket: bucketName
-      }
+      images = await Image.find({})
 
-      const data = await s3.send(new ListObjectsV2Command(listParams))
       images = await Promise.all(
-        data.Contents.map(async item => {
+        images.map(async image => {
           const imageUrl = await getSignedUrl(
             s3,
             new GetObjectCommand({
               Bucket: bucketName,
-              Key: item.Key
+              Key: image.filename
             })
           )
+
           return {
+            _id: image._id,
             url: imageUrl,
-            name: item.Key,
-            lastModified: item.LastModified,
-            imageSize: item.Size
+            desc: image.desc,
+            mimetype: image.mimetype,
+            author: image.author,
+            filename: image.filename
           }
         })
       )
+
+      console.log('Data from MongoDB:', images)
     }
 
     res.status(200).json(images)

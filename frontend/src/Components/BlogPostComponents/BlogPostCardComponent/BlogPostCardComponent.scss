@@ -1,59 +1,95 @@
 .blog-post-card {
-  width: 100%;
-  padding: 10px;
+  animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
   overflow: hidden;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 250px;
+  width: 350px;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &__content {
+    padding: 16px;
+
+    @media (max-width: 600px) {
+      padding: 12px;
+    }
+  }
+
+  &__author {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  &__created-at {
+    font-size: 0.75rem;
+  }
+
+  &__favorite-border-icon,
+  &__favorite-icon {
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 4px;
+  }
+
+  &__likes {
+    font-size: 0.75rem;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__body {
+    font-size: 1rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+
+    @media (max-width: 600px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__categories {
+    font-size: 0.75rem;
+  }
 }
-.blog-post-card a {
+
+a {
   text-decoration: none;
   color: inherit;
-  &:hover {
-    cursor: pointer;
-  }
-}
-@media only screen and (min-width: 600px) {
-  .blog-post-card {
-    width: 600px;
-  }
-}
-
-.blog-post-card__author-created-at {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.blog-post-card__author {
-  font-weight: bold;
-  color: grey;
-  font-size: smaller;
-}
-
-.blog-post-card__created-at {
-  font-style: italic;
-  color: grey;
-  font-size: smaller;
-}
-
-.blog-post-card__title {
-  margin-bottom: 20px;
-}
-
-.blog-post-card__body {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  margin-bottom: 20px;
-}
-
-.blog-post-card__categories {
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.blog-post-card__likes {
-  font-weight: bold;
-  margin-bottom: 20px;
 }

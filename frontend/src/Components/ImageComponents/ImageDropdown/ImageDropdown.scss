@@ -1,0 +1,20 @@
+.image-dropdown-container {
+  .image-dropdown-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+
+  .image-dropdown-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .image-dropdown-add-btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

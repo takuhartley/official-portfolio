@@ -1,37 +1,107 @@
 .blog-post-read-one-page {
-  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 20px;
-  text-align: left;
-  margin: 20px auto;
-  width: 80%;
   max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .blog-post-read-one-page {
+    padding: 10px;
+  }
+}
+
+.blog-post-read-one-page__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .blog-post-read-one-page__header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .blog-post-read-one-page__title {
-  font-size: 36px;
+  font-size: 2.5rem;
+  line-height: 1.3;
   margin-bottom: 20px;
-  line-height: 2.5rem;
+}
+
+.blog-post-read-one-page__author-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 600px) {
+  .blog-post-read-one-page__author-info {
+    margin-bottom: 10px;
+  }
+}
+
+.blog-post-read-one-page__author-name {
+  margin-left: 10px;
+}
+
+.blog-post-read-one-page__date {
+  margin-bottom: 30px;
+  color: #666;
+  font-size: 1rem;
 }
 
 .blog-post-read-one-page__body {
-  line-height: 2.5rem;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
 }
 
 .blog-post-read-one-page__categories {
-  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .blog-post-read-one-page__categories-title {
-  font-size: 22px;
+  margin-right: 10px;
+}
+
+.blog-post-read-one-page__category {
+  margin-right: 10px;
+}
+
+.blog-post-read-one-page__likes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .blog-post-read-one-page__likes-title {
-  font-size: 22px;
-}
-
-.blog-post-read-one-page__likes-value {
-  font-size: 18px;
+  margin-right: 10px;
 }
 /*# sourceMappingURL=BlogPostReadOnePage.css.map */

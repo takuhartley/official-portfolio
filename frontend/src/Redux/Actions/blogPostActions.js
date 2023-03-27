@@ -38,10 +38,16 @@ export const getBlogPost = id => async dispatch => {
 export const createBlogPost = post => async dispatch => {
   dispatch({ type: CREATE_BLOG_POST })
   try {
-    const { data } = await axios.post('/api/blog-posts', post)
+    const { data } = await axios.post('/api/blog-posts/new', post)
     dispatch({ type: CREATE_BLOG_POST_SUCCESS, payload: data })
   } catch (error) {
-    dispatch({ type: CREATE_BLOG_POST_FAILURE, payload: error })
+    dispatch({
+      type: CREATE_BLOG_POST_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
   }
 }
 export const updateBlogPost = (id, post) => async dispatch => {

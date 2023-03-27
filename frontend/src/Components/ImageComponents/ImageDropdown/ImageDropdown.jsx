@@ -10,8 +10,10 @@ import {
   FormControl,
   FormHelperText,
   MenuItem,
-  InputLabel
+  InputLabel,
+  Typography
 } from '@mui/material'
+import './ImageDropdown.scss'
 
 const ImageDropdown = props => {
   const navigate = useNavigate()
@@ -34,45 +36,75 @@ const ImageDropdown = props => {
   }
   const handleImageChange = event => {
     setSelectedImage(event.target.value)
+    handleCloseDropdown()
   }
+
+  const handleCloseDropdown = () => {
+    setOpen(false)
+  }
+
+  const handleOpenDropdown = () => {
+    setOpen(true)
+  }
+
+  const [open, setOpen] = useState(false)
+  const findImageUrl = imageId => {
+    const foundImage = images.find(image => image._id === imageId)
+    return foundImage ? foundImage.url : ''
+  }
+
+  const imageUrl = findImageUrl(selectedImage)
 
   return (
     <>
-      <div>
-        {loading && <LoadingComponent></LoadingComponent>}
+      <div className='image-dropdown-container'>
+        {loading && <LoadingComponent />}
         {error && <AlertComponent severity='danger'>{error}</AlertComponent>}
         {images && (
           <>
-            <div>
-              <h1>Image Dropdown</h1>
-            </div>
-            <div>
+            <Typography variant='h5' className='image-dropdown-title'>
+              Image Dropdown
+            </Typography>
+            <div className='image-dropdown-form'>
               <FormControl>
                 <InputLabel id='image-select-label'>Image</InputLabel>
                 <Select
                   labelId='image-select-label'
                   id='image-select'
+                  open={open}
+                  onOpen={handleOpenDropdown}
+                  onClose={handleCloseDropdown}
                   onChange={handleImageChange}
                   value={selectedImage}
+                  MenuProps={{
+                    onClose: () => {
+                      handleCloseDropdown()
+                    }
+                  }}
                 >
                   {images.map(image => (
-                    <MenuItem key={image._id} value={image._id}>
+                    <MenuItem key={image.name} value={image._id}>
                       {image.name}
                     </MenuItem>
                   ))}
                 </Select>
-                <FormHelperText>Select an Thumbnail</FormHelperText>
+                <FormHelperText>Select a Thumbnail</FormHelperText>
               </FormControl>
+              <div className='image-dropdown-add-btn'>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={() => handleAddImage()}
+                >
+                  Add
+                </Button>
+              </div>
             </div>
-            <div>
-              <Button
-                variant='contained'
-                color='primary'
-                onClick={handleAddImage}
-              >
-                Add
-              </Button>
-            </div>
+            {selectedImage && (
+              <div className='image-preview'>
+                <img src={imageUrl} alt='Selected thumbnail' width='200' />
+              </div>
+            )}
           </>
         )}
       </div>

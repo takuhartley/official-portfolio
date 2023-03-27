@@ -1,28 +1,26 @@
 .about-page-container {
-  padding: 20px;
+  padding: 2rem 0;
+}
+
+.about-page-container .about-page-header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .about-page-container .about-page-header .about-page-header-title {
-  font-size: 36px;
+  color: #444;
   font-weight: bold;
-  text-align: center;
-  padding: 20px;
+  margin-bottom: 0.5rem;
 }
 
 .about-page-container .about-page-header hr {
-  border: 0;
-  height: 1px;
-  background-color: #ccc;
-  margin: 20px 0;
-}
-
-.about-page-container .about-page-body {
-  line-height: 1.25;
+  border: 1px solid #ccc;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .about-page-container .about-page-body .about-page-main-body__text {
-  font-size: 18px;
-  text-align: justify;
+  margin-bottom: 1rem;
 }
 
 .about-page-container .about-page-body .about-page-main-body__list {
@@ -31,45 +29,70 @@
 }
 
 .about-page-container .about-page-body .about-page-main-body__list li {
-  font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
 
 .about-page-container .about-page-second-body {
-  border-radius: 25px;
-  border: 1px dotted black;
-  padding: 20px;
-}
-
-.about-page-container .about-page-second-body .about-page-second-body__hr {
-  border: 0;
-  height: 1px;
-  background-color: #ccc;
-  margin: 20px 0;
+  margin-top: 2rem;
 }
 
 .about-page-container .about-page-second-body .about-page-second-body__header {
-  font-size: 24px;
-  font-weight: bold;
   text-align: center;
-  padding: 20px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.about-page-container .about-page-second-body .about-page-second-body__hr {
+  border: 1px solid #ccc;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .about-page-container .about-page-second-body .about-page-second-body__text {
-  font-size: 18px;
-  line-height: 1.5;
-  text-align: justify;
-  padding: 20px;
+  margin-bottom: 1rem;
 }
 
 .about-page-container .about-page-second-body .about-page-second-body__list {
   list-style-type: none;
   padding: 0;
-  padding: 20px;
 }
 
 .about-page-container .about-page-second-body .about-page-second-body__list li {
-  font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.about-page-container .about-page-resume {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2rem;
+}
+
+.about-page-container .about-page-resume a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  color: #444;
+}
+
+.about-page-container .about-page-resume a:hover {
+  color: #777;
 }
 /*# sourceMappingURL=AboutPage.css.map */

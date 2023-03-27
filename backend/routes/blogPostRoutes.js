@@ -11,7 +11,7 @@ import {
   deleteBlogById
 } from '../controllers/blogPostController.js'
 
-router.post('/new', protect, admin, createBlogPost)
+router.post('/new', createBlogPost)
 router.route('/').get(getAllBlogPosts)
 router.route('/search').get(searchBlogPost)
 router

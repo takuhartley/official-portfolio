@@ -1,29 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 #blog-posts-container {
-  margin: 40px 0;
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(45deg, #5f9ea0, #8a2be2);
+  background-size: 200% 200%;
+  -webkit-animation: Gradient 10s ease infinite;
+          animation: Gradient 10s ease infinite;
+  padding: 0;
 }
 
-#blog-posts-container #blog-posts-header {
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.blog-posts-header {
+  position: relative;
   text-align: center;
-  margin: 20px;
+  color: #ffffff;
+  padding-bottom: 1rem;
+  background-image: url("../../../public/Assets/Images/Doorway_to_Success.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 1rem;
 }
 
-#blog-posts-container #blog-posts-header h1.blog-posts-title {
-  font-weight: bold;
+.blog-posts-header:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-#blog-posts-container #blog-posts-list .blog-posts-list {
+.blog-posts-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-posts-header .blog-posts-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-posts-header .blog-posts-description {
+  font-size: 1rem;
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-posts-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.blog-post {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-#blog-posts-container #blog-posts-list .blog-posts-list .blog-post {
-  width: 300px;
-  margin: 1rem;
+@media (max-width: 600px) {
+  #blog-posts-container {
+    padding-bottom: 1rem;
+  }
+  .blog-posts-header h1 {
+    font-size: 1.8rem;
+  }
+  .blog-posts-header .blog-posts-subtitle {
+    font-size: 1rem;
+  }
+  .blog-posts-header .blog-posts-description {
+    font-size: 0.9rem;
+  }
 }
 /*# sourceMappingURL=BlogPostsReadAllPage.css.map */
