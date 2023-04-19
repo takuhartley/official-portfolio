@@ -3,7 +3,6 @@ import { ThemeContext } from '../../App.js'
 import Switch from '@mui/material/Switch'
 const ThemeToggleButton = () => {
   const { theme, toggleTheme } = useContext(ThemeContext)
-  console.log(theme)
   return (
     <Switch
       onClick={toggleTheme}

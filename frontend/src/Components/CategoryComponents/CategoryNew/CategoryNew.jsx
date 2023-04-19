@@ -23,7 +23,6 @@ const CategoryNew = () => {
       description: formData.description,
       color: formData.color
     }
-    console.log(categoryData)
     dispatch(createCategory(categoryData))
     navigate('/dashboard')
   }

@@ -2,6 +2,7 @@
 import asyncHandler from 'express-async-handler'
 import ProjectPost from '../models/projectPostModel.js'
 import Image from '../models/imageModel.js'
+import Category from '../models/categoriesModel.js'
 import * as dotenv from 'dotenv'
 import {
   GetObjectCommand,
@@ -63,9 +64,6 @@ const getAllProjectPosts = asyncHandler(async (req, res) => {
       .populate('thumbnail')
       .populate('categories')
       .populate('images')
-
-    console.log(colors.green('Projects:'), projects)
-
     const projectsWithImages = await Promise.all(
       projects.map(async project => {
         const projectImages = await Promise.all(
@@ -83,8 +81,6 @@ const getAllProjectPosts = asyncHandler(async (req, res) => {
             return null
           })
         )
-
-        // Get thumbnail URL
         let thumbnailUrl = null
         if (project.thumbnail && project.thumbnail.filename) {
           thumbnailUrl = await getSignedUrl(
@@ -95,10 +91,13 @@ const getAllProjectPosts = asyncHandler(async (req, res) => {
             })
           )
         }
-
         const filteredImageData = projectImages.filter(image => image !== null)
-
-        // Modify the return statement to include the updated `images` array and `thumbnail`
+        const categoriesData = await Promise.all(
+          project.categories.map(async categoryId => {
+            const category = await Category.findById(categoryId)
+            return category
+          })
+        )
         return {
           ...project._doc,
           thumbnail: thumbnailUrl
@@ -107,22 +106,20 @@ const getAllProjectPosts = asyncHandler(async (req, res) => {
           images:
             filteredImageData.length > 0
               ? filteredImageData
-              : project.images.map(image => image._id.toString())
+              : project.images.map(image => image._id.toString()),
+          categories: categoriesData
         }
       })
     )
-
-    console.log(colors.green('ProjectsWithImages:'), projectsWithImages)
     res.json(projectsWithImages)
   } catch (err) {
-    console.log(colors.red('Error:'), err.message)
-
     res.status(500).json({
       success: false,
       error: err.message
     })
   }
 })
+
 // Update a project post by ID
 const updateProjectPostById = asyncHandler(async (req, res) => {
   try {

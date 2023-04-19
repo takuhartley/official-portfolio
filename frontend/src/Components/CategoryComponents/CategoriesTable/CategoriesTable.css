@@ -1,0 +1,57 @@
+.categories-table h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.categories-table .data-grid {
+  height: 400px;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .categories-table .data-grid {
+    height: auto;
+  }
+}
+
+.categories-table .border-pink {
+  border: 2px solid pink;
+}
+
+.categories-table .border-blue {
+  border: 2px solid blue;
+}
+
+.categories-table .border-green {
+  border: 2px solid green;
+}
+
+.categories-table .border-yellow {
+  border: 2px solid yellow;
+}
+
+.categories-table .border-orange {
+  border: 2px solid orange;
+}
+
+.categories-table .border-purple {
+  border: 2px solid purple;
+}
+
+.categories-table .border-red {
+  border: 2px solid red;
+}
+
+.categories-table .border-brown {
+  border: 2px solid brown;
+}
+
+.categories-table .border-grey {
+  border: 2px solid grey;
+}
+
+.categories-table .border-black {
+  border: 2px solid black;
+}
+/*# sourceMappingURL=CategoriesTable.css.map */

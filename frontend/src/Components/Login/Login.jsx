@@ -1,134 +1,102 @@
-import React, { useState, useEffect } from 'react'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
-import Link from '@mui/material/Link'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../Redux/Actions/userActions.js'
+import {
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  Button,
+  Typography
+} from '@mui/material'
+import './Login.scss'
 import { useNavigate } from 'react-router-dom'
-function Copyright (props) {
-  return (
-    <Typography
-      variant='body2'
-      color='text.secondary'
-      align='center'
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color='inherit' href='https://mui.com/'>
-        Your Website
-      </Link>
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
-
-const theme = createTheme()
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
+  const [error, setError] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/dashboard')
-    }
-  }, [navigate, userInfo])
-  const handleSubmit = e => {
+  const { loading, error: loginError, userInfo } = userLogin
+
+  const handleSubmit = async e => {
     e.preventDefault()
-    dispatch(login(email, password))
+
+    // validate form fields
+    if (!email || !password) {
+      setError('Please enter email and password')
+      return
+    }
+
+    // call the login action and wait for the response
+    await dispatch(login(email, password))
+
+    // check if the login was successful
+    if (userInfo && userInfo.token) {
+      // redirect to the dashboard page
+      navigate('/dashboard')
+    } else {
+      // display the login error
+      setError(loginError || 'Login failed')
+    }
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component='main' maxWidth='xs'>
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
+    <div className='login-container'>
+      <form onSubmit={handleSubmit} className='login-form'>
+        <Typography variant='h3' className='login-title'>
+          Sign in
+        </Typography>
+        {error && <div className='login-error'>{error}</div>}
+        {loginError && <div className='login-error'>{loginError}</div>}
+        <TextField
+          id='email'
+          label='Email Address'
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          className='login-field'
+        />
+        <TextField
+          id='password'
+          label='Password'
+          type='password'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          className='login-field'
+        />
+        <div className='login-field'>
+          <Checkbox
+            id='rememberMe'
+            checked={rememberMe}
+            onChange={e => setRememberMe(e.target.checked)}
+          />
+          <label htmlFor='rememberMe' className='login-checkbox-label'>
+            Remember me
+          </label>
+        </div>
+        <Button
+          type='submit'
+          variant='contained'
+          color='primary'
+          disabled={loading}
+          className='login-button'
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Sign in
-          </Typography>
-          <Box
-            component='form'
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              autoFocus
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href='#' variant='body2'>
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href='#' variant='body2'>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+          {loading ? 'Signing in...' : 'Sign In'}
+        </Button>
+        <div className='login-links'>
+          <a href='#' className='login-forgot-password'>
+            Forgot password?
+          </a>
+          <a href='#' className='login-sign-up'>
+            Don't have an account? Sign Up
+          </a>
+        </div>
+      </form>
+    </div>
   )
 }
+
 export default Login

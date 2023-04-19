@@ -70,7 +70,6 @@ const People = ({ position, buildings, cars }) => {
   })
 
   useEffect(() => {
-    console.log(animations) // Log animations to the console
     if (actions['mixamo.com']) {
       actions['mixamo.com'].play()
     }

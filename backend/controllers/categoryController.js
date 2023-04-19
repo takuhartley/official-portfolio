@@ -26,9 +26,8 @@ const createCategory = asyncHandler(async (req, res) => {
   res.json({ message: 'Category added successfully', category: newCategory })
 })
 
-// Update a category
 const updateCategory = asyncHandler(async (req, res) => {
-  const { name, description } = req.body
+  const { name, description, color } = req.body // Add 'color' here
 
   // Find the category by its ID
   const category = await Category.findById(req.params.id)
@@ -40,6 +39,7 @@ const updateCategory = asyncHandler(async (req, res) => {
   // Update the category with the new data
   category.name = name
   category.description = description
+  category.color = color // Add this line
 
   // Save the updated category to the database
   await category.save()

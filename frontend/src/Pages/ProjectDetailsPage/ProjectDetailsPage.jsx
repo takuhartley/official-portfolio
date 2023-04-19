@@ -22,7 +22,6 @@ const ProjectDetailsPage = () => {
     thumbnail: '',
     links: []
   })
-  console.log(formData)
   const dispatch = useDispatch()
   const projectDetails = useSelector(state => state.projectDetails)
   const { loading, error, project } = projectDetails

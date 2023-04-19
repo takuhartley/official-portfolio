@@ -5,7 +5,6 @@ import AlertComponent from '../../AlertComponent/AlertComponent'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
 import './ImageComponent.scss'
 const ImageDetailsComponent = ({ imageId }) => {
-  console.log('Image Details ' + JSON.stringify(imageId))
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -19,12 +18,9 @@ const ImageDetailsComponent = ({ imageId }) => {
   const dispatch = useDispatch()
   const imageDetails = useSelector(state => state.imageDetails)
   const { loading, error, imageData: image } = imageDetails
-  console.log('Image Details ' + JSON.stringify(image))
   useEffect(() => {
     dispatch(listImageDetails(imageId))
-    console.log('Image Details ' + JSON.stringify(imageId))
   }, [dispatch, imageId, formData.id, image, formData.name])
-  console.log(image)
   return (
     <>
       <div className='image-details-container' id='image-details-component'>

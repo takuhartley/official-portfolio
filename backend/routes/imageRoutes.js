@@ -23,7 +23,7 @@ const bucketName = process.env.AWS_BUCKET_NAME
 const bucketRegion = process.env.AWS_BUCKET_REGION
 const bucketAccessKey = process.env.AWS_ACCESS_KEY
 const bucketSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
-console.log(process.env.AWS_BUCKET_NAME)
+
 const s3 = new S3Client({
   region: bucketRegion,
   credentials: {
@@ -31,7 +31,9 @@ const s3 = new S3Client({
     secretAccessKey: bucketSecretAccessKey
   }
 })
+
 const MAX_FILE_SIZE = 5000000 // 5MB
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'Images') // set the destination to the public/images folder

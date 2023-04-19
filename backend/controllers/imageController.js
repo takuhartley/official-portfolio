@@ -38,12 +38,6 @@ const imageUpload = asyncHandler(async (req, res) => {
   try {
     const key = req.file.filename
     const contentType = req.file.mimetype
-
-    console.log(
-      `Uploading image ${req.file.originalname} with key ${key} to S3 bucket ${bucketName}`
-        .blue.bold
-    )
-
     const uploadParams = {
       Bucket: bucketName,
       Key: key,
@@ -53,7 +47,7 @@ const imageUpload = asyncHandler(async (req, res) => {
     const data = await s3.send(new PutObjectCommand(uploadParams))
     const imageUrl = `https://${bucketName}.s3.amazonaws.com/${key}`
 
-    console.log(`Image uploaded successfully to ${imageUrl}`.green.bold)
+
 
     const image = new Image({
       name,
@@ -66,11 +60,11 @@ const imageUpload = asyncHandler(async (req, res) => {
       filename: key
     })
 
-    console.log(`Saving image metadata to MongoDB`.blue.bold)
+    
 
     await image.save()
 
-    console.log(`Image metadata saved successfully`.green.bold)
+    
 
     res.status(201).json({
       success: true,
@@ -105,7 +99,7 @@ const getAllImages = asyncHandler(async (req, res) => {
     let images
 
     if (name) {
-      console.log('Fetching images with name:', name.yellow)
+      
       const dbImages = await Image.find({
         name: { $regex: name, $options: 'i' }
       })
@@ -118,7 +112,7 @@ const getAllImages = asyncHandler(async (req, res) => {
       }
 
       const data = await s3.send(new ListObjectsV2Command(listParams))
-      console.log('Data from S3:', data)
+      
 
       images = await Promise.all(
         data.Contents.map(async item => {
@@ -153,9 +147,9 @@ const getAllImages = asyncHandler(async (req, res) => {
         })
       )
 
-      console.log('Data from MongoDB:', dbImages)
+      
     } else {
-      console.log('Fetching all images'.yellow)
+      
       images = await Image.find({})
 
       images = await Promise.all(
@@ -178,8 +172,6 @@ const getAllImages = asyncHandler(async (req, res) => {
           }
         })
       )
-
-      console.log('Data from MongoDB:', images)
     }
 
     res.status(200).json(images)

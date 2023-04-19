@@ -25,7 +25,6 @@ const Logo = () => {
           position={[0, 0, 0]}
           rotation={[0, 0, 0]}
           scale={[1, 1, 1]}
-          onClick={() => console.log('clicked')}
         >
           <meshStandardMaterial attach='material' color={color} />
         </AnimatedBox>

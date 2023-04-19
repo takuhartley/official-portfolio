@@ -8,7 +8,6 @@ import CloseIcon from '@mui/icons-material/Close'
 
 const AlertComponent = ({ severity, error }) => {
   const [open, setOpen] = React.useState(true)
-  console.log(error)
   return (
     <Box sx={{ width: '100%' }}>
       <Collapse in={open}>

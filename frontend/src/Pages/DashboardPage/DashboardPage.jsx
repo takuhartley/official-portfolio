@@ -7,7 +7,7 @@ const DashboardPage = () => {
       <div className='dashboard-page'>
         <DashboardNavigation />
         <div className='welcome-section'>
-          <h2 className='welcome-title'>Welcome to Your Dashboard Daddy 😩</h2>
+          <h2 className='welcome-title'>Welcome to Your Dashboard</h2>
           <p className='welcome-text'>
             This page is built using React, a popular JavaScript library for
             building user interfaces. It is designed to give you a comprehensive

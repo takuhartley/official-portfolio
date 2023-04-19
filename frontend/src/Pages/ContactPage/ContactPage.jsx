@@ -24,8 +24,7 @@ const ContactPage = () => {
       <div className='contact-page'>
         <Container>
           <ScrollTrigger
-            onEnter={() => console.log('onEnter')}
-            onExit={() => console.log('onExit')}
+            
           >
             <motion.div
               initial='hidden'

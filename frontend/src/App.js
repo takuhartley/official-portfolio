@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+
 import Login from './Components/Login/Login.jsx'
 import Logout from './Components/Logout/Logout.jsx'
 import NotFound from './Components/NotFound/NotFound.jsx'
@@ -38,6 +39,9 @@ import ImageSettingPage from './Pages/ImageSettingPage/ImageSettingPage.jsx'
 import CategorySettingPage from './Pages/CategorySettingPage/CategorySettingPage.jsx'
 import BlogPostSettingPage from './Pages/BlogPostSettingPage/BlogPostSettingPage.jsx'
 import UserSettingPage from './Pages/UserSettingPage/UserSettingPage.jsx'
+
+import { getUserDetails } from './Redux/Actions/userActions'
+
 export const ThemeContext = createContext({
   theme: 'light',
   toggleTheme: () => {}
@@ -49,6 +53,10 @@ const App = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
   const location = useLocation()
+
+  // Replace this with the appropriate user data retrieval method
+  const user = getUserDetails()
+
   return (
     <>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -76,32 +84,47 @@ const App = () => {
           <Route path='/about' element={<AboutPage />} />
 
           <Route path='/dashboard'>
-            <Route index element={<Dashboard />} />
-            <Route path='image-setting' element={<ImageSettingPage />} />
-            <Route path='image-setting/:id' element={<ImageDetails />} />
-            <Route path='image-setting/upload' element={<ImageUpload />} />
-            <Route path='image-setting/:id/edit' element={<ImageEdit />} />
-            <Route path='project-setting' element={<ProjectSettingPage />} />
-            <Route
-              path='project-setting/new'
-              element={<NewProjectComponent />}
-            />
-            <Route path='project-setting/:id/edit' element={<EditProject />} />
-            <Route path='blog-post-setting' element={<BlogPostSettingPage />} />
-            <Route
-              path='blog-post-setting/create'
-              element={<BlogPostCreateComponent />}
-            />
-            <Route
-              path='blog-post-setting/:id/edit'
-              element={<BlogPostEditComponent />}
-            />
-            <Route path='category-setting' element={<CategorySettingPage />} />
-            <Route path='user-setting' element={<UserSettingPage />} />
+            {user && (
+              <>
+                <Route index element={<Dashboard />} />
+                <Route path='image-setting' element={<ImageSettingPage />} />
+                <Route path='image-setting/:id' element={<ImageDetails />} />
+                <Route path='image-setting/upload' element={<ImageUpload />} />
+                <Route path='image-setting/:id/edit' element={<ImageEdit />} />
+                <Route
+                  path='project-setting'
+                  element={<ProjectSettingPage />}
+                />
+                <Route
+                  path='project-setting/new'
+                  element={<NewProjectComponent />}
+                />
+                <Route
+                  path='project-setting/:id/edit'
+                  element={<EditProject />}
+                />
+                <Route
+                  path='blog-post-setting'
+                  element={<BlogPostSettingPage />}
+                />
+                <Route
+                  path='blog-post-setting/create'
+                  element={<BlogPostCreateComponent />}
+                />
+                <Route
+                  path='blog-post-setting/:id/edit'
+                  element={<BlogPostEditComponent />}
+                />
+                <Route
+                  path='category-setting'
+                  element={<CategorySettingPage />}
+                />
+                <Route path='user-setting' element={<UserSettingPage />} />
+              </>
+            )}
           </Route>
-
           <Route path='/login' element={<Login />} />
-          <Route path='/logout' element={<Logout />} />
+          {user && <Route path='/logout' element={<Logout />} />}
           <Route path='/playground' element={<Playground />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

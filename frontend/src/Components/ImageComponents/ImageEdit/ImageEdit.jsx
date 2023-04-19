@@ -21,9 +21,7 @@ import AlertComponent from '../../AlertComponent/AlertComponent'
 
 const ImageEdit = () => {
   const { id } = useParams()
-  console.log(id)
   const imageId = id
-  console.log(imageId)
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -42,7 +40,6 @@ const ImageEdit = () => {
   useEffect(() => {
     if (!image || image._id !== imageId) {
       dispatch(listImageDetails(imageId))
-      console.log(image)
     } else {
       setFormData({
         id: image._id,

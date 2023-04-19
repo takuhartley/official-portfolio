@@ -1,0 +1,56 @@
+.categories-table {
+  h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .data-grid {
+    height: 400px;
+    width: 100%;
+
+    @media (max-width: 480px) {
+      height: auto;
+    }
+  }
+
+  .border-pink {
+    border: 2px solid pink;
+  }
+
+  .border-blue {
+    border: 2px solid blue;
+  }
+
+  .border-green {
+    border: 2px solid green;
+  }
+
+  .border-yellow {
+    border: 2px solid yellow;
+  }
+
+  .border-orange {
+    border: 2px solid orange;
+  }
+
+  .border-purple {
+    border: 2px solid purple;
+  }
+
+  .border-red {
+    border: 2px solid red;
+  }
+
+  .border-brown {
+    border: 2px solid brown;
+  }
+
+  .border-grey {
+    border: 2px solid grey;
+  }
+
+  .border-black {
+    border: 2px solid black;
+  }
+}

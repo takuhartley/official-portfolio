@@ -46,7 +46,6 @@ export const listProjectDetails = projectId => async dispatch => {
     dispatch({ type: PROJECT_DETAILS_REQUEST })
 
     const { data } = await axios.get(`/api/projects/${projectId}`)
-    console.log('Redux Actions ' + JSON.stringify(data))
     dispatch({
       type: PROJECT_DETAILS_SUCCESS,
       payload: data

@@ -39,7 +39,6 @@ const ProjectEditPage = () => {
     images: [],
     categories: []
   })
-  console.log('Form Data: ' + JSON.stringify(formData))
   // Dispatch Redux
   const dispatch = useDispatch()
   // Define project details from state

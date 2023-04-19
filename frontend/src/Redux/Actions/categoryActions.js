@@ -129,7 +129,7 @@ export const createCategory = categoryData => async (dispatch, getState) => {
   }
 }
 
-export const getCATEGORYImage = id => async (dispatch, getState) => {
+export const getCategoryImage = id => async (dispatch, getState) => {
   try {
     dispatch({
       type: CATEGORY_IMAGES_REQUEST
@@ -152,45 +152,41 @@ export const getCATEGORYImage = id => async (dispatch, getState) => {
   }
 }
 
-export const updateCATEGORY = CATEGORY => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: CATEGORY_UPDATE_REQUEST
-    })
+export const updateCategory =
+  (id, updatedData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: CATEGORY_UPDATE_REQUEST
+      })
 
-    const {
-      userLogin: { userInfo }
-    } = getState()
+      const {
+        userLogin: { userInfo }
+      } = getState()
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`
+        }
       }
-    }
 
-    const { data } = await axios.patch(
-      `/api/CATEGORYs/${CATEGORY._id}`,
-      CATEGORY,
-      config
-    )
+      const { data } = await axios.patch(
+        `/api/categories/${id}`,
+        updatedData,
+        config
+      )
 
-    dispatch({
-      type: CATEGORY_UPDATE_SUCCESS,
-      payload: data
-    })
-    dispatch({ type: CATEGORY_DETAILS_SUCCESS, payload: data })
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout())
+      dispatch({
+        type: CATEGORY_UPDATE_SUCCESS,
+        payload: data
+      })
+    } catch (error) {
+      dispatch({
+        type: CATEGORY_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
     }
-    dispatch({
-      type: CATEGORY_UPDATE_FAIL,
-      payload: message
-    })
   }
-}
